@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GCT Group Transformation Strategy 2026+ | DSG</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: '#0F172A',
+            accent: '#0369A1',
+            danger: '#C8102E',
+            surface: '#F8FAFC',
+            muted: '#64748B',
+            slate2: '#334155',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    .accent-bar { width: 3.5rem; height: 4px; background: #0369A1; border-radius: 2px; margin-top: 0.75rem; margin-bottom: 1.5rem; }
+    .section-alt { background: #F8FAFC; }
+    .nav-link { transition: color 0.2s; }
+    .nav-link:hover { color: #0369A1; }
+    tr:nth-child(even) td { background: rgba(248,250,252,0.7); }
+    details > summary { list-style: none; cursor: pointer; }
+    details > summary::-webkit-details-marker { display: none; }
+    details[open] summary .chevron { transform: rotate(180deg); }
+    .chevron { transition: transform 0.2s; }
+  </style>
+</head>
+<body class="font-sans text-navy bg-white">
+
+  <!-- STICKY NAV -->
+  <header class="sticky top-0 z-50 bg-navy border-b border-white/10 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 flex items-center justify-between h-14">
+      <div class="flex items-center gap-2">
+        <span class="text-white font-bold text-sm tracking-wide">DSG</span>
+        <span class="text-white/30 text-xs">|</span>
+        <span class="text-white/60 text-xs font-medium">GCT Group Proposal</span>
+      </div>
+      <nav class="hidden md:flex items-center gap-5 text-xs font-semibold text-white/70">
+        <a href="#summary" class="nav-link">Summary</a>
+        <a href="#background" class="nav-link">Background</a>
+        <a href="#why-dsg" class="nav-link">Why DSG</a>
+        <a href="#approach" class="nav-link">Approach</a>
+        <a href="#design" class="nav-link">Design</a>
+        <a href="#build" class="nav-link">Build &amp; Operate</a>
+        <a href="#transfer" class="nav-link">Transfer</a>
+        <a href="#commercial" class="nav-link">Commercial</a>
+        <a href="#terms" class="nav-link">Terms</a>
+        <a href="#acceptance" class="nav-link">Acceptance</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="bg-navy text-white py-20 px-4">
+    <div class="max-w-5xl mx-auto">
+      <div class="inline-flex items-center gap-2 border border-white/20 rounded-full px-3 py-1 text-xs text-white/60 font-semibold mb-6">
+        <span class="w-2 h-2 rounded-full bg-accent inline-block"></span>
+        Confidential · For GCT Group Executive &amp; Board Review
+      </div>
+      <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">
+        GCT Group<br/>
+        <span class="text-sky-400">Transformation Strategy</span><br/>
+        2026+
+      </h1>
+      <div class="accent-bar"></div>
+      <p class="text-white/70 text-lg max-w-2xl mb-10">
+        A Design-Build-Operate-Transfer (DBOT) partnership to transform GCT Group into
+        Nigeria's first fully converged, cloud-enabled, customer-centric digital telecoms provider.
+      </p>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+        <div class="bg-white/5 border border-white/10 rounded-xl p-4 text-center">
+          <div class="text-2xl font-extrabold text-sky-400">USD 250K</div>
+          <div class="text-xs text-white/50 mt-1">Fixed Investment</div>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-xl p-4 text-center">
+          <div class="text-2xl font-extrabold text-sky-400">9 Months</div>
+          <div class="text-xs text-white/50 mt-1">Programme Duration</div>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-xl p-4 text-center">
+          <div class="text-2xl font-extrabold text-sky-400">3 Phases</div>
+          <div class="text-xs text-white/50 mt-1">Design · Build · Transfer</div>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-xl p-4 text-center">
+          <div class="text-2xl font-extrabold text-danger">2 Apr 2026</div>
+          <div class="text-xs text-white/50 mt-1">Decision Deadline</div>
+        </div>
+      </div>
+      <div class="flex gap-3 flex-wrap">
+        <a href="#commercial" class="bg-accent hover:bg-sky-700 text-white font-semibold text-sm px-5 py-2.5 rounded-lg transition">View Commercial Terms</a>
+        <a href="#acceptance" class="bg-danger hover:bg-red-700 text-white font-semibold text-sm px-5 py-2.5 rounded-lg transition">Accept Proposal</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXECUTIVE SUMMARY -->
+  <section id="summary" class="py-16 px-4 bg-white">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-2xl font-extrabold text-navy">Executive Summary</h2>
+      <div class="accent-bar"></div>
+      <p class="text-muted mb-8 max-w-3xl">
+        GCT Group stands at a pivotal inflection point — transitioning from a traditional fibre ISP to
+        <strong class="text-navy">Nigeria's first fully converged, cloud-enabled digital telecoms provider</strong>.
+        DSG proposes a DBOT partnership delivering measurable outcomes across revenue, operations, and customer experience.
+      </p>
+      <div class="grid md:grid-cols-3 gap-5">
+        <div class="rounded-xl border border-slate-200 p-5 bg-surface">
+          <div class="text-accent font-bold text-sm mb-2 uppercase tracking-wide">Revenue Growth</div>
+          <p class="text-sm text-muted">Sustainable diversification through mobile bundling, IoT, and enterprise contracts layered onto the existing fibre base.</p>
+        </div>
+        <div class="rounded-xl border border-slate-200 p-5 bg-surface">
+          <div class="text-accent font-bold text-sm mb-2 uppercase tracking-wide">Operational Efficiency</div>
+          <p class="text-sm text-muted">Automation, digital process redesign, and a Transformation Project Office delivering discipline from day one.</p>
+        </div>
+        <div class="rounded-xl border border-slate-200 p-5 bg-surface">
+          <div class="text-accent font-bold text-sm mb-2 uppercase tracking-wide">Customer Excellence</div>
+          <p class="text-sm text-muted">Data-driven engagement and omnichannel experience building long-term customer loyalty and reduced churn.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BACKGROUND -->
+  <section id="background" class="py-16 px-4 section-alt">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-2xl font-extrabold text-navy">Background &amp; Context</h2>
+      <div class="accent-bar"></div>
+      <p class="text-muted mb-8 max-w-3xl">
+        GCT Group has built a formidable reputation as one of Nigeria's leading FTTH, enterprise connectivity,
+        and data centre providers. The next logical evolution is an MVNO capability enabling
+        <strong class="text-navy">fully integrated fixed-mobile convergence (FMC)</strong>.
+      </p>
+
+      <h3 class="font-bold text-navy mb-3">Why an MVNO Makes Strategic Sense</h3>
+      <div class="grid md:grid-cols-2 gap-4 mb-10">
+        <div class="bg-white rounded-xl border border-slate-200 p-5">
+          <div class="font-semibold text-navy mb-1">🔗 Fixed-Mobile Convergence</div>
+          <p class="text-sm text-muted">Bundled Fibre + Mobile, shared data pools, unified billing, SIM-enabled backup for fibre outages — dramatically reducing churn.</p>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 p-5">
+          <div class="font-semibold text-navy mb-1">🏢 Enterprise &amp; SME Upsell</div>
+          <p class="text-sm text-muted">Corporate mobile fleets, IoT SIMs, M2M connectivity, LTE failover, and Closed User Groups to strengthen enterprise contracts.</p>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 p-5">
+          <div class="font-semibold text-navy mb-1">🏠 Residential Cross-Sell</div>
+          <p class="text-sm text-muted">Family SIM packs, value-based mobile bundles, and loyalty rewards linked to fibre usage turning mobile into a retention tool.</p>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 p-5">
+          <div class="font-semibold text-navy mb-1">💡 Asset-Light Expansion</div>
+          <p class="text-sm text-muted">No spectrum or RAN investment. Leverage existing MNO networks (MTN, Airtel, Glo) while focusing on brand, billing, and CX.</p>
+        </div>
+      </div>
+
+      <h3 class="font-bold text-navy mb-3">Competitive Differentiation</h3>
+      <div class="overflow-x-auto rounded-xl border border-slate-200">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="bg-navy text-white">
+              <th class="text-left py-3 px-4 font-semibold">Traditional MNO</th>
+              <th class="text-left py-3 px-4 font-semibold text-sky-400">GCT Group MVNO Advantage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-slate-100"><td class="py-3 px-4 text-muted">Mobile-only</td><td class="py-3 px-4 font-medium">Fixed + Mobile convergence</td></tr>
+            <tr class="border-b border-slate-100"><td class="py-3 px-4 text-muted">Mass market</td><td class="py-3 px-4 font-medium">Premium urban segment</td></tr>
+            <tr class="border-b border-slate-100"><td class="py-3 px-4 text-muted">Generic bundles</td><td class="py-3 px-4 font-medium">Converged smart home bundles</td></tr>
+            <tr><td class="py-3 px-4 text-muted">Limited enterprise integration</td><td class="py-3 px-4 font-medium">Full ICT + fibre + mobile integration</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY DSG -->
+  <section id="why-dsg" class="py-16 px-4 bg-white">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-2xl font-extrabold text-navy">Why DSG?</h2>
+      <div class="accent-bar"></div>
+      <p class="text-muted mb-8 max-w-3xl">
+        DSG partners with customers across Africa to build comprehensive solutions that innovate business
+        relationships and yield mutual return on investment. Our people and diverse technology enable
+        anywhere, anytime access to products and services ensuring a customer-centric focus.
+      </p>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="rounded-xl border border-slate-200 p-5">
+          <div class="text-accent font-bold text-sm mb-1">MVNE</div>
+          <p class="text-xs text-muted">MVNO platform &amp; ecosystem management, VAS, Travel eSIM, Loyalty Programs, Device Financing, Revenue Assurance</p>
+        </div>
+        <div class="rounded-xl border border-slate-200 p-5">
+          <div class="text-accent font-bold text-sm mb-1">CXG — Customer Experience Group</div>
+          <p class="text-xs text-muted">Omni-channel support, contact centre, social media, WhatsApp, SMS, email, CRM, Business Intelligence</p>
+        </div>
+        <div class="rounded-xl border border-slate-200 p-5">
+          <div class="text-accent font-bold text-sm mb-1">Digitalise</div>
+          <p class="text-xs text-muted">Design &amp; development studio — digital transformation, web &amp; app development, social CRM</p>
+        </div>
+        <div class="rounded-xl border border-slate-200 p-5">
+          <div class="text-accent font-bold text-sm mb-1">BroadBrand</div>
+          <p class="text-xs text-muted">AI-driven mobile media marketing, Xanite CVM platform, SEO/SEM, analytics &amp; reporting</p>
+        </div>
+        <div class="rounded-xl border border-slate-200 p-5">
+          <div class="text-accent font-bold text-sm mb-1">digitalmall.com</div>
+          <p class="text-xs text-muted">Turnkey e-commerce platform — launch online stores without complexity or high overheads</p>
+        </div>
+        <div class="rounded-xl border border-slate-200 p-5">
+          <div class="text-accent font-bold text-sm mb-1">Digital Resilience</div>
+          <p class="text-xs text-muted">Managed cybersecurity services, McAfee consumer, eInsurer cyber insurance, identity theft protection</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPROACH -->
+  <section id="approach" class="py-16 px-4 section-alt">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-2xl font-extrabold text-navy">Strategic Review Approach</h2>
+      <div class="accent-bar"></div>
+      <p class="text-muted mb-8 max-w-3xl">DSG's DBOT model is structured across seven clear phases, each unlocking tangible business value.</p>
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div>
+          <h3 class="font-bold text-navy mb-3 flex items-center gap-2">
+            <span class="w-7 h-7 rounded-full bg-accent text-white text-xs flex items-center justify-center font-bold">D</span>
+            Design Phase
+          </h3>
+          <p class="text-sm text-muted mb-3">Strategic clarity and commercial validation through five structured phases delivered over 8 weeks.</p>
+          <ul class="space-y-1 text-sm">
+            <li class="flex gap-2 text-muted"><span class="text-accent font-semibold">Wk 1–2</span> Strategic Thinking Sessions &amp; Direction</li>
+            <li class="flex gap-2 text-muted"><span class="text-accent font-semibold">Wk 3–5</span> Draft Plan Development</li>
+            <li class="flex gap-2 text-muted"><span class="text-accent font-semibold">Wk 5–7</span> Implementation Roadmap</li>
+            <li class="flex gap-2 text-muted"><span class="text-accent font-semibold">Wk 8</span> Board Pack &amp; Final Approval</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-bold text-navy mb-3 flex items-center gap-2">
+            <span class="w-7 h-7 rounded-full bg-navy text-white text-xs flex items-center justify-center font-bold">B</span>
+            Build &amp; Operate
+          </h3>
+          <p class="text-sm text-muted mb-3">Activates the transformation blueprint via a dedicated Transformation Project Office (TPO) over 6 months.</p>
+          <ul class="space-y-1 text-sm text-muted">
+            <li>✦ Revenue growth &amp; cost efficiency</li>
+            <li>✦ Customer experience uplift</li>
+            <li>✦ Digital adoption &amp; network performance</li>
+            <li>✦ KPI governance and board visibility</li>
+          </ul>
+        </div>
+      </div>
+      <div class="overflow-x-auto rounded-xl border border-slate-200">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="bg-navy text-white">
+              <th class="text-left py-3 px-4 font-semibold">Phase</th>
+              <th class="text-left py-3 px-4 font-semibold">Duration</th>
+              <th class="text-left py-3 px-4 font-semibold">Business Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-slate-100"><td class="py-3 px-4 font-medium">Design</td><td class="py-3 px-4 text-muted">8 weeks</td><td class="py-3 px-4 text-muted">Strategic clarity &amp; commercial validation</td></tr>
+            <tr class="border-b border-slate-100"><td class="py-3 px-4 font-medium">Build &amp; Operate</td><td class="py-3 px-4 text-muted">6 months</td><td class="py-3 px-4 text-muted">Digital &amp; operational enablement</td></tr>
+            <tr class="border-b border-slate-100"><td class="py-3 px-4 font-medium">Transfer</td><td class="py-3 px-4 text-muted">1 month</td><td class="py-3 px-4 text-muted">Capability independence &amp; scalability</td></tr>
+            <tr><td class="py-3 px-4 font-bold text-accent">Total</td><td class="py-3 px-4 font-bold">~9 months</td><td class="py-3 px-4 text-muted">Future-ready, self-sufficient digital operator</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- DESIGN PHASE -->
+  <section id="design" class="py-16 px-4 bg-white">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-2xl font-extrabold text-navy">Design Phase</h2>
+      <div class="accent-bar"></div>
+      <p class="text-muted mb-8 max-w-3xl">The Design Phase lays the foundation for execution — translating strategy into commercially viable, technically sound, and operationally executable plans before any investment is deployed.</p>
+      <h3 class="font-bold text-navy mb-4">Deliverables</h3>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+        <div class="bg-surface rounded-xl border border-slate-200 p-5">
+          <span class="inline-block bg-accent text-white text-xs font-bold rounded-full px-2.5 py-0.5 mb-2">MVP</span>
+          <p class="text-sm text-muted">Minimum Viable Proposition — packages, deals and specific products/services for relaunch</p>
+        </div>
+        <div class="bg-surface rounded-xl border border-slate-200 p-5">
+          <span class="inline-block bg-accent text-white text-xs font-bold rounded-full px-2.5 py-0.5 mb-2">GTM</span>
+          <p class="text-sm text-muted">Go-to-Market plan — brand, sales, distribution, customer care, subscriber lifecycle management</p>
+        </div>
+        <div class="bg-surface rounded-xl border border-slate-200 p-5">
+          <span class="inline-block bg-accent text-white text-xs font-bold rounded-full px-2.5 py-0.5 mb-2">OM</span>
+          <p class="text-sm text-muted">Operating Model — high-level technical architecture &amp; relational diagram between parties</p>
+        </div>
+        <div class="bg-surface rounded-xl border border-slate-200 p-5">
+          <span class="inline-block bg-accent text-white text-xs font-bold rounded-full px-2.5 py-0.5 mb-2">ICX</span>
+          <p class="text-sm text-muted">Integrated Customer Experience — customer journeys and high-level business processes</p>
+        </div>
+        <div class="bg-surface rounded-xl border border-slate-200 p-5 md:col-span-2 lg:col-span-1">
+          <span class="inline-block bg-accent text-white text-xs font-bold rounded-full px-2.5 py-0.5 mb-2">BM</span>
+          <p class="text-sm text-muted">Granular 60-month business plan &amp; commercial analysis — capex/opex, peak funding, break-even, ROI</p>
+        </div>
+      </div>
+      <h3 class="font-bold text-navy mb-3">Design Team Resources</h3>
+      <div class="overflow-x-auto rounded-xl border border-slate-200">
+        <table class="w-full text-sm">
+          <thead><tr class="bg-surface border-b border-slate-200"><th class="text-left py-3 px-4 font-semibold text-navy">Resource</th><th class="text-left py-3 px-4 font-semibold text-navy">Commitment</th></tr></thead>
+          <tbody>
+            <tr class="border-b border-slate-100"><td class="py-3 px-4 font-medium">C-Level Commercial Resource</td><td class="py-3 px-4 text-muted">2 weeks per month</td></tr>
+            <tr class="border-b border-slate-100"><td class="py-3 px-4 font-medium">Business Analyst</td><td class="py-3 px-4 text-muted">Full time</td></tr>
+            <tr class="border-b border-slate-100"><td class="py-3 px-4 font-medium">Senior Engineer</td><td class="py-3 px-4 text-muted">Full time</td></tr>
+            <tr><td class="py-3 px-4 font-medium">Project Manager</td><td class="py-3 px-4 text-muted">Full time</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUILD & OPERATE -->
+  <section id="build" class="py-16 px-4 section-alt">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-2xl font-extrabold text-navy">Build &amp; Operate Phase</h2>
+      <div class="accent-bar"></div>
+      <p class="text-muted mb-6 max-w-3xl">The Build and Operate phase activates the transformation blueprint. DSG establishes a dedicated <strong class="text-navy">Transformation Project Office (TPO)</strong>, co-led by GCT Group's leadership, responsible for implementing the agreed roadmap and delivering measurable outcomes.</p>
+      <div class="bg-navy text-white rounded-xl p-6 mb-8">
+        <div class="grid md:grid-cols-2 gap-4 text-sm">
+          <div><span class="text-sky-400 font-semibold block mb-1">Duration</span>6 months from completion of Design Phase</div>
+          <div><span class="text-sky-400 font-semibold block mb-1">Governance</span>TPO co-led by GCT Group &amp; DSG leadership</div>
+          <div><span class="text-sky-400 font-semibold block mb-1">Reporting</span>KPI dashboards with board-level visibility</div>
+          <div><span class="text-sky-400 font-semibold block mb-1">Activities</span>Derived from Design Phase strategy outputs</div>
+        </div>
+      </div>
+      <h3 class="font-bold text-navy mb-3">Build &amp; Operate Resources</h3>
+      <div class="overflow-x-auto rounded-xl border border-slate-200">
+        <table class="w-full text-sm">
+          <thead><tr class="bg-surface border-b border-slate-200"><th class="text-left py-3 px-4 font-semibold text-navy">Resource</th><th class="text-left py-3 px-4 font-semibold text-navy">Commitment</th></tr></thead>
+          <tbody>
+            <tr class="border-b border-slate-100"><td class="py-3 px-4 font-medium">C-Level Commercial Resource</td><td class="py-3 px-4 text-muted">2 weeks per month</td></tr>
+            <tr class="border-b border-slate-100"><td class="py-3 px-4 font-medium">Business Analyst</td><td class="py-3 px-4 text-muted">Full time</td></tr>
+            <tr class="border-b border-slate-100"><td class="py-3 px-4 font-medium">Senior Engineer</td><td class="py-3 px-4 text-muted">Full time</td></tr>
+            <tr class="border-b border-slate-100"><td class="py-3 px-4 font-medium">Project Managers</td><td class="py-3 px-4 text-muted">Full time</td></tr>
+            <tr><td class="py-3 px-4 font-medium">Enterprise Architect</td><td class="py-3 px-4 text-muted">As required</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRANSFER -->
+  <section id="transfer" class="py-16 px-4 bg-white">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-2xl font-extrabold text-navy">Transfer Phase</h2>
+      <div class="accent-bar"></div>
+      <p class="text-muted mb-6 max-w-3xl">The Transfer Phase transitions full operational control from the MVNE team to GCT Group's internal management — marking the transition from dependence to <strong class="text-navy">digital sovereignty</strong>.</p>
+      <div class="grid md:grid-cols-3 gap-4 mb-8">
+        <div class="bg-surface rounded-xl border border-slate-200 p-5 text-center">
+          <div class="text-3xl font-extrabold text-accent mb-1">100%</div>
+          <div class="text-sm text-muted">Systems managed internally</div>
+        </div>
+        <div class="bg-surface rounded-xl border border-slate-200 p-5 text-center">
+          <div class="text-3xl font-extrabold text-accent mb-1">90 Days</div>
+          <div class="text-sm text-muted">KPI validation window</div>
+        </div>
+        <div class="bg-surface rounded-xl border border-slate-200 p-5 text-center">
+          <div class="text-3xl font-extrabold text-accent mb-1">3–6 Mo</div>
+          <div class="text-sm text-muted">Post-transfer support period</div>
+        </div>
+      </div>
+      <h3 class="font-bold text-navy mb-4">Transfer Roadmap</h3>
+      <div class="overflow-x-auto rounded-xl border border-slate-200 mb-8">
+        <table class="w-full text-sm">
+          <thead><tr class="bg-navy text-white"><th class="text-left py-3 px-4 font-semibold">Phase</th><th class="text-left py-3 px-4 font-semibold">Duration</th><th class="text-left py-3 px-4 font-semibold">Key Activities</th><th class="text-left py-3 px-4 font-semibold">Deliverables</th></tr></thead>
+          <tbody>
+            <tr class="border-b border-slate-100"><td class="py-3 px-4 font-medium">T1 – Preparation &amp; Planning</td><td class="py-3 px-4 text-muted">Week 1</td><td class="py-3 px-4 text-muted">Define scope, audit findings, agree success metrics</td><td class="py-3 px-4 text-muted">Transfer Plan, Acceptance Criteria</td></tr>
+            <tr class="border-b border-slate-100"><td class="py-3 px-4 font-medium">T2 – Knowledge Transfer</td><td class="py-3 px-4 text-muted">Week 2</td><td class="py-3 px-4 text-muted">Workshops, job shadowing, system walk-throughs</td><td class="py-3 px-4 text-muted">Training Completion Reports</td></tr>
+            <tr class="border-b border-slate-100"><td class="py-3 px-4 font-medium">T3 – Operational Validation</td><td class="py-3 px-4 text-muted">Week 3</td><td class="py-3 px-4 text-muted">Live ops under supervision, monitor SLAs</td><td class="py-3 px-4 text-muted">Readiness Dashboard, KPI Validation</td></tr>
+            <tr><td class="py-3 px-4 font-medium">T4 – Handover &amp; Certification</td><td class="py-3 px-4 text-muted">Week 4</td><td class="py-3 px-4 text-muted">Final handover, documentation transfer</td><td class="py-3 px-4 text-muted">Handover Certificates, Support MoU</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="bg-navy text-white rounded-xl p-5 text-sm">
+        <span class="text-sky-400 font-semibold">Joint Transfer Steering Committee</span> — co-chaired by the GCT Group CEO and DSG CEO — oversees the transition, ensuring alignment on milestones, risk mitigation, and continuity of strategic intent.
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMERCIAL -->
+  <section id="commercial" class="py-16 px-4 section-alt">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-2xl font-extrabold text-navy">Investment &amp; Commercial Terms</h2>
+      <div class="accent-bar"></div>
+      <p class="text-muted mb-8 max-w-3xl">The proposed investment of <strong class="text-navy">USD 250,000</strong> represents a strategic enablement cost — not an expense — delivering a fully operational, self-sustaining, revenue-generating telecom business within 9 months.</p>
+      <div class="overflow-x-auto rounded-xl border border-slate-200 mb-8">
+        <table class="w-full text-sm">
+          <thead><tr class="bg-navy text-white"><th class="text-left py-3 px-4 font-semibold">Item</th><th class="text-left py-3 px-4 font-semibold">Description</th><th class="text-left py-3 px-4 font-semibold">Cost (excl. VAT)</th></tr></thead>
+          <tbody>
+            <tr class="border-b border-slate-100"><td class="py-3 px-4 font-medium">1</td><td class="py-3 px-4 text-muted">Fixed Fee — Design, Build &amp; Operate, Transfer</td><td class="py-3 px-4 font-bold text-accent">USD 250,000</td></tr>
+            <tr class="border-b border-slate-100"><td class="py-3 px-4 font-medium">2</td><td class="py-3 px-4 text-muted">Travel &amp; Accommodation (economy flights + lodging)</td><td class="py-3 px-4 text-muted">Actual cost</td></tr>
+            <tr><td class="py-3 px-4 font-medium">3</td><td class="py-3 px-4 text-muted">Additional Consulting Hours</td><td class="py-3 px-4 font-medium">USD 300 / hour</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3 class="font-bold text-navy mb-3">Payment Schedule</h3>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="bg-white rounded-xl border border-slate-200 p-5">
+          <div class="text-2xl font-extrabold text-accent mb-1">50%</div>
+          <div class="font-semibold text-navy text-sm">On Acceptance</div>
+          <p class="text-xs text-muted mt-1">Deposit invoiced on signature; payment due before project commencement</p>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 p-5">
+          <div class="text-2xl font-extrabold text-accent mb-1">50%</div>
+          <div class="font-semibold text-navy text-sm">Monthly — As Defined</div>
+          <p class="text-xs text-muted mt-1">Phased monthly invoicing aligned to programme milestones</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEXT STEPS -->
+  <section class="py-16 px-4 bg-white">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-2xl font-extrabold text-navy">Next Steps</h2>
+      <div class="accent-bar"></div>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="flex gap-4 items-start">
+          <span class="w-8 h-8 rounded-full bg-accent text-white font-bold text-sm flex items-center justify-center flex-shrink-0">1</span>
+          <div><div class="font-semibold text-navy text-sm">Approve Engagement</div><p class="text-xs text-muted mt-0.5">Approve and nominate Steering Committee members</p></div>
+        </div>
+        <div class="flex gap-4 items-start">
+          <span class="w-8 h-8 rounded-full bg-accent text-white font-bold text-sm flex items-center justify-center flex-shrink-0">2</span>
+          <div><div class="font-semibold text-navy text-sm">Schedule Workshop</div><p class="text-xs text-muted mt-0.5">Strategic Thinking Workshop within 14 days of acceptance</p></div>
+        </div>
+        <div class="flex gap-4 items-start">
+          <span class="w-8 h-8 rounded-full bg-accent text-white font-bold text-sm flex items-center justify-center flex-shrink-0">3</span>
+          <div><div class="font-semibold text-navy text-sm">Provide Baseline Data</div><p class="text-xs text-muted mt-0.5">Share financials, operations data, and subscriber base</p></div>
+        </div>
+        <div class="flex gap-4 items-start">
+          <span class="w-8 h-8 rounded-full bg-accent text-white font-bold text-sm flex items-center justify-center flex-shrink-0">4</span>
+          <div><div class="font-semibold text-navy text-sm">Kick-off Session</div><p class="text-xs text-muted mt-0.5">Align priorities and success metrics with all stakeholders</p></div>
+        </div>
+      </div>
+      <div class="mt-6 bg-danger/10 border border-danger/20 rounded-xl p-4 text-sm">
+        <span class="text-danger font-bold">Decision Required:</span>
+        <span class="text-navy ml-1">Approval to commence the Design Phase by <strong>2nd April 2026</strong></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- TERMS -->
+  <section id="terms" class="py-16 px-4 section-alt">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-2xl font-extrabold text-navy">Terms &amp; Conditions</h2>
+      <div class="accent-bar"></div>
+      <div class="overflow-x-auto rounded-xl border border-slate-200">
+        <table class="w-full text-sm">
+          <thead><tr class="bg-surface border-b border-slate-200"><th class="text-left py-3 px-4 font-semibold text-navy">Clause</th><th class="text-left py-3 px-4 font-semibold text-navy">Detail</th></tr></thead>
+          <tbody>
+            <tr class="border-b border-slate-100"><td class="py-3 px-4 font-medium">Validity</td><td class="py-3 px-4 text-muted">All proposals from DSG are valid for thirty (30) days unless otherwise stated</td></tr>
+            <tr class="border-b border-slate-100"><td class="py-3 px-4 font-medium">Additional Agreements</td><td class="py-3 px-4 text-muted">Subject to signature of a comprehensive contract</td></tr>
+            <tr class="border-b border-slate-100"><td class="py-3 px-4 font-medium">Payment Terms</td><td class="py-3 px-4 text-muted">Payable within 30 days of invoice date; 2% per month late penalty</td></tr>
+            <tr class="border-b border-slate-100"><td class="py-3 px-4 font-medium">Pricing Adjustments</td><td class="py-3 px-4 text-muted">Subject to USD/ZAR exchange rate fluctuations; DSG reserves the right to recalibrate</td></tr>
+            <tr><td class="py-3 px-4 font-medium">Proposal Acceptance</td><td class="py-3 px-4 text-muted">Both parties agree to terms set out in this proposal and the detailed SOW</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCEPTANCE / SIGNATURES -->
+  <section id="acceptance" class="py-16 px-4 bg-white">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-2xl font-extrabold text-navy">Proposal Acceptance</h2>
+      <div class="accent-bar"></div>
+      <p class="text-muted mb-8 max-w-3xl">Upon acceptance, both parties agree to the terms set out in this proposal and the detailed Scope of Work. This document, along with the SOW, represents the full understanding between DSG and GCT Group.</p>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="rounded-xl border border-slate-200 p-6">
+          <div class="text-xs font-bold text-accent uppercase tracking-wide mb-4">For DSG (Pty) Ltd</div>
+          <div class="space-y-3 text-sm">
+            <div class="flex justify-between border-b border-slate-100 pb-2"><span class="text-muted">Name</span><span class="font-semibold text-navy">Yaron Assabi</span></div>
+            <div class="flex justify-between border-b border-slate-100 pb-2"><span class="text-muted">Position</span><span class="font-semibold text-navy">CEO</span></div>
+            <div class="flex justify-between border-b border-slate-100 pb-2"><span class="text-muted">Date</span><span class="text-slate-400">________________</span></div>
+            <div class="flex justify-between pb-2"><span class="text-muted">Signature</span><span class="text-slate-400">________________</span></div>
+          </div>
+        </div>
+        <div class="rounded-xl border border-slate-200 p-6">
+          <div class="text-xs font-bold text-accent uppercase tracking-wide mb-4">For GCT Group</div>
+          <div class="space-y-3 text-sm">
+            <div class="flex justify-between border-b border-slate-100 pb-2"><span class="text-muted">Name</span><span class="text-slate-400">________________</span></div>
+            <div class="flex justify-between border-b border-slate-100 pb-2"><span class="text-muted">Position</span><span class="text-slate-400">________________</span></div>
+            <div class="flex justify-between border-b border-slate-100 pb-2"><span class="text-muted">Date</span><span class="text-slate-400">________________</span></div>
+            <div class="flex justify-between pb-2"><span class="text-muted">Signature</span><span class="text-slate-400">________________</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-navy text-white/50 text-xs py-6 px-4 text-center">
+    © 2026 Digital Solutions Group (Pty) Ltd · A DSG Company · Confidential · www.mvne.co.za
+  </footer>
+
+</body>
+</html>
