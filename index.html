@@ -1086,74 +1086,75 @@
     <!-- Backdrop -->
     <div class="absolute inset-0 bg-navy/80 backdrop-blur-sm" onclick="closeAcceptModal()"></div>
     <!-- Card -->
-    <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-lg p-8 z-10">
-      <h3 class="text-xl font-extrabold text-navy mb-1">Accept Proposals</h3>
-      <p class="text-sm text-muted mb-6">Select the products you wish to accept. At least one product must be selected.</p>
+    <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-lg p-5 z-10">
+      <h3 class="text-base font-extrabold text-navy mb-0.5">Accept Proposals</h3>
+      <p class="text-xs text-muted mb-3">Select the products you wish to accept. At least one must be selected.</p>
 
-      <div class="space-y-3 mb-8">
+      <!-- Scrollable list -->
+      <div class="overflow-y-auto max-h-[55vh] pr-1 space-y-1.5 mb-4">
 
-        <label class="accept-option flex items-start gap-4 p-4 rounded-xl border-2 border-slate-200 cursor-pointer hover:border-accent transition has-[:checked]:border-accent has-[:checked]:bg-accent/5">
-          <input type="checkbox" name="accept-product" value="dbot" class="mt-0.5 w-4 h-4 accent-[#0369A1] flex-shrink-0" />
-          <div>
-            <div class="font-bold text-navy text-sm">DBOT Transformation Partnership</div>
-            <div class="text-xs text-muted mt-0.5">$ 250,000 fixed fee · 9-month programme</div>
+        <label class="accept-option flex items-center gap-3 px-3 py-2.5 rounded-lg border-2 border-slate-200 cursor-pointer hover:border-accent transition has-[:checked]:border-accent has-[:checked]:bg-accent/5">
+          <input type="checkbox" name="accept-product" value="dbot" class="w-4 h-4 accent-[#0369A1] flex-shrink-0" />
+          <div class="min-w-0">
+            <div class="font-semibold text-navy text-xs">DBOT Transformation Partnership</div>
+            <div class="text-xs text-muted">$ 250,000 fixed fee · 9-month programme</div>
           </div>
         </label>
 
-        <label class="accept-option flex items-start gap-4 p-4 rounded-xl border-2 border-slate-200 cursor-pointer hover:border-accent transition has-[:checked]:border-accent has-[:checked]:bg-accent/5">
-          <input type="checkbox" name="accept-product" value="pwa" class="mt-0.5 w-4 h-4 accent-[#0369A1] flex-shrink-0" />
-          <div>
-            <div class="font-bold text-navy text-sm">MVNO PWA Platform</div>
-            <div class="text-xs text-muted mt-0.5">$12,507 once-off setup + $4,250 / month</div>
+        <label class="accept-option flex items-center gap-3 px-3 py-2.5 rounded-lg border-2 border-slate-200 cursor-pointer hover:border-accent transition has-[:checked]:border-accent has-[:checked]:bg-accent/5">
+          <input type="checkbox" name="accept-product" value="pwa" class="w-4 h-4 accent-[#0369A1] flex-shrink-0" />
+          <div class="min-w-0">
+            <div class="font-semibold text-navy text-xs">MVNO PWA Platform</div>
+            <div class="text-xs text-muted">$12,507 once-off + $4,250 / month</div>
           </div>
         </label>
 
-        <label class="accept-option flex items-start gap-4 p-4 rounded-xl border-2 border-slate-200 cursor-pointer hover:border-accent transition has-[:checked]:border-accent has-[:checked]:bg-accent/5">
-          <input type="checkbox" name="accept-product" value="esim" class="mt-0.5 w-4 h-4 accent-[#0369A1] flex-shrink-0" />
-          <div>
-            <div class="font-bold text-navy text-sm">Travel eSIM Platform</div>
-            <div class="text-xs text-muted mt-0.5">$3,200 once-off setup + 50/50 revenue share</div>
+        <label class="accept-option flex items-center gap-3 px-3 py-2.5 rounded-lg border-2 border-slate-200 cursor-pointer hover:border-accent transition has-[:checked]:border-accent has-[:checked]:bg-accent/5">
+          <input type="checkbox" name="accept-product" value="esim" class="w-4 h-4 accent-[#0369A1] flex-shrink-0" />
+          <div class="min-w-0">
+            <div class="font-semibold text-navy text-xs">Travel eSIM Platform</div>
+            <div class="text-xs text-muted">$3,200 once-off + 50/50 revenue share</div>
           </div>
         </label>
 
-        <label class="accept-option flex items-start gap-4 p-4 rounded-xl border-2 border-slate-200 cursor-pointer hover:border-accent transition has-[:checked]:border-accent has-[:checked]:bg-accent/5">
-          <input type="checkbox" name="accept-product" value="cxg" class="mt-0.5 w-4 h-4 accent-[#0369A1] flex-shrink-0" />
-          <div>
-            <div class="font-bold text-navy text-sm">CXG — Customer Experience Group</div>
-            <div class="text-xs text-muted mt-0.5">Omni-channel CX management · pricing on request</div>
+        <label class="accept-option flex items-center gap-3 px-3 py-2.5 rounded-lg border-2 border-slate-200 cursor-pointer hover:border-accent transition has-[:checked]:border-accent has-[:checked]:bg-accent/5">
+          <input type="checkbox" name="accept-product" value="cxg" class="w-4 h-4 accent-[#0369A1] flex-shrink-0" />
+          <div class="min-w-0">
+            <div class="font-semibold text-navy text-xs">CXG — Customer Experience Group</div>
+            <div class="text-xs text-muted">Omni-channel CX management · pricing on request</div>
           </div>
         </label>
 
-        <label class="accept-option flex items-start gap-4 p-4 rounded-xl border-2 border-slate-200 cursor-pointer hover:border-accent transition has-[:checked]:border-accent has-[:checked]:bg-accent/5">
-          <input type="checkbox" name="accept-product" value="xanite" class="mt-0.5 w-4 h-4 accent-[#0369A1] flex-shrink-0" />
-          <div>
-            <div class="font-bold text-navy text-sm">Xanite CVM Platform</div>
-            <div class="text-xs text-muted mt-0.5">AI-powered Customer Value Management · pricing on request</div>
+        <label class="accept-option flex items-center gap-3 px-3 py-2.5 rounded-lg border-2 border-slate-200 cursor-pointer hover:border-accent transition has-[:checked]:border-accent has-[:checked]:bg-accent/5">
+          <input type="checkbox" name="accept-product" value="xanite" class="w-4 h-4 accent-[#0369A1] flex-shrink-0" />
+          <div class="min-w-0">
+            <div class="font-semibold text-navy text-xs">Xanite CVM Platform</div>
+            <div class="text-xs text-muted">AI-powered Customer Value Management · pricing on request</div>
           </div>
         </label>
 
-        <label class="accept-option flex items-start gap-4 p-4 rounded-xl border-2 border-slate-200 cursor-pointer hover:border-accent transition has-[:checked]:border-accent has-[:checked]:bg-accent/5">
-          <input type="checkbox" name="accept-product" value="persaic" class="mt-0.5 w-4 h-4 accent-[#0369A1] flex-shrink-0" />
-          <div>
-            <div class="font-bold text-navy text-sm">PersAIc — AI Personalisation</div>
-            <div class="text-xs text-muted mt-0.5">Real-time personalisation engine · per-subscriber pricing</div>
+        <label class="accept-option flex items-center gap-3 px-3 py-2.5 rounded-lg border-2 border-slate-200 cursor-pointer hover:border-accent transition has-[:checked]:border-accent has-[:checked]:bg-accent/5">
+          <input type="checkbox" name="accept-product" value="persaic" class="w-4 h-4 accent-[#0369A1] flex-shrink-0" />
+          <div class="min-w-0">
+            <div class="font-semibold text-navy text-xs">PersAIc — AI Personalisation</div>
+            <div class="text-xs text-muted">Real-time personalisation engine · per-subscriber pricing</div>
           </div>
         </label>
 
-        <label class="accept-option flex items-start gap-4 p-4 rounded-xl border-2 border-slate-200 cursor-pointer hover:border-accent transition has-[:checked]:border-accent has-[:checked]:bg-accent/5">
-          <input type="checkbox" name="accept-product" value="bitdefender" class="mt-0.5 w-4 h-4 accent-[#0369A1] flex-shrink-0" />
-          <div>
-            <div class="font-bold text-navy text-sm">Bitdefender — Cybersecurity VAS</div>
-            <div class="text-xs text-muted mt-0.5">Consumer security as a value-added service · per-subscriber reseller model</div>
+        <label class="accept-option flex items-center gap-3 px-3 py-2.5 rounded-lg border-2 border-slate-200 cursor-pointer hover:border-accent transition has-[:checked]:border-accent has-[:checked]:bg-accent/5">
+          <input type="checkbox" name="accept-product" value="bitdefender" class="w-4 h-4 accent-[#0369A1] flex-shrink-0" />
+          <div class="min-w-0">
+            <div class="font-semibold text-navy text-xs">Bitdefender — Cybersecurity VAS</div>
+            <div class="text-xs text-muted">Consumer security VAS · per-subscriber reseller model</div>
           </div>
         </label>
 
-        <div class="border-t border-slate-100 pt-3 mt-1">
-          <label class="accept-option flex items-start gap-4 p-4 rounded-xl border-2 border-dashed border-slate-200 cursor-pointer hover:border-accent transition has-[:checked]:border-accent has-[:checked]:bg-accent/5">
-            <input type="checkbox" name="accept-product" value="consultation" class="mt-0.5 w-4 h-4 accent-[#0369A1] flex-shrink-0" />
-            <div>
-              <div class="font-bold text-navy text-sm">Request a Consultation</div>
-              <div class="text-xs text-muted mt-0.5">I would like a consultation session to understand requirements and discuss the right product mix for GCT Group</div>
+        <div class="border-t border-slate-100 pt-1.5">
+          <label class="accept-option flex items-center gap-3 px-3 py-2.5 rounded-lg border-2 border-dashed border-slate-200 cursor-pointer hover:border-accent transition has-[:checked]:border-accent has-[:checked]:bg-accent/5">
+            <input type="checkbox" name="accept-product" value="consultation" class="w-4 h-4 accent-[#0369A1] flex-shrink-0" />
+            <div class="min-w-0">
+              <div class="font-semibold text-navy text-xs">Request a Consultation</div>
+              <div class="text-xs text-muted">Consultation session to discuss requirements and the right product mix</div>
             </div>
           </label>
         </div>
