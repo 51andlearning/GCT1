@@ -632,20 +632,20 @@
       document.querySelectorAll('[data-view]').forEach(el => {
         const v = el.dataset.view;
         if (v === 'all') {
-          el.style.display = '';
+          el.style.display = 'block';
         } else if (v === 'overview') {
-          el.style.display = view === 'overview' ? '' : 'none';
+          el.style.display = view === 'overview' ? 'block' : 'none';
         } else if (v === 'product') {
-          el.style.display = view !== 'overview' ? '' : 'none';
+          el.style.display = view !== 'overview' ? 'block' : 'none';
         } else {
-          el.style.display = v === view ? '' : 'none';
+          el.style.display = v === view ? 'block' : 'none';
         }
       });
 
       // Show/hide commercial + accept nav links
       const isProduct = view !== 'overview';
-      document.getElementById('nav-commercial').style.display = isProduct ? '' : 'none';
-      document.getElementById('nav-accept').style.display = isProduct ? '' : 'none';
+      document.getElementById('nav-commercial').style.display = isProduct ? 'inline' : 'none';
+      document.getElementById('nav-accept').style.display = isProduct ? 'inline' : 'none';
 
       // Update active nav state
       document.querySelectorAll('[data-nav]').forEach(el => {
