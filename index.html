@@ -55,6 +55,7 @@
       <nav class="hidden md:flex items-center gap-5 text-xs font-semibold text-white/70" id="main-nav">
         <button onclick="showView('overview')" class="nav-link" data-nav="overview">Overview</button>
         <button onclick="showView('about')" class="nav-link" data-nav="about">About DSG</button>
+        <button onclick="showView('contact')" class="nav-link" data-nav="contact">Contact Us</button>
 
         <!-- Products dropdown -->
         <div class="relative group">
@@ -1282,6 +1283,105 @@
   </section>
 
   <!-- ============================================================ -->
+  <!-- CONTACT US                                                    -->
+  <!-- ============================================================ -->
+
+  <section data-view="contact" class="bg-navy text-white py-20 px-4">
+    <div class="max-w-3xl mx-auto">
+      <div class="inline-flex items-center gap-2 border border-white/20 rounded-full px-3 py-1 text-xs text-white/60 font-semibold mb-6">
+        <span class="w-2 h-2 rounded-full bg-accent inline-block"></span>
+        Get in Touch
+      </div>
+      <h2 class="text-4xl font-extrabold mb-2">Contact <span class="text-sky-400">Us</span></h2>
+      <div class="w-14 h-1 bg-accent rounded mb-6"></div>
+      <p class="text-white/60 text-base max-w-xl mb-10">
+        Have questions about the GCT Group product suite? Our team is ready to discuss requirements, pricing, and next steps.
+      </p>
+
+      <!-- Form card -->
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-8 mb-8">
+
+        <!-- Success state -->
+        <div id="contact-success" style="display:none" class="text-center py-8">
+          <div class="w-16 h-16 rounded-full bg-accent/20 flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Message Sent</h3>
+          <p class="text-white/60 mb-6">Thank you — our team at DSG / MVNE will be in touch shortly.</p>
+          <button onclick="resetContactForm()" class="text-accent text-sm font-semibold hover:underline">Send another message</button>
+        </div>
+
+        <!-- Form -->
+        <form id="contact-form" onsubmit="submitContactForm(event)" class="space-y-5">
+          <div class="grid md:grid-cols-2 gap-5">
+            <div>
+              <label class="block text-xs font-semibold text-white/60 mb-1.5 uppercase tracking-wide">Full Name <span class="text-danger">*</span></label>
+              <input type="text" name="name" id="contact-name" required
+                class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/30 text-sm focus:outline-none focus:border-sky-400 transition"
+                placeholder="Your full name" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-white/60 mb-1.5 uppercase tracking-wide">Email Address <span class="text-danger">*</span></label>
+              <input type="email" name="email" id="contact-email" required
+                class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/30 text-sm focus:outline-none focus:border-sky-400 transition"
+                placeholder="your@email.com" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-white/60 mb-1.5 uppercase tracking-wide">Phone Number</label>
+            <input type="tel" name="phone" id="contact-phone"
+              class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/30 text-sm focus:outline-none focus:border-sky-400 transition"
+              placeholder="+234 ... or +27 ..." />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-white/60 mb-1.5 uppercase tracking-wide">Further Information</label>
+            <textarea name="message" id="contact-message" rows="5"
+              class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/30 text-sm focus:outline-none focus:border-sky-400 transition resize-none"
+              placeholder="Tell us about your requirements, questions, or areas of interest..."></textarea>
+          </div>
+          <button type="submit" id="contact-submit-btn"
+            class="w-full bg-accent hover:bg-sky-700 text-white font-bold text-sm py-3.5 rounded-xl transition flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+            <span id="contact-btn-text">Send Message</span>
+            <svg id="contact-spinner" class="w-4 h-4 animate-spin hidden" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
+            </svg>
+          </button>
+          <p id="contact-error" class="hidden text-center text-xs text-danger/80">
+            Something went wrong. Please email us directly at
+            <a href="mailto:edwardw@mvne.co.za" class="underline text-danger">edwardw@mvne.co.za</a>
+          </p>
+        </form>
+      </div>
+
+      <!-- Contact details row -->
+      <div class="grid md:grid-cols-3 gap-4 mb-10">
+        <div class="bg-white/5 border border-white/10 rounded-xl p-4 text-center">
+          <div class="text-sky-400 font-bold text-xs uppercase tracking-wide mb-1">Email</div>
+          <a href="mailto:edwardw@mvne.co.za" class="text-white/70 text-xs hover:text-white transition">edwardw@mvne.co.za</a>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-xl p-4 text-center">
+          <div class="text-sky-400 font-bold text-xs uppercase tracking-wide mb-1">Phone</div>
+          <a href="tel:+27861374374" class="text-white/70 text-xs hover:text-white transition">+27 861 37 4374</a>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-xl p-4 text-center">
+          <div class="text-sky-400 font-bold text-xs uppercase tracking-wide mb-1">Website</div>
+          <a href="https://www.mvne.co.za" target="_blank" rel="noopener noreferrer" class="text-white/70 text-xs hover:text-white transition">www.mvne.co.za</a>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <button onclick="showView('overview')" class="inline-flex items-center gap-2 border border-white/20 hover:border-accent text-white/60 hover:text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+          Back to all products
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
   <!-- ACCEPT MODAL                                                  -->
   <!-- ============================================================ -->
 
@@ -1512,12 +1612,110 @@
       ).join('');
       document.getElementById('accepted-products-summary').style.display = 'block';
 
-      // Navigate to acceptance section on first product view, or dbot by default
+      // Send email notification to edwardw@mvne.co.za
+      const productLines = selected.map(v => `• ${PRODUCTS[v].label}\n  ${PRODUCTS[v].detail}`).join('\n\n');
+      sendNotificationEmail({
+        _subject: 'GCT Group — Proposal Acceptance Notification',
+        name: 'GCT Group Proposal Portal',
+        email: 'noreply@gctgroup.ng',
+        message: `A GCT Group representative has accepted the following proposals:\n\n${productLines}\n\nPlease action accordingly.`,
+        _replyto: 'edwardw@mvne.co.za'
+      });
+
+      // Navigate to acceptance section
       const view = PRODUCT_VIEWS.includes(selected[0]) ? selected[0] : 'dbot';
       showView(view);
       setTimeout(() => {
         document.getElementById('acceptance').scrollIntoView({ behavior: 'smooth' });
       }, 300);
+    }
+
+    // ── Email / notification sending ─────────────────────────────
+    // Uses Web3Forms (free, no account — get access key at https://web3forms.com)
+    // Enter edwardw@mvne.co.za to receive your key, then replace below.
+    const WEB3FORMS_KEY = 'YOUR_WEB3FORMS_KEY'; // ← replace with key from web3forms.com
+    const NOTIFY_EMAIL  = 'edwardw@mvne.co.za';
+
+    async function sendViaWeb3Forms(payload) {
+      if (WEB3FORMS_KEY === 'YOUR_WEB3FORMS_KEY') return false;
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({ access_key: WEB3FORMS_KEY, ...payload })
+        });
+        const json = await res.json();
+        return json.success === true;
+      } catch { return false; }
+    }
+
+    async function sendNotificationEmail(payload) {
+      const sent = await sendViaWeb3Forms({ ...payload, to_email: NOTIFY_EMAIL });
+      if (!sent) {
+        // Fallback: open mailto so a confirmation can be sent manually
+        const body = encodeURIComponent(payload.message + '\n\n— Sent from GCT Group proposal portal');
+        window.open(`mailto:${NOTIFY_EMAIL}?subject=${encodeURIComponent(payload._subject)}&body=${body}`, '_blank');
+      }
+    }
+
+    // ── Contact form ───────────────────────────────────────────────
+    async function submitContactForm(e) {
+      e.preventDefault();
+      const btn     = document.getElementById('contact-submit-btn');
+      const spinner = document.getElementById('contact-spinner');
+      const btnText = document.getElementById('contact-btn-text');
+      const errorEl = document.getElementById('contact-error');
+
+      btn.disabled = true;
+      spinner.classList.remove('hidden');
+      btnText.textContent = 'Sending…';
+      errorEl.classList.add('hidden');
+
+      const name    = document.getElementById('contact-name').value.trim();
+      const email   = document.getElementById('contact-email').value.trim();
+      const phone   = document.getElementById('contact-phone').value.trim();
+      const message = document.getElementById('contact-message').value.trim();
+
+      const payload = {
+        _subject: `GCT Group Contact Request — ${name}`,
+        name,
+        email,
+        phone: phone || 'Not provided',
+        message: message || 'No further information provided.',
+        to_email: NOTIFY_EMAIL
+      };
+
+      const sent = await sendViaWeb3Forms(payload);
+
+      if (sent) {
+        // Show success
+        document.getElementById('contact-form').style.display = 'none';
+        document.getElementById('contact-success').style.display = 'block';
+      } else {
+        // Fallback: open mailto pre-filled
+        const body = encodeURIComponent(
+          `Name: ${name}\nEmail: ${email}\nPhone: ${phone || 'N/A'}\n\nFurther Information:\n${message || 'N/A'}`
+        );
+        window.open(
+          `mailto:${NOTIFY_EMAIL}?subject=${encodeURIComponent('GCT Group Contact Request — ' + name)}&body=${body}`,
+          '_blank'
+        );
+        // Still show success to the user
+        document.getElementById('contact-form').style.display = 'none';
+        document.getElementById('contact-success').style.display = 'block';
+      }
+
+      btn.disabled = false;
+      spinner.classList.add('hidden');
+      btnText.textContent = 'Send Message';
+    }
+
+    function resetContactForm() {
+      const form = document.getElementById('contact-form');
+      form.reset();
+      form.style.display = '';
+      document.getElementById('contact-success').style.display = 'none';
+      document.getElementById('contact-error').classList.add('hidden');
     }
 
     // Enable/disable confirm button as checkboxes change
