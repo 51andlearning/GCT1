@@ -59,7 +59,7 @@
         <button onclick="showView('pwa')" class="nav-link" data-nav="pwa">PWA Platform</button>
         <button onclick="showView('esim')" class="nav-link" data-nav="esim">Travel eSIM</button>
         <a href="#commercial" class="nav-link" id="nav-commercial" style="display:none">Commercial</a>
-        <a href="#acceptance" class="nav-link" id="nav-accept" style="display:none">Accept</a>
+        <button onclick="openAcceptModal()" class="nav-link" id="nav-accept" style="display:none">Accept</button>
       </nav>
     </div>
   </header>
@@ -84,6 +84,11 @@
         A curated suite of proven digital products and transformation services to position GCT Group as
         Nigeria's first fully converged, cloud-enabled digital telecoms provider.
       </p>
+
+      <div class="flex gap-3 flex-wrap mb-12">
+        <button onclick="openAcceptModal()" class="bg-danger hover:bg-red-700 text-white font-semibold text-sm px-5 py-2.5 rounded-lg transition">Accept Proposal</button>
+        <button onclick="showView('dbot')" class="bg-white/10 hover:bg-white/20 text-white font-semibold text-sm px-5 py-2.5 rounded-lg transition">View Products</button>
+      </div>
 
       <div class="grid md:grid-cols-3 gap-5 mb-12">
 
@@ -606,7 +611,15 @@
     <div class="max-w-5xl mx-auto">
       <h2 class="text-2xl font-extrabold text-navy">Proposal Acceptance</h2>
       <div class="accent-bar"></div>
-      <p class="text-muted mb-8 max-w-3xl">Upon acceptance, both parties agree to the terms set out in this proposal and the detailed Scope of Work.</p>
+      <p class="text-muted mb-6 max-w-3xl">Upon acceptance, both parties agree to the terms set out in this proposal and the detailed Scope of Work.</p>
+
+      <!-- Selected products summary -->
+      <div id="accepted-products-summary" class="mb-8 rounded-xl border border-accent/30 bg-accent/5 p-5" style="display:none">
+        <div class="text-xs font-bold text-accent uppercase tracking-wide mb-3">Products Being Accepted</div>
+        <ul id="accepted-products-list" class="space-y-2 text-sm text-navy"></ul>
+        <button onclick="openAcceptModal()" class="mt-4 text-xs text-accent font-semibold hover:underline">Edit selection</button>
+      </div>
+
       <div class="grid md:grid-cols-2 gap-6">
         <div class="rounded-xl border border-slate-200 p-6 bg-white">
           <div class="text-xs font-bold text-accent uppercase tracking-wide mb-4">For DSG / MVNE (Pty) Ltd</div>
@@ -799,6 +812,58 @@
     </div>
   </section>
 
+  <!-- ============================================================ -->
+  <!-- ACCEPT MODAL                                                  -->
+  <!-- ============================================================ -->
+
+  <div id="accept-modal" class="fixed inset-0 z-[100] flex items-center justify-center px-4" style="display:none !important">
+    <!-- Backdrop -->
+    <div class="absolute inset-0 bg-navy/80 backdrop-blur-sm" onclick="closeAcceptModal()"></div>
+    <!-- Card -->
+    <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-lg p-8 z-10">
+      <h3 class="text-xl font-extrabold text-navy mb-1">Accept Proposal</h3>
+      <p class="text-sm text-muted mb-6">Select the products you wish to accept. At least one product must be selected.</p>
+
+      <div class="space-y-3 mb-8">
+
+        <label class="accept-option flex items-start gap-4 p-4 rounded-xl border-2 border-slate-200 cursor-pointer hover:border-accent transition has-[:checked]:border-accent has-[:checked]:bg-accent/5">
+          <input type="checkbox" name="accept-product" value="dbot" class="mt-0.5 w-4 h-4 accent-[#0369A1] flex-shrink-0" />
+          <div>
+            <div class="font-bold text-navy text-sm">DBOT Transformation Partnership</div>
+            <div class="text-xs text-muted mt-0.5">$ 250,000 fixed fee · 9-month programme</div>
+          </div>
+        </label>
+
+        <label class="accept-option flex items-start gap-4 p-4 rounded-xl border-2 border-slate-200 cursor-pointer hover:border-accent transition has-[:checked]:border-accent has-[:checked]:bg-accent/5">
+          <input type="checkbox" name="accept-product" value="pwa" class="mt-0.5 w-4 h-4 accent-[#0369A1] flex-shrink-0" />
+          <div>
+            <div class="font-bold text-navy text-sm">MVNO PWA Platform</div>
+            <div class="text-xs text-muted mt-0.5">$12,507 once-off setup + $4,250 / month</div>
+          </div>
+        </label>
+
+        <label class="accept-option flex items-start gap-4 p-4 rounded-xl border-2 border-slate-200 cursor-pointer hover:border-accent transition has-[:checked]:border-accent has-[:checked]:bg-accent/5">
+          <input type="checkbox" name="accept-product" value="esim" class="mt-0.5 w-4 h-4 accent-[#0369A1] flex-shrink-0" />
+          <div>
+            <div class="font-bold text-navy text-sm">Travel eSIM Platform</div>
+            <div class="text-xs text-muted mt-0.5">$3,200 once-off setup + 50/50 revenue share</div>
+          </div>
+        </label>
+
+      </div>
+
+      <div class="flex gap-3">
+        <button id="modal-confirm-btn" onclick="confirmAcceptance()" disabled
+          class="flex-1 bg-accent text-white font-bold text-sm py-3 rounded-xl transition disabled:opacity-40 disabled:cursor-not-allowed hover:bg-sky-700">
+          Confirm &amp; Proceed to Sign
+        </button>
+        <button onclick="closeAcceptModal()" class="px-5 py-3 rounded-xl border border-slate-200 text-sm font-semibold text-muted hover:border-slate-400 transition">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- BOTTOM BACK (shown in all product views) -->
   <div data-view="product" class="py-10 px-4 bg-white border-t border-slate-100 text-center">
     <button onclick="showView('overview')" class="inline-flex items-center gap-2 bg-surface border border-slate-200 hover:border-accent hover:text-accent text-muted text-sm font-semibold px-5 py-2.5 rounded-lg transition">
@@ -873,6 +938,60 @@
         carouselMove(1);
       }
     }, 5000);
+
+    // ── Accept modal ───────────────────────────────────────────────
+    const PRODUCTS = {
+      dbot: { label: 'DBOT Transformation Partnership', detail: '$ 250,000 fixed fee · 9-month programme' },
+      pwa:  { label: 'MVNO PWA Platform',               detail: '$12,507 once-off + $4,250 / month' },
+      esim: { label: 'Travel eSIM Platform',             detail: '$3,200 once-off + 50/50 revenue share' },
+    };
+
+    function openAcceptModal() {
+      const modal = document.getElementById('accept-modal');
+      modal.style.setProperty('display', 'flex', 'important');
+      document.body.style.overflow = 'hidden';
+      updateConfirmBtn();
+    }
+
+    function closeAcceptModal() {
+      const modal = document.getElementById('accept-modal');
+      modal.style.setProperty('display', 'none', 'important');
+      document.body.style.overflow = '';
+    }
+
+    function updateConfirmBtn() {
+      const any = [...document.querySelectorAll('input[name="accept-product"]')].some(c => c.checked);
+      document.getElementById('modal-confirm-btn').disabled = !any;
+    }
+
+    function confirmAcceptance() {
+      const selected = [...document.querySelectorAll('input[name="accept-product"]:checked')].map(c => c.value);
+      closeAcceptModal();
+
+      // Build summary list
+      const list = document.getElementById('accepted-products-list');
+      list.innerHTML = selected.map(v =>
+        `<li class="flex items-start gap-2">
+          <svg class="w-4 h-4 text-accent flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+          </svg>
+          <span><strong>${PRODUCTS[v].label}</strong> <span class="text-muted font-normal">— ${PRODUCTS[v].detail}</span></span>
+        </li>`
+      ).join('');
+      document.getElementById('accepted-products-summary').style.display = 'block';
+
+      // Navigate to acceptance section on first product view, or dbot by default
+      const view = PRODUCT_VIEWS.includes(selected[0]) ? selected[0] : 'dbot';
+      showView(view);
+      setTimeout(() => {
+        document.getElementById('acceptance').scrollIntoView({ behavior: 'smooth' });
+      }, 300);
+    }
+
+    // Enable/disable confirm button as checkboxes change
+    document.querySelectorAll('input[name="accept-product"]').forEach(cb => {
+      cb.addEventListener('change', updateConfirmBtn);
+    });
 
     // Start on overview
     showView('overview');
