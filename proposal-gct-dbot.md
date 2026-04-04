@@ -46,7 +46,7 @@ This partnership will create a **future-ready GCT Group MVNO** — financially s
 | Design Phase | 2 months |
 | Build & Operate Phase | 6 months |
 | Transfer Phase | 1 month |
-| Decision Deadline | 2nd April 2026 |
+| Decision Deadline | 8th May 2026 |
 
 ---
 
@@ -291,7 +291,7 @@ The Transfer Phase transitions full operational control from the MVNE team to GC
 3. Provide baseline data (financials, operations, subscriber base)
 4. Kick-off session to align priorities and success metrics
 
-> **Decision Required:** Approval to commence the Design Phase by **2nd April 2026**
+> **Decision Required:** Approval to commence the Design Phase by **8th May 2026**
 
 ---
 
