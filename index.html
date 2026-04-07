@@ -1090,22 +1090,56 @@
       </div>
 
       <div class="grid md:grid-cols-2 gap-6">
+        <!-- DSG / MVNE -->
         <div class="rounded-xl border border-slate-200 p-6 bg-white">
           <div class="text-xs font-bold text-accent uppercase tracking-wide mb-4">For DSG / MVNE (Pty) Ltd</div>
-          <div class="space-y-3 text-sm">
-            <div class="flex justify-between border-b border-slate-100 pb-2"><span class="text-muted">Name</span><span class="font-semibold text-navy">Yaron Assabi</span></div>
-            <div class="flex justify-between border-b border-slate-100 pb-2"><span class="text-muted">Position</span><span class="font-semibold text-navy">CEO</span></div>
-            <div class="flex justify-between border-b border-slate-100 pb-2"><span class="text-muted">Date</span><span class="text-slate-400">________________</span></div>
-            <div class="flex justify-between pb-2"><span class="text-muted">Signature</span><span class="text-slate-400">________________</span></div>
+          <div class="space-y-4 text-sm">
+            <div>
+              <label class="block text-xs text-muted mb-1">Name</label>
+              <input type="text" value="Yaron Assabi" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm text-navy font-semibold focus:outline-none focus:border-accent" />
+            </div>
+            <div>
+              <label class="block text-xs text-muted mb-1">Position</label>
+              <input type="text" value="CEO" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm text-navy focus:outline-none focus:border-accent" />
+            </div>
+            <div>
+              <label class="block text-xs text-muted mb-1">Date</label>
+              <input type="date" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm text-navy focus:outline-none focus:border-accent" />
+            </div>
+            <div>
+              <label class="block text-xs text-muted mb-1">Signature</label>
+              <div class="border border-dashed border-slate-300 rounded-lg p-3 text-center cursor-pointer hover:border-accent transition" onclick="document.getElementById('sig-dsg').click()">
+                <img id="sig-dsg-preview" src="" alt="" class="max-h-16 mx-auto mb-1" style="display:none" />
+                <p id="sig-dsg-label" class="text-xs text-slate-400">Click to upload signature image</p>
+                <input type="file" id="sig-dsg" accept="image/*" class="hidden" onchange="previewSig('sig-dsg')" />
+              </div>
+            </div>
           </div>
         </div>
+        <!-- GCT Group -->
         <div class="rounded-xl border border-slate-200 p-6 bg-white">
           <div class="text-xs font-bold text-accent uppercase tracking-wide mb-4">For GCT Group</div>
-          <div class="space-y-3 text-sm">
-            <div class="flex justify-between border-b border-slate-100 pb-2"><span class="text-muted">Name</span><span class="text-slate-400">________________</span></div>
-            <div class="flex justify-between border-b border-slate-100 pb-2"><span class="text-muted">Position</span><span class="text-slate-400">________________</span></div>
-            <div class="flex justify-between border-b border-slate-100 pb-2"><span class="text-muted">Date</span><span class="text-slate-400">________________</span></div>
-            <div class="flex justify-between pb-2"><span class="text-muted">Signature</span><span class="text-slate-400">________________</span></div>
+          <div class="space-y-4 text-sm">
+            <div>
+              <label class="block text-xs text-muted mb-1">Name</label>
+              <input type="text" placeholder="Full name" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm text-navy focus:outline-none focus:border-accent" />
+            </div>
+            <div>
+              <label class="block text-xs text-muted mb-1">Position</label>
+              <input type="text" placeholder="Job title" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm text-navy focus:outline-none focus:border-accent" />
+            </div>
+            <div>
+              <label class="block text-xs text-muted mb-1">Date</label>
+              <input type="date" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm text-navy focus:outline-none focus:border-accent" />
+            </div>
+            <div>
+              <label class="block text-xs text-muted mb-1">Signature</label>
+              <div class="border border-dashed border-slate-300 rounded-lg p-3 text-center cursor-pointer hover:border-accent transition" onclick="document.getElementById('sig-gct').click()">
+                <img id="sig-gct-preview" src="" alt="" class="max-h-16 mx-auto mb-1" style="display:none" />
+                <p id="sig-gct-label" class="text-xs text-slate-400">Click to upload signature image</p>
+                <input type="file" id="sig-gct" accept="image/*" class="hidden" onchange="previewSig('sig-gct')" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1576,6 +1610,21 @@
       vms:         { label: 'VMS — Voucher Management Server',       detail: 'Prepaid voucher lifecycle management · pricing on request' },
       consultation:{ label: 'Consultation Request',                  detail: 'Requirements consultation session with DSG / MVNE' },
     };
+
+    function previewSig(id) {
+      const input = document.getElementById(id);
+      const preview = document.getElementById(id + '-preview');
+      const label = document.getElementById(id + '-label');
+      const file = input.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = e => {
+        preview.src = e.target.result;
+        preview.style.display = 'block';
+        label.style.display = 'none';
+      };
+      reader.readAsDataURL(file);
+    }
 
     function openAcceptModal() {
       const modal = document.getElementById('accept-modal');
