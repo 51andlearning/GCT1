@@ -32,7 +32,7 @@
     details > summary::-webkit-details-marker { display: none; }
     details[open] summary .chevron { transform: rotate(180deg); }
     .chevron { transition: transform 0.2s; }
-    .product-card { transition: box-shadow 0.2s, transform 0.2s; cursor: pointer; }
+    .product-card { transition: box-shadow 0.2s, transform 0.2s; cursor: pointer; display: flex; flex-direction: column; }
     .product-card:hover { box-shadow: 0 8px 30px rgba(3,105,161,0.15); transform: translateY(-2px); }
     .nav-link { transition: color 0.2s; }
     .nav-link:hover { color: #0369A1; }
@@ -113,7 +113,7 @@
           <div class="inline-block bg-accent text-white text-xs font-bold rounded-full px-2.5 py-0.5 mb-4">Product 01</div>
           <h2 class="text-lg font-extrabold text-white mb-1">DBOT Transformation</h2>
           <p class="text-white/50 text-xs mb-5 leading-relaxed">Design-Build-Operate-Transfer partnership to build Nigeria's first converged digital telco under GCT Group.</p>
-          <div class="border-t border-white/10 pt-4 flex items-end justify-between">
+          <div class="border-t border-white/10 pt-4 flex items-end justify-between mt-auto">
             <div>
               <div class="text-2xl font-extrabold text-sky-400">$ 250,000</div>
               <div class="text-xs text-white/40 mt-0.5">fixed fee · 9 months</div>
@@ -126,7 +126,7 @@
           <div class="inline-block bg-accent text-white text-xs font-bold rounded-full px-2.5 py-0.5 mb-4">Product 02</div>
           <h2 class="text-lg font-extrabold text-white mb-1">MVNO PWA Platform</h2>
           <p class="text-white/50 text-xs mb-5 leading-relaxed">Branded self-service mobile app for subscribers — SIM management, top-ups, bundles, account, and support.</p>
-          <div class="border-t border-white/10 pt-4 flex items-end justify-between">
+          <div class="border-t border-white/10 pt-4 flex items-end justify-between mt-auto">
             <div>
               <div class="text-2xl font-extrabold text-sky-400">$12,507</div>
               <div class="text-xs text-white/40 mt-0.5">once-off + $4,250/month</div>
@@ -139,7 +139,7 @@
           <div class="inline-block bg-accent text-white text-xs font-bold rounded-full px-2.5 py-0.5 mb-4">Product 03</div>
           <h2 class="text-lg font-extrabold text-white mb-1">Travel eSIM Platform</h2>
           <p class="text-white/50 text-xs mb-5 leading-relaxed">Offer GCT subscribers branded international Travel eSIM bundles — revenue share model, zero capex required.</p>
-          <div class="border-t border-white/10 pt-4 flex items-end justify-between">
+          <div class="border-t border-white/10 pt-4 flex items-end justify-between mt-auto">
             <div>
               <div class="text-2xl font-extrabold text-sky-400">$3,200</div>
               <div class="text-xs text-white/40 mt-0.5">once-off + 50/50 rev share</div>
@@ -152,7 +152,7 @@
           <div class="inline-block bg-accent text-white text-xs font-bold rounded-full px-2.5 py-0.5 mb-4">Product 04</div>
           <h2 class="text-lg font-extrabold text-white mb-1">CXG</h2>
           <p class="text-white/50 text-xs mb-5 leading-relaxed">Omni-channel customer experience management — contact centre, social media, WhatsApp, CRM and business intelligence.</p>
-          <div class="border-t border-white/10 pt-4 flex items-end justify-between">
+          <div class="border-t border-white/10 pt-4 flex items-end justify-between mt-auto">
             <div>
               <div class="text-2xl font-extrabold text-sky-400">Custom</div>
               <div class="text-xs text-white/40 mt-0.5">based on requirements</div>
@@ -165,7 +165,7 @@
           <div class="inline-block bg-accent text-white text-xs font-bold rounded-full px-2.5 py-0.5 mb-4">Product 05</div>
           <h2 class="text-lg font-extrabold text-white mb-1">Xanite CVM</h2>
           <p class="text-white/50 text-xs mb-5 leading-relaxed">AI-powered Customer Value Management platform — intelligent campaigns, churn reduction and subscriber revenue growth.</p>
-          <div class="border-t border-white/10 pt-4 flex items-end justify-between">
+          <div class="border-t border-white/10 pt-4 flex items-end justify-between mt-auto">
             <div>
               <div class="text-2xl font-extrabold text-sky-400">Custom</div>
               <div class="text-xs text-white/40 mt-0.5">platform licence</div>
@@ -178,7 +178,7 @@
           <div class="inline-block bg-accent text-white text-xs font-bold rounded-full px-2.5 py-0.5 mb-4">Product 06</div>
           <h2 class="text-lg font-extrabold text-white mb-1">PersAIc</h2>
           <p class="text-white/50 text-xs mb-5 leading-relaxed">AI-driven personalisation engine — real-time customer journeys, behavioural analytics and intelligent product recommendations.</p>
-          <div class="border-t border-white/10 pt-4 flex items-end justify-between">
+          <div class="border-t border-white/10 pt-4 flex items-end justify-between mt-auto">
             <div>
               <div class="text-2xl font-extrabold text-sky-400">Custom</div>
               <div class="text-xs text-white/40 mt-0.5">per subscriber model</div>
@@ -191,7 +191,7 @@
           <div class="inline-block bg-accent text-white text-xs font-bold rounded-full px-2.5 py-0.5 mb-4">Product 07</div>
           <h2 class="text-lg font-extrabold text-white mb-1">Bitdefender</h2>
           <p class="text-white/50 text-xs mb-5 leading-relaxed">Consumer cybersecurity as a VAS for GCT subscribers — antivirus, VPN, identity protection and parental controls.</p>
-          <div class="border-t border-white/10 pt-4 flex items-end justify-between">
+          <div class="border-t border-white/10 pt-4 flex items-end justify-between mt-auto">
             <div>
               <div class="text-2xl font-extrabold text-sky-400">Per user</div>
               <div class="text-xs text-white/40 mt-0.5">reseller model</div>
@@ -204,7 +204,7 @@
           <div class="inline-block bg-accent text-white text-xs font-bold rounded-full px-2.5 py-0.5 mb-4">Product 08</div>
           <h2 class="text-lg font-extrabold text-white mb-1">MARS</h2>
           <p class="text-white/50 text-xs mb-5 leading-relaxed">Mediation, Assurance &amp; Revenue Services — a strategic enabler ensuring data reliability, revenue integrity, and operational performance.</p>
-          <div class="border-t border-white/10 pt-4 flex items-end justify-between">
+          <div class="border-t border-white/10 pt-4 flex items-end justify-between mt-auto">
             <div>
               <div class="text-2xl font-extrabold text-sky-400">Custom</div>
               <div class="text-xs text-white/40 mt-0.5">pricing on request</div>
@@ -217,7 +217,7 @@
           <div class="inline-block bg-accent text-white text-xs font-bold rounded-full px-2.5 py-0.5 mb-4">Product 09</div>
           <h2 class="text-lg font-extrabold text-white mb-1">VMS</h2>
           <p class="text-white/50 text-xs mb-5 leading-relaxed">Voucher Management Server — full lifecycle management of prepaid airtime, data, and promotional vouchers for GCT's MVNO.</p>
-          <div class="border-t border-white/10 pt-4 flex items-end justify-between">
+          <div class="border-t border-white/10 pt-4 flex items-end justify-between mt-auto">
             <div>
               <div class="text-2xl font-extrabold text-sky-400">Custom</div>
               <div class="text-xs text-white/40 mt-0.5">based on requirements</div>
