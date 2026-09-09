@@ -1,0 +1,2068 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>GCT Group | MVNO Light Proposal | MVNE</title>
+<meta name="robots" content="noindex, nofollow" />
+<meta name="description" content="MVNO Light (Digital Mobile) proposal for GCT Group, with all value added services. Prepared by MVNE (Pty) Ltd and the DSG Group. Confidential." />
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="favicon.ico" sizes="any" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="GCT Group | MVNO Light Proposal" />
+<meta property="og:description" content="Digital Mobile model with all value added services. $20,000 set up, $5,000 per month minimum, 50/50 profit share. Confidential." />
+<meta property="og:image" content="og-image.png" />
+<meta property="og:site_name" content="MVNE (Pty) Ltd" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="GCT Group | MVNO Light Proposal" />
+<meta name="twitter:description" content="Digital Mobile model with all value added services. Confidential." />
+<meta name="twitter:image" content="og-image.png" />
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<script>
+tailwind.config = { theme: { extend: {
+  colors: { navy:'#0F172A', accent:'#0369A1', danger:'#C8102E', surface:'#F8FAFC', muted:'#64748B', slate2:'#334155' },
+  fontFamily: { sans:['Inter','sans-serif'] }
+}}};
+</script>
+<style>
+  html { scroll-behavior:smooth; scroll-padding-top:5.5rem; }
+  .accent-bar { width:3.5rem; height:4px; background:#0369A1; border-radius:2px; margin:.75rem 0 1.5rem; }
+  .prose-tight p { margin-bottom:.85rem; }
+  table.doc { width:100%; border-collapse:collapse; font-size:.8125rem; }
+  table.doc th { background:#0F172A; color:#fff; text-align:left; font-weight:600; padding:.6rem .75rem; font-size:.6875rem;
+                 text-transform:uppercase; letter-spacing:.06em; }
+  table.doc td { padding:.6rem .75rem; border-bottom:1px solid #E2E8F0; vertical-align:top; color:#334155; }
+  table.doc tbody tr:nth-child(even) td { background:rgba(248,250,252,.75); }
+  table.doc td.num { text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
+  table.doc tr.total td { background:#0F172A !important; color:#fff; font-weight:700; border-bottom:0; }
+  .tick::before { content:'\2713'; color:#0369A1; font-weight:700; margin-right:.55rem; }
+  .scroller { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+  .sig-pad { touch-action:none; background:#fff; border-radius:.5rem; width:100%; height:150px; display:block; cursor:crosshair; }
+  .step-dot { width:1.75rem; height:1.75rem; border-radius:9999px; display:grid; place-items:center;
+              font-size:.75rem; font-weight:700; flex:0 0 auto; }
+  #confidentiality-gate { position:fixed; inset:0; z-index:200; display:grid; place-items:center; padding:1rem;
+    background:rgba(6,12,24,.86); backdrop-filter:blur(6px); }
+  body.gated { overflow:hidden; }
+  body.gated #doc { filter:blur(9px); pointer-events:none; user-select:none; }
+
+  /* Print to PDF. Renders the whole document, drops all interactive chrome. */
+  @media print {
+    @page { size:A4; margin:14mm 12mm; }
+    html { scroll-padding-top:0; }
+    body { background:#fff !important; }
+    body.gated { overflow:visible; }
+    body.gated #doc { filter:none !important; }
+    .no-print, #confidentiality-gate, #sign-modal, header.sitenav, #toc { display:none !important; }
+    .print-only { display:block !important; }
+    section { break-inside:auto; page-break-inside:auto; }
+    h1,h2,h3 { break-after:avoid; page-break-after:avoid; }
+    table.doc { break-inside:auto; font-size:8.5pt; }
+    table.doc tr { break-inside:avoid; page-break-inside:avoid; }
+    table.doc th { background:#0F172A !important; color:#fff !important; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    table.doc tr.total td { background:#0F172A !important; color:#fff !important; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    .bg-navy, .bg-navy * { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    a[href^="http"]::after { content:" (" attr(href) ")"; font-size:7pt; color:#64748B; }
+    .page-break { break-before:page; page-break-before:always; }
+    /* On paper the translucent whites on navy print far too faint, so lift
+       the muted text and the inner panels to a readable contrast. */
+    .bg-navy [class*="text-white/4"],
+    .bg-navy [class*="text-white/5"],
+    .bg-navy [class*="text-white/6"],
+    .bg-navy [class*="text-white/7"] { color:#DCE4EE !important; }
+    .bg-navy [class*="bg-white/5"] { background:rgba(255,255,255,.14) !important; }
+    .bg-navy [class*="border-white/1"] { border-color:rgba(255,255,255,.32) !important; }
+    /* Keep a card whole rather than splitting it over a page boundary.
+       Tables are excluded so a long one can still flow across pages. */
+    [class*="rounded-2xl"]:not(.scroller):not(:has(.scroller)),
+    [class*="rounded-xl"]:not(.scroller):not(:has(.scroller)) {
+      break-inside:avoid; page-break-inside:avoid;
+    }
+  }
+  .print-only { display:none; }
+</style>
+</head>
+<body class="font-sans text-navy bg-white gated">
+
+<!-- ============================================================= -->
+<!-- CONFIDENTIALITY ACKNOWLEDGEMENT. Shown before the document is  -->
+<!-- readable. The site itself is gated server side by middleware.js -->
+<!-- ============================================================= -->
+<div id="confidentiality-gate" role="dialog" aria-modal="true" aria-labelledby="cg-title">
+  <div class="w-full max-w-lg bg-white rounded-2xl shadow-2xl overflow-hidden">
+    <div class="bg-navy px-6 py-5 flex items-center gap-3">
+      <img src="dsg-logo.png" alt="DSG" class="h-10 w-auto rounded-lg" />
+      <div class="text-white/30">|</div>
+      <img src="gct-logo.png" alt="GCT Group" class="h-9 w-auto rounded-md" />
+    </div>
+    <div class="p-6 sm:p-7">
+      <div class="inline-flex items-center gap-2 bg-danger/10 text-danger rounded-full px-3 py-1 text-xs font-bold mb-4">
+        <span class="w-1.5 h-1.5 rounded-full bg-danger"></span> Confidential document
+      </div>
+      <h1 id="cg-title" class="text-xl font-extrabold leading-snug">MVNO Light proposal for GCT Group</h1>
+      <div class="accent-bar"></div>
+      <p class="text-sm text-muted leading-relaxed mb-4">
+        This document contains commercial pricing and proprietary information belonging to MVNE (Pty) Ltd,
+        Digital Mobile and the DSG Group. It is provided to GCT Group for evaluation only.
+      </p>
+      <div class="space-y-3 mb-5">
+        <label class="flex items-start gap-2.5 text-sm cursor-pointer">
+          <input type="checkbox" class="cg-chk mt-0.5 w-4 h-4 accent-accent flex-none" />
+          <span class="text-slate2">I am authorised by GCT Group to receive this proposal.</span>
+        </label>
+        <label class="flex items-start gap-2.5 text-sm cursor-pointer">
+          <input type="checkbox" class="cg-chk mt-0.5 w-4 h-4 accent-accent flex-none" />
+          <span class="text-slate2">I will keep the contents confidential and will not share them outside GCT Group without written consent from MVNE (Pty) Ltd.</span>
+        </label>
+      </div>
+      <label class="block text-xs font-semibold text-muted mb-1.5" for="cg-name">Your name, for the access record</label>
+      <input id="cg-name" type="text" autocomplete="name" placeholder="Full name"
+             class="w-full border border-slate-300 rounded-lg px-3 py-2.5 text-sm mb-4 focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20" />
+      <button id="cg-btn" disabled onclick="acceptConfidentiality()"
+              class="w-full bg-navy text-white font-bold text-sm py-3 rounded-lg transition disabled:opacity-40 disabled:cursor-not-allowed hover:bg-slate2">
+        Open the proposal
+      </button>
+      <p class="text-[11px] text-muted mt-3.5 leading-relaxed">
+        Prepared by MVNE (Pty) Ltd, 15 6th Street, Parkhurst, Johannesburg.
+        Questions go to <a href="mailto:edwardw@mvne.co.za" class="text-accent font-semibold">edwardw@mvne.co.za</a>.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== NAV ============================== -->
+<header class="sitenav no-print sticky top-0 z-50 bg-navy border-b border-white/10 shadow-md">
+  <div class="max-w-6xl mx-auto px-4 flex items-center justify-between h-16 sm:h-20 gap-3">
+    <div class="flex items-center gap-2.5 min-w-0">
+      <a href="https://www.dsg.co.za" target="_blank" rel="noopener noreferrer" class="flex-none">
+        <img src="dsg-logo.png" alt="DSG" class="h-9 sm:h-12 w-auto rounded-lg" />
+      </a>
+      <span class="text-white/25 flex-none">|</span>
+      <div class="min-w-0">
+        <div class="text-white text-xs sm:text-sm font-bold truncate">GCT Group</div>
+        <div class="text-white/50 text-[10px] sm:text-xs truncate">MVNO Light Proposal</div>
+      </div>
+    </div>
+    <nav class="hidden lg:flex items-center gap-4 text-xs font-semibold text-white/70">
+      <a href="#summary"  class="hover:text-white transition">Summary</a>
+      <a href="#model"    class="hover:text-white transition">The model</a>
+      <a href="#scope"    class="hover:text-white transition">Scope</a>
+      <a href="#vas"      class="hover:text-white transition">Services</a>
+      <a href="#money"    class="hover:text-white transition">Commercials</a>
+      <a href="#plan"     class="hover:text-white transition">Plan</a>
+    </nav>
+    <div class="flex items-center gap-2 flex-none">
+      <button onclick="downloadPdf()" title="Download or print a PDF copy for signature"
+              class="hidden sm:inline-flex items-center gap-1.5 bg-white/10 hover:bg-white/20 text-white font-semibold text-xs px-3 py-2 rounded-lg transition">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v11m0 0l-4-4m4 4l4-4M4 19h16"/></svg>
+        PDF
+      </button>
+      <button onclick="openSign()"
+              class="bg-danger hover:bg-red-700 text-white font-bold text-xs px-3.5 py-2 rounded-lg transition whitespace-nowrap">
+        Sign online
+      </button>
+    </div>
+  </div>
+  <div id="progress" class="h-0.5 bg-accent transition-all duration-150" style="width:0"></div>
+</header>
+
+<main id="doc">
+
+<!-- ============================== HERO ============================== -->
+<section class="bg-navy text-white pt-12 pb-14 sm:pt-16 sm:pb-20 px-4">
+  <div class="max-w-6xl mx-auto">
+    <div class="flex items-start justify-between gap-4 mb-7">
+      <div class="inline-flex items-center gap-2 border border-white/20 rounded-full px-3 py-1 text-[11px] sm:text-xs text-white/60 font-semibold">
+        <span class="w-2 h-2 rounded-full bg-accent inline-block"></span>
+        Confidential, for GCT Group executive and board review
+      </div>
+      <img src="gct-logo.png" alt="GCT Group" class="hidden sm:block h-12 w-auto rounded-lg flex-none ring-1 ring-white/15" />
+    </div>
+    <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight mb-4">
+      GCT Group<br /><span class="text-sky-400">MVNO Light</span><br />Digital Mobile model
+    </h1>
+    <div class="accent-bar"></div>
+    <p class="text-white/70 text-base sm:text-lg max-w-2xl mb-9 leading-relaxed">
+      Enter the Nigerian mobile market on the GCT Group brand without a licence application,
+      without platform capital cost and without a nine month build. Every value added service
+      is included in this proposal.
+    </p>
+
+    <div class="grid sm:grid-cols-3 gap-4 mb-9">
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+        <div class="text-[11px] font-bold text-white/40 uppercase tracking-wider mb-1.5">Set up, once off</div>
+        <div class="text-3xl font-extrabold text-sky-400">$20,000</div>
+        <div class="text-xs text-white/50 mt-1">Payable on contract signature</div>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+        <div class="text-[11px] font-bold text-white/40 uppercase tracking-wider mb-1.5">Platform, monthly</div>
+        <div class="text-3xl font-extrabold text-sky-400">$5,000</div>
+        <div class="text-xs text-white/50 mt-1">Or $0.48 per active subscriber, whichever is higher</div>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+        <div class="text-[11px] font-bold text-white/40 uppercase tracking-wider mb-1.5">Net profit share</div>
+        <div class="text-3xl font-extrabold text-sky-400">50 / 50</div>
+        <div class="text-xs text-white/50 mt-1">GCT Group and Digital Mobile</div>
+      </div>
+    </div>
+
+    <div class="no-print flex flex-wrap gap-3">
+      <button onclick="openSign()" class="bg-danger hover:bg-red-700 text-white font-semibold text-sm px-5 py-3 rounded-lg transition">Sign this proposal online</button>
+      <button onclick="downloadPdf()" class="bg-white/10 hover:bg-white/20 text-white font-semibold text-sm px-5 py-3 rounded-lg transition">Download PDF for signature</button>
+    </div>
+
+    <div class="mt-9 pt-6 border-t border-white/10 grid sm:grid-cols-3 gap-4 text-xs text-white/50">
+      <div><span class="text-white/80 font-semibold block mb-0.5">Prepared by</span>MVNE (Pty) Ltd, with the DSG Group of Companies</div>
+      <div><span class="text-white/80 font-semibold block mb-0.5">Date</span>9 September 2026</div>
+      <div><span class="text-white/80 font-semibold block mb-0.5">Validity</span>30 days from the date of issue</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== SUMMARY ============================== -->
+<section id="summary" class="py-14 px-4 bg-white">
+  <div class="max-w-6xl mx-auto">
+    <span class="text-xs font-bold text-accent uppercase tracking-wider">Section 1</span>
+    <h2 class="text-2xl sm:text-3xl font-extrabold mt-1">Executive summary</h2>
+    <div class="accent-bar"></div>
+    <div class="grid lg:grid-cols-3 gap-8">
+      <div class="lg:col-span-2 prose-tight text-slate2 text-sm sm:text-[0.95rem] leading-relaxed">
+        <p>GCT Group can enter the Nigerian mobile market without building an MVNO of its own. This proposal
+        covers one option only, the MVNO Light (Digital Mobile) model, together with the full range of value
+        added services that can be sold on top of it.</p>
+        <p>Under MVNO Light, GCT Group sells mobile service under the GCT brand. Digital Mobile, a DSG Group
+        operator, provides the MVNO licence position, the platform, the network interconnect and the day to day
+        operations. GCT Group provides the brand, the customer base and the sales channel. The two parties share
+        the net profit equally.</p>
+        <p>The commercial shape is a single set up fee of <strong>$20,000</strong>, a monthly platform and
+        management fee of <strong>$5,000 or $0.48 per active subscriber, whichever is higher</strong>, and a
+        <strong>50/50</strong> split of net profit per subscriber. There is no capital expenditure and no
+        licence application.</p>
+        <p>This proposal replaces neither the DBOT transformation proposal of 19 January 2026 nor the full MVNO
+        proposal of 28 January 2026. It sets out the light option on its own so GCT Group can price and sign it
+        separately.</p>
+      </div>
+      <div class="bg-surface border border-slate-200 rounded-2xl p-6">
+        <div class="text-xs font-bold text-accent uppercase tracking-wider mb-4">Three points that define this model</div>
+        <ol class="space-y-4 text-sm text-slate2">
+          <li class="flex gap-3">
+            <span class="step-dot bg-navy text-white">1</span>
+            <span>GCT Group carries no platform capital cost and no regulatory licence obligation.</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="step-dot bg-navy text-white">2</span>
+            <span>Launch takes about <strong>16 weeks</strong> from contract signature, against 9 to 12 months for a full MVNO.</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="step-dot bg-navy text-white">3</span>
+            <span>Every value added service in Section 6 can be attached at launch or later, each with its own revenue share.</span>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== CONDITIONS ============================== -->
+<section id="conditions" class="py-14 px-4 bg-surface">
+  <div class="max-w-6xl mx-auto">
+    <span class="text-xs font-bold text-accent uppercase tracking-wider">Section 2</span>
+    <h2 class="text-2xl sm:text-3xl font-extrabold mt-1">Conditions precedent</h2>
+    <div class="accent-bar"></div>
+    <div class="rounded-2xl border-l-4 border-danger bg-danger/5 p-5 mb-7">
+      <p class="text-sm text-slate2 leading-relaxed">
+        <strong>Read this before pricing the model.</strong> MVNO Light depends on two conditions being met
+        before the project can start. Both are stated in the MVNE MVNO proposal of 28 January 2026 and both are
+        repeated here without change.
+      </p>
+    </div>
+    <div class="scroller rounded-xl border border-slate-200 overflow-hidden bg-white mb-7">
+      <table class="doc">
+        <thead><tr><th>Condition</th><th>Owner</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>A Mobile Network Operator host agreement is secured in Nigeria</td><td>MVNE and Digital Mobile</td><td>In progress</td></tr>
+          <tr><td>Three further Light MVNOs have signed with MVNE in Nigeria</td><td>MVNE</td><td>In progress</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="grid md:grid-cols-2 gap-5 text-sm text-slate2 leading-relaxed">
+      <p>The second condition exists because the shared platform only carries its cost across four or more
+      brands. GCT Group can sign now and hold first position in the queue. The set up fee becomes payable on
+      contract signature, and the project clock starts when both conditions are met.</p>
+      <p>If GCT Group needs to launch ahead of these conditions, the full MVNO route in the 28 January 2026
+      proposal remains open, at a higher cost and a longer timeline.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== MODEL ============================== -->
+<section id="model" class="py-14 px-4 bg-white">
+  <div class="max-w-6xl mx-auto">
+    <span class="text-xs font-bold text-accent uppercase tracking-wider">Section 3</span>
+    <h2 class="text-2xl sm:text-3xl font-extrabold mt-1">What MVNO Light is</h2>
+    <div class="accent-bar"></div>
+    <div class="grid lg:grid-cols-2 gap-8 mb-9">
+      <div class="prose-tight text-slate2 text-sm sm:text-[0.95rem] leading-relaxed">
+        <p>MVNO Light is a profit share arrangement over an existing MVNO. GCT Group does not hold the mobile
+        licence, does not own the platform and does not carry the network agreements. Digital Mobile holds all
+        three and configures its platform to run the GCT Group brand as a separate operation.</p>
+        <p>The model is prepaid and digital first. Subscribers join through the GCT Group website or app, verify
+        their identity digitally, receive an eSIM or a physical SIM, and recharge through digital channels.</p>
+        <p>MVNO Light suits a first market entry, a digital only sub brand, or a test of demand before
+        committing to a full MVNO. Each brand in the GCT Group could run its own MVNO Light operation on the
+        same platform.</p>
+      </div>
+      <div class="bg-navy rounded-2xl p-6 text-white">
+        <div class="text-xs font-bold text-white/40 uppercase tracking-wider mb-4">Who brings what</div>
+        <div class="grid grid-cols-2 gap-5 text-xs">
+          <div>
+            <div class="text-sky-400 font-bold mb-2.5 text-sm">GCT Group</div>
+            <ul class="space-y-2 text-white/70">
+              <li class="tick">The brand</li>
+              <li class="tick">The customer base</li>
+              <li class="tick">The sales channel</li>
+              <li class="tick">Website and app front end</li>
+            </ul>
+          </div>
+          <div>
+            <div class="text-sky-400 font-bold mb-2.5 text-sm">Digital Mobile</div>
+            <ul class="space-y-2 text-white/70">
+              <li class="tick">The mobile licence</li>
+              <li class="tick">The MVNO platform</li>
+              <li class="tick">Host network agreement</li>
+              <li class="tick">Operations and support</li>
+            </ul>
+          </div>
+        </div>
+        <div class="mt-5 pt-4 border-t border-white/10 text-xs text-white/50">
+          Net profit is split equally between the two parties.
+        </div>
+      </div>
+    </div>
+
+    <h3 class="text-lg font-bold mb-4">How the two models compare</h3>
+    <div class="scroller rounded-xl border border-slate-200 overflow-hidden">
+      <table class="doc">
+        <thead><tr><th>Dimension</th><th>MVNO Light, this proposal</th><th>Full MVNO</th></tr></thead>
+        <tbody>
+          <tr><td>Licence held by</td><td>Digital Mobile</td><td>GCT Group</td></tr>
+          <tr><td>Platform owned by</td><td>Digital Mobile</td><td>GCT Group, licenced from MVNE</td></tr>
+          <tr><td>Set up fee</td><td>$20,000</td><td>Per the 28 January 2026 proposal</td></tr>
+          <tr><td>Time to launch</td><td>About 16 weeks</td><td>9 to 12 months</td></tr>
+          <tr><td>Capital expenditure</td><td>None</td><td>Platform, integration, licence costs</td></tr>
+          <tr><td>Billing types</td><td>Prepaid only</td><td>Prepaid, subscription and postpaid</td></tr>
+          <tr><td>International roaming</td><td>Not included</td><td>Included</td></tr>
+          <tr><td>Product control</td><td>Predefined bundles, limited customisation</td><td>Full catalogue control</td></tr>
+          <tr><td>Commercial model</td><td>50/50 net profit share</td><td>GCT Group keeps margin, pays platform fees</td></tr>
+          <tr><td>Regulatory obligation</td><td>Digital Mobile</td><td>GCT Group</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== WHY GCT ============================== -->
+<section id="why" class="py-14 px-4 bg-surface">
+  <div class="max-w-6xl mx-auto">
+    <span class="text-xs font-bold text-accent uppercase tracking-wider">Section 4</span>
+    <h2 class="text-2xl sm:text-3xl font-extrabold mt-1">Why MVNO Light for GCT Group</h2>
+    <div class="accent-bar"></div>
+    <p class="text-slate2 text-sm sm:text-[0.95rem] max-w-3xl mb-8 leading-relaxed">
+      GCT Group is one of Nigeria's leading FTTH and enterprise connectivity providers. That existing base is
+      the reason this model works.
+    </p>
+    <div class="grid md:grid-cols-2 gap-5">
+      <div class="bg-white border border-slate-200 rounded-2xl p-6">
+        <h3 class="font-bold text-base mb-2">Mobile completes the bundle</h3>
+        <p class="text-sm text-muted leading-relaxed">A fibre customer who also takes GCT Group mobile is
+        materially harder for a competitor to win. Cross selling mobile into the installed fibre base costs a
+        fraction of acquiring a new mobile subscriber cold.</p>
+      </div>
+      <div class="bg-white border border-slate-200 rounded-2xl p-6">
+        <h3 class="font-bold text-base mb-2">The channel already exists</h3>
+        <p class="text-sm text-muted leading-relaxed">GCT Group has customers, billing relationships, a brand
+        and a sales team. MVNO Light supplies the only missing piece, which is the mobile network capability.</p>
+      </div>
+      <div class="bg-white border border-slate-200 rounded-2xl p-6">
+        <h3 class="font-bold text-base mb-2">The downside is capped</h3>
+        <p class="text-sm text-muted leading-relaxed">The exposure is the $20,000 set up fee and the monthly
+        minimum of $5,000. If the market does not respond, the loss is measured in tens of thousands of dollars
+        rather than millions.</p>
+      </div>
+      <div class="bg-white border border-slate-200 rounded-2xl p-6">
+        <h3 class="font-bold text-base mb-2">Value added services carry the margin</h3>
+        <p class="text-sm text-muted leading-relaxed">Mobile voice and data are low margin in Nigeria. The
+        Bitdefender rate card in Section 6 is priced at 2.5 times wholesale cost, so gross profit is 60% of the
+        retail price on every package. The mobile subscription earns the customer relationship, and the value
+        added services earn the profit.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== SCOPE ============================== -->
+<section id="scope" class="py-14 px-4 bg-white page-break">
+  <div class="max-w-6xl mx-auto">
+    <span class="text-xs font-bold text-accent uppercase tracking-wider">Section 5</span>
+    <h2 class="text-2xl sm:text-3xl font-extrabold mt-1">Scope of work</h2>
+    <div class="accent-bar"></div>
+    <p class="text-slate2 text-sm sm:text-[0.95rem] max-w-3xl mb-8 leading-relaxed">
+      The platform capability below is taken from Section 7.2 of the MVNE MVNO proposal of 28 January 2026 and
+      localised for Nigeria.
+    </p>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-9">
+
+      <div class="bg-surface border border-slate-200 rounded-2xl p-5">
+        <div class="text-[11px] font-bold text-accent uppercase tracking-wider mb-3">5.1 SIM lifecycle</div>
+        <ul class="space-y-2 text-xs text-slate2">
+          <li class="tick">eSIM first, physical SIM as an option</li>
+          <li class="tick">Bulk and individual provisioning through digital channels</li>
+          <li class="tick">Churn management, inventory control and SIM security</li>
+        </ul>
+      </div>
+
+      <div class="bg-surface border border-slate-200 rounded-2xl p-5">
+        <div class="text-[11px] font-bold text-accent uppercase tracking-wider mb-3">5.2 Account management</div>
+        <ul class="space-y-2 text-xs text-slate2">
+          <li class="tick">Self service account creation, upgrade and closure</li>
+          <li class="tick">Multi SIM and account hierarchy, simplified for digital use</li>
+        </ul>
+      </div>
+
+      <div class="bg-surface border border-slate-200 rounded-2xl p-5">
+        <div class="text-[11px] font-bold text-accent uppercase tracking-wider mb-3">5.3 Product and bundling</div>
+        <ul class="space-y-2 text-xs text-slate2">
+          <li class="tick">Predefined voice, data and SMS bundles</li>
+          <li class="tick">Customisation is limited by design, which is what keeps the cost down</li>
+          <li class="tick">Promotions and loyalty through digital channels</li>
+        </ul>
+      </div>
+
+      <div class="bg-surface border border-slate-200 rounded-2xl p-5">
+        <div class="text-[11px] font-bold text-accent uppercase tracking-wider mb-3">5.4 Recharge and activity</div>
+        <ul class="space-y-2 text-xs text-slate2">
+          <li class="tick">Digital recharge through app, web and USSD</li>
+          <li class="tick">Real time balance enquiry through self service</li>
+        </ul>
+      </div>
+
+      <div class="bg-surface border border-slate-200 rounded-2xl p-5">
+        <div class="text-[11px] font-bold text-accent uppercase tracking-wider mb-3">5.5 Events and notifications</div>
+        <ul class="space-y-2 text-xs text-slate2">
+          <li class="tick">SMS, email and push notification for every key subscriber event</li>
+        </ul>
+      </div>
+
+      <div class="bg-surface border border-slate-200 rounded-2xl p-5">
+        <div class="text-[11px] font-bold text-accent uppercase tracking-wider mb-3">5.6 Core services platform</div>
+        <ul class="space-y-2 text-xs text-slate2">
+          <li class="tick">SMS, voicemail, USSD and WhatsApp included</li>
+          <li class="tick">APIs available for digital partners</li>
+        </ul>
+      </div>
+
+      <div class="bg-surface border border-slate-200 rounded-2xl p-5">
+        <div class="text-[11px] font-bold text-accent uppercase tracking-wider mb-3">5.7 Billing and finance</div>
+        <ul class="space-y-2 text-xs text-slate2">
+          <li class="tick">Prepaid only, subscription and postpaid are not included</li>
+          <li class="tick">Automated invoicing and statements, delivered digitally</li>
+        </ul>
+      </div>
+
+      <div class="bg-surface border border-slate-200 rounded-2xl p-5 md:col-span-2 lg:col-span-1">
+        <div class="text-[11px] font-bold text-accent uppercase tracking-wider mb-3">5.8 Nigerian regulatory compliance</div>
+        <ul class="space-y-2 text-xs text-slate2">
+          <li class="tick">SIM registration under the NCC SIM Registration Regulations</li>
+          <li class="tick">National Identity Number verification through NIMC integration</li>
+          <li class="tick">Compliance with the Nigeria Data Protection Act, 2023</li>
+          <li class="tick">Number portability and lawful intercept supported</li>
+        </ul>
+      </div>
+
+      <div class="bg-surface border border-slate-200 rounded-2xl p-5">
+        <div class="text-[11px] font-bold text-accent uppercase tracking-wider mb-3">5.9 CRM and administration</div>
+        <ul class="space-y-2 text-xs text-slate2">
+          <li class="tick">Digital CRM with real time analytics, segmentation and campaign management</li>
+        </ul>
+      </div>
+
+      <div class="bg-surface border border-slate-200 rounded-2xl p-5">
+        <div class="text-[11px] font-bold text-accent uppercase tracking-wider mb-3">5.10 OSS and BSS</div>
+        <ul class="space-y-2 text-xs text-slate2">
+          <li class="tick">Real time charging</li>
+          <li class="tick">Digital product catalogue</li>
+          <li class="tick">Operational dashboards</li>
+        </ul>
+      </div>
+
+      <div class="bg-surface border border-slate-200 rounded-2xl p-5">
+        <div class="text-[11px] font-bold text-accent uppercase tracking-wider mb-3">5.11 Support and service desk</div>
+        <ul class="space-y-2 text-xs text-slate2">
+          <li class="tick">Digital first support through chat, email and knowledge base</li>
+          <li class="tick">Escalation to second and third line as required</li>
+          <li class="tick">Voice contact centre delivered by CXG, managed by Digital Mobile</li>
+        </ul>
+      </div>
+
+      <div class="bg-surface border border-slate-200 rounded-2xl p-5">
+        <div class="text-[11px] font-bold text-accent uppercase tracking-wider mb-3">5.12 Portal and integration</div>
+        <ul class="space-y-2 text-xs text-slate2">
+          <li class="tick">Self service portal for mobile and web, role based, white labelled to GCT Group</li>
+          <li class="tick">APIs for digital partners</li>
+          <li class="tick">Zero rating for GCT Group digital properties</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="rounded-2xl border border-slate-300 bg-white p-6">
+      <h3 class="font-bold text-base mb-1">What sits outside this proposal</h3>
+      <p class="text-xs text-muted mb-4">Section 5.14. These items are excluded from MVNO Light.</p>
+      <div class="grid sm:grid-cols-2 gap-x-8 gap-y-2 text-sm text-slate2">
+        <div class="flex gap-2"><span class="text-danger font-bold flex-none">&times;</span>Hardware procurement</div>
+        <div class="flex gap-2"><span class="text-danger font-bold flex-none">&times;</span>Marketing spend and physical retail estate</div>
+        <div class="flex gap-2"><span class="text-danger font-bold flex-none">&times;</span>Postpaid billing and international roaming</div>
+        <div class="flex gap-2"><span class="text-danger font-bold flex-none">&times;</span>Handset financing and device sales</div>
+      </div>
+      <p class="text-xs text-muted mt-4 pt-4 border-t border-slate-200">
+        Digital Mobile carries the regulatory obligation as the licence holder. GCT Group carries the obligation
+        to present accurate subscriber information at the point of sale.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== VAS ============================== -->
+<section id="vas" class="py-14 px-4 bg-navy text-white page-break">
+  <div class="max-w-6xl mx-auto">
+    <span class="text-xs font-bold text-sky-400 uppercase tracking-wider">Section 6</span>
+    <h2 class="text-2xl sm:text-3xl font-extrabold mt-1">Value added services</h2>
+    <div class="accent-bar"></div>
+    <p class="text-white/70 text-sm sm:text-[0.95rem] max-w-3xl mb-9 leading-relaxed">
+      Every service below can be attached to the MVNO Light operation. Each is priced separately and each can be
+      added at launch or at any point afterwards. Nine services are available and five carry published pricing.
+    </p>
+
+    <!-- 6.1 included -->
+    <div class="bg-white/5 border border-white/10 rounded-2xl p-6 mb-6">
+      <div class="flex items-baseline gap-3 mb-1">
+        <span class="text-xs font-bold text-sky-400">6.1</span>
+        <h3 class="text-lg font-extrabold">Included in the platform at no extra cost</h3>
+      </div>
+      <p class="text-white/50 text-xs mb-5">These five services are part of the MVNO Light platform fee.</p>
+      <div class="grid sm:grid-cols-3 lg:grid-cols-5 gap-3">
+        <div class="bg-white/5 rounded-xl p-4"><div class="font-bold text-sm mb-1">SMS</div><div class="text-[11px] text-white/50 leading-relaxed">Person to person and application to person</div></div>
+        <div class="bg-white/5 rounded-xl p-4"><div class="font-bold text-sm mb-1">Voicemail</div><div class="text-[11px] text-white/50 leading-relaxed">Standard voicemail with notification</div></div>
+        <div class="bg-white/5 rounded-xl p-4"><div class="font-bold text-sm mb-1">USSD</div><div class="text-[11px] text-white/50 leading-relaxed">Balance, recharge and bundle purchase</div></div>
+        <div class="bg-white/5 rounded-xl p-4"><div class="font-bold text-sm mb-1">WhatsApp</div><div class="text-[11px] text-white/50 leading-relaxed">Support and self service channel</div></div>
+        <div class="bg-white/5 rounded-xl p-4"><div class="font-bold text-sm mb-1">Notifications</div><div class="text-[11px] text-white/50 leading-relaxed">SMS, email and push for all events</div></div>
+      </div>
+    </div>
+
+    <!-- 6.2 PWA -->
+    <div class="bg-white/5 border border-white/10 rounded-2xl p-6 mb-6">
+      <div class="flex flex-wrap items-start justify-between gap-4 mb-3">
+        <div>
+          <div class="flex items-baseline gap-3 mb-1">
+            <span class="text-xs font-bold text-sky-400">6.2</span>
+            <h3 class="text-lg font-extrabold">MVNO PWA platform</h3>
+          </div>
+          <p class="text-white/50 text-xs">Subscriber self service app</p>
+        </div>
+        <div class="text-right">
+          <div class="text-2xl font-extrabold text-sky-400">$12,507</div>
+          <div class="text-[11px] text-white/50">once off, plus $4,250 per month</div>
+        </div>
+      </div>
+      <p class="text-white/70 text-sm leading-relaxed mb-4">
+        A branded progressive web app giving subscribers SIM management, top ups, bundle purchase, account
+        management and support. Installs from the browser with no app store dependency.
+      </p>
+      <div class="text-xs text-white/50 bg-white/5 rounded-lg px-4 py-3">
+        The monthly fee covers 40 hours of tier 3 support at $3,250 and 10 hours of development at $1,000.
+      </div>
+    </div>
+
+    <!-- 6.3 eSIM -->
+    <div class="bg-white/5 border border-white/10 rounded-2xl p-6 mb-6">
+      <div class="flex flex-wrap items-start justify-between gap-4 mb-3">
+        <div>
+          <div class="flex items-baseline gap-3 mb-1">
+            <span class="text-xs font-bold text-sky-400">6.3</span>
+            <h3 class="text-lg font-extrabold">Travel eSIM</h3>
+          </div>
+          <p class="text-white/50 text-xs">Outbound travel data proposition</p>
+        </div>
+        <div class="text-right">
+          <div class="text-2xl font-extrabold text-sky-400">$3,200</div>
+          <div class="text-[11px] text-white/50">once off, plus 50/50 margin share</div>
+        </div>
+      </div>
+      <p class="text-white/70 text-sm leading-relaxed mb-5">
+        A travel data proposition sold to GCT Group subscribers and to the wider Nigerian outbound travel
+        market. Subscribers buy a destination data bundle before departure and activate it on arrival.
+        Integration takes about two weeks.
+      </p>
+      <div class="scroller rounded-xl overflow-hidden bg-white">
+        <table class="doc">
+          <thead><tr><th>Item</th><th style="text-align:right">Amount</th></tr></thead>
+          <tbody>
+            <tr><td>Platform configuration, once off</td><td class="num">$3,200</td></tr>
+            <tr><td>SIM profile creation, per subscriber</td><td class="num">$0.63</td></tr>
+            <tr><td>ICCID provisioning, per subscriber</td><td class="num">$0.31</td></tr>
+            <tr><td>Active IMSI, per subscriber per month</td><td class="num">$0.31</td></tr>
+            <tr class="total"><td>Margin share on every bundle sold</td><td class="num">50 / 50</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 6.4 Bitdefender -->
+    <div class="bg-white/5 border border-white/10 rounded-2xl p-6 mb-6">
+      <div class="flex flex-wrap items-start justify-between gap-4 mb-3">
+        <div>
+          <div class="flex items-baseline gap-3 mb-1">
+            <span class="text-xs font-bold text-sky-400">6.4</span>
+            <h3 class="text-lg font-extrabold">Bitdefender cybersecurity</h3>
+          </div>
+          <p class="text-white/50 text-xs">Delivered by the Digital Resilience division of DSG</p>
+        </div>
+        <div class="text-right">
+          <div class="text-2xl font-extrabold text-sky-400">$2,000</div>
+          <div class="text-[11px] text-white/50">once off set up, plus 50/50 revenue share</div>
+        </div>
+      </div>
+      <p class="text-white/70 text-sm leading-relaxed mb-5">
+        Consumer security sold as a monthly subscription and billed to the subscriber's mobile account. No
+        additional infrastructure is required. Retail prices below are the recommended starting point for the
+        GCT Group subscriber tariff, and gross profit is split 50/50.
+      </p>
+      <div class="grid lg:grid-cols-2 gap-5">
+        <div>
+          <div class="text-[11px] font-bold text-white/60 uppercase tracking-wider mb-2.5">With Digital Identity Protection</div>
+          <div class="scroller rounded-xl overflow-hidden bg-white">
+            <table class="doc">
+              <thead><tr><th>Package</th><th style="text-align:right">Cost</th><th style="text-align:right">Retail</th><th style="text-align:right">Profit</th></tr></thead>
+              <tbody>
+                <tr><td>1 device</td><td class="num">$1.08</td><td class="num">$2.70</td><td class="num">$1.62</td></tr>
+                <tr><td>5 devices</td><td class="num">$2.38</td><td class="num">$5.96</td><td class="num">$3.58</td></tr>
+                <tr><td>10 devices</td><td class="num">$3.40</td><td class="num">$8.50</td><td class="num">$5.10</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div>
+          <div class="text-[11px] font-bold text-white/60 uppercase tracking-wider mb-2.5">With Dark Web Monitoring and VPN</div>
+          <div class="scroller rounded-xl overflow-hidden bg-white">
+            <table class="doc">
+              <thead><tr><th>Package</th><th style="text-align:right">Cost</th><th style="text-align:right">Retail</th><th style="text-align:right">Profit</th></tr></thead>
+              <tbody>
+                <tr><td>1 device</td><td class="num">$1.84</td><td class="num">$4.60</td><td class="num">$2.76</td></tr>
+                <tr><td>5 devices</td><td class="num">$3.14</td><td class="num">$7.86</td><td class="num">$4.72</td></tr>
+                <tr><td>10 devices</td><td class="num">$5.22</td><td class="num">$13.06</td><td class="num">$7.84</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <p class="text-[11px] text-white/50 mt-4">
+        All prices are per subscriber per month in US dollars. Every package is priced at 2.5 times wholesale
+        cost, so gross profit is 60% of the retail price.
+      </p>
+    </div>
+
+    <!-- 6.5 to 6.9 -->
+    <div class="grid md:grid-cols-2 gap-5">
+
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+        <div class="flex items-baseline gap-3 mb-1">
+          <span class="text-xs font-bold text-sky-400">6.5</span>
+          <h3 class="text-base font-extrabold">Xanite CVM platform</h3>
+        </div>
+        <p class="text-white/50 text-xs mb-4">Customer Value Management, by BroadBrand</p>
+        <p class="text-white/70 text-sm leading-relaxed mb-4">
+          Campaign automation and segmentation, churn prediction with retention triggers, and ARPU uplift
+          through targeted upsell. Campaign delivery covers SMS, push, email and USSD.
+        </p>
+        <div class="text-xs text-white/50 bg-white/5 rounded-lg px-4 py-3">
+          Licenced on a platform fee scaled to subscriber base size and active campaign volume. Integration with
+          the MVNO platform is included in set up. <strong class="text-white/80">Price on request.</strong>
+        </div>
+      </div>
+
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+        <div class="flex items-baseline gap-3 mb-1">
+          <span class="text-xs font-bold text-sky-400">6.6</span>
+          <h3 class="text-base font-extrabold">PersAIc personalisation engine</h3>
+        </div>
+        <p class="text-white/50 text-xs mb-4">Real time AI personalisation</p>
+        <p class="text-white/70 text-sm leading-relaxed mb-4">
+          Serves real time offers, bundle recommendations and content across the app, the web and messaging
+          channels. Includes predictive lifetime value and next best action modelling. Designed to comply with
+          the Nigeria Data Protection Act, 2023.
+        </p>
+        <div class="text-xs text-white/50 bg-white/5 rounded-lg px-4 py-3">
+          Priced per active subscriber. Implementation and integration with the MVNO platform and the PWA are
+          included in onboarding. <strong class="text-white/80">Price on request.</strong>
+        </div>
+      </div>
+
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+        <div class="flex items-baseline gap-3 mb-1">
+          <span class="text-xs font-bold text-sky-400">6.7</span>
+          <h3 class="text-base font-extrabold">CXG omni channel customer experience</h3>
+        </div>
+        <p class="text-white/50 text-xs mb-4">Customer Experience Group</p>
+        <p class="text-white/70 text-sm leading-relaxed mb-4">
+          Voice, email, chat and social customer service, WhatsApp automation, social media management, CRM
+          implementation and subscriber analytics.
+        </p>
+        <div class="text-xs text-white/50 bg-white/5 rounded-lg px-4 py-3">
+          The voice contact centre is delivered by CXG and managed by Digital Mobile, and its cost sits inside
+          the net profit calculation in Section 7. Scope beyond the standard service is
+          <strong class="text-white/80">priced on request</strong> against volume, channel mix and service levels.
+        </div>
+      </div>
+
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+        <div class="flex items-baseline gap-3 mb-1">
+          <span class="text-xs font-bold text-sky-400">6.9</span>
+          <h3 class="text-base font-extrabold">VMS voucher management server</h3>
+        </div>
+        <p class="text-white/50 text-xs mb-4">Prepaid voucher lifecycle</p>
+        <p class="text-white/70 text-sm leading-relaxed mb-4">
+          End to end management of prepaid airtime, data and promotional vouchers. Covers generation,
+          distribution through retail, agent, WhatsApp and USSD channels, real time redemption validation, and
+          expiry and reactivation handling.
+        </p>
+        <div class="text-xs text-white/50 bg-white/5 rounded-lg px-4 py-3">
+          VMS matters in Nigeria because a large share of prepaid value still moves through physical agent and
+          dealer networks. Priced on voucher volume, channel complexity and integration scope.
+          <strong class="text-white/80">Price on request.</strong>
+        </div>
+      </div>
+
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-6 md:col-span-2">
+        <div class="flex items-baseline gap-3 mb-1">
+          <span class="text-xs font-bold text-sky-400">6.8</span>
+          <h3 class="text-base font-extrabold">MARS, mediation, assurance and revenue services</h3>
+        </div>
+        <p class="text-white/50 text-xs mb-4">Revenue protection for the operation, delivered by MVNE</p>
+        <p class="text-white/70 text-sm leading-relaxed mb-5">
+          MARS also validates wholesale bills, which matters when the host network invoice is the single largest
+          cost line in the operation.
+        </p>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-3 mb-4">
+          <div class="bg-white/5 rounded-xl p-4"><div class="font-bold text-sm mb-1">Mediation</div><div class="text-[11px] text-white/50 leading-relaxed">Processes raw EDR, GDR and CDR files into usable data, with enrichment and real time ingestion</div></div>
+          <div class="bg-white/5 rounded-xl p-4"><div class="font-bold text-sm mb-1">Assurance</div><div class="text-[11px] text-white/50 leading-relaxed">Audits systems against each other, validates service reliability, monitors continuously</div></div>
+          <div class="bg-white/5 rounded-xl p-4"><div class="font-bold text-sm mb-1">Revenue</div><div class="text-[11px] text-white/50 leading-relaxed">Detects and corrects revenue leakage in real time, tracks revenue flows end to end</div></div>
+          <div class="bg-white/5 rounded-xl p-4"><div class="font-bold text-sm mb-1">Service enablers</div><div class="text-[11px] text-white/50 leading-relaxed">Task automation, workflows, reporting services and machine learning scheduling</div></div>
+          <div class="bg-white/5 rounded-xl p-4"><div class="font-bold text-sm mb-1">Enablers</div><div class="text-[11px] text-white/50 leading-relaxed">Delivers accuracy, operational efficiency and sustained margin</div></div>
+        </div>
+        <div class="text-xs text-white/50 bg-white/5 rounded-lg px-4 py-3">
+          Priced on data volumes, integration complexity and the module combination required.
+          <strong class="text-white/80">Price on request</strong> following a requirements session.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== COMMERCIALS ============================== -->
+<section id="money" class="py-14 px-4 bg-white page-break">
+  <div class="max-w-6xl mx-auto">
+    <span class="text-xs font-bold text-accent uppercase tracking-wider">Section 7</span>
+    <h2 class="text-2xl sm:text-3xl font-extrabold mt-1">Commercial terms</h2>
+    <div class="accent-bar"></div>
+
+    <h3 class="text-lg font-bold mb-3">7.1 Once off fees</h3>
+    <div class="scroller rounded-xl border border-slate-200 overflow-hidden mb-3">
+      <table class="doc">
+        <thead><tr><th>Item</th><th style="text-align:right">Amount</th><th>When payable</th></tr></thead>
+        <tbody>
+          <tr class="total"><td>Project set up fee</td><td class="num">$20,000</td><td>On contract signature, in advance</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="text-xs text-muted mb-9">There are no other upfront costs from either party.</p>
+
+    <h3 class="text-lg font-bold mb-3">7.2 Who pays for what at set up</h3>
+    <div class="scroller rounded-xl border border-slate-200 overflow-hidden mb-9">
+      <table class="doc">
+        <thead><tr><th>Item</th><th>GCT Group</th><th>Digital Mobile</th><th>Note</th></tr></thead>
+        <tbody>
+          <tr><td>Web development</td><td>Yes</td><td></td><td>GCT Group covers changes to its own website, or Digital Mobile can provide a white labelled site</td></tr>
+          <tr><td>MVNO platform deployment</td><td></td><td>Yes</td><td>Covered under existing Digital Mobile infrastructure cost</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="text-lg font-bold mb-3">7.3 Monthly and recurring fees</h3>
+    <div class="scroller rounded-xl border border-slate-200 overflow-hidden mb-4">
+      <table class="doc">
+        <thead><tr><th>Item</th><th>GCT Group</th><th>Digital Mobile</th><th>Charge</th></tr></thead>
+        <tbody>
+          <tr><td>Platform and management fee</td><td></td><td>Yes</td><td>$5,000 per month, or $0.48 per active subscriber, whichever is higher</td></tr>
+          <tr><td>Contact centre</td><td></td><td>Yes</td><td>Run by CXG, managed by Digital Mobile</td></tr>
+          <tr><td>Airtime recharge distribution</td><td></td><td>Yes</td><td>Through Digital Mobile distribution channels</td></tr>
+          <tr><td>SIM cards</td><td></td><td>Yes</td><td>$0.65 per SIM</td></tr>
+          <tr><td>Digital SIM registration, NIN verification</td><td></td><td>Yes</td><td>$0.45 per SIM</td></tr>
+          <tr><td>SIM delivery and logistics</td><td></td><td>Yes</td><td>$2.15 per delivery, where applicable</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="grid md:grid-cols-2 gap-5 mb-9">
+      <div class="bg-accent/5 border border-accent/25 rounded-xl p-5">
+        <div class="text-xs font-bold text-accent uppercase tracking-wider mb-2">Drive recharge to owned channels</div>
+        <p class="text-sm text-slate2 leading-relaxed">Airtime distribution costs 7% when recharge runs through
+        a third party channel. It costs nothing when recharge runs through the GCT Group website or app.</p>
+      </div>
+      <div class="bg-surface border-l-4 border-danger rounded-r-xl p-5">
+        <div class="text-xs font-bold text-danger uppercase tracking-wider mb-2">Fix these three in the contract</div>
+        <p class="text-sm text-slate2 leading-relaxed">The per SIM, registration and logistics figures were set
+        in South African rand in the 28 January 2026 proposal at R12, R8 and R40. The dollar figures above are
+        indicative conversions at roughly R18.50 to the dollar. Both the rand rate card and the exchange rate
+        move, so these three need fixing at contracting. The platform fee was quoted in dollars and needs no
+        conversion.</p>
+      </div>
+    </div>
+
+    <h3 class="text-lg font-bold mb-1">7.4 Profit share</h3>
+    <p class="text-sm text-slate2 leading-relaxed mb-6 max-w-3xl">
+      Net profit per subscriber is split <strong>50/50</strong> between GCT Group and Digital Mobile. Net profit
+      is ARPU less the wholesale network cost, less the Digital Mobile platform fee, less contact centre cost
+      where a contact is made, and less airtime distribution cost where a third party channel is used.
+    </p>
+
+    <h3 class="text-lg font-bold mb-3">7.5 Worked example</h3>
+    <div class="rounded-2xl border-l-4 border-danger bg-danger/5 p-5 mb-5">
+      <p class="text-sm text-slate2 leading-relaxed">
+        This example comes from the 28 January 2026 proposal. It is illustrative and uses Nigerian naira. The
+        figures imply an exchange rate of about N1,375 to the dollar.
+        <strong>Both the naira figures and the exchange rate need confirming against the final product set and
+        the rate on the day.</strong>
+      </p>
+    </div>
+    <div class="grid lg:grid-cols-3 gap-5 mb-5">
+      <div class="lg:col-span-2 scroller rounded-xl border border-slate-200 overflow-hidden">
+        <table class="doc">
+          <thead><tr><th>Monthly, per subscriber</th><th style="text-align:right">Amount</th><th>Note</th></tr></thead>
+          <tbody>
+            <tr><td>ARPU</td><td class="num">N8,800</td><td>Illustrative</td></tr>
+            <tr><td>Wholesale network cost</td><td class="num">(N4,400)</td><td>Depends on the final product set</td></tr>
+            <tr><td>Digital Mobile platform fee</td><td class="num">(N660)</td><td>$0.48 per subscriber, or $5,000 monthly, whichever is higher</td></tr>
+            <tr><td>Contact centre cost</td><td class="num">(N263)</td><td>Based on one customer contact</td></tr>
+            <tr><td>Airtime distribution cost</td><td class="num">(N616)</td><td>7% through third parties, nothing through own web or app</td></tr>
+            <tr class="total"><td>Net profit</td><td class="num">N2,861</td><td></td></tr>
+            <tr><td>GCT Group share</td><td class="num">N1,430.50</td><td>50%</td></tr>
+            <tr><td>Digital Mobile share</td><td class="num">N1,430.50</td><td>50%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="scroller rounded-xl border border-slate-200 overflow-hidden mb-4">
+          <table class="doc">
+            <thead><tr><th>Once off, per sale</th><th style="text-align:right">Amount</th></tr></thead>
+            <tbody>
+              <tr><td>Logistics, where applicable</td><td class="num">N3,571</td></tr>
+              <tr><td>SIM card</td><td class="num">N1,055</td></tr>
+              <tr><td>Digital SIM registration</td><td class="num">N967</td></tr>
+              <tr class="total"><td>Acquisition cost</td><td class="num">N5,593</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="bg-navy text-white rounded-xl p-5">
+          <div class="text-[11px] font-bold text-white/40 uppercase tracking-wider mb-2">On these illustrative figures</div>
+          <p class="text-xs text-white/70 leading-relaxed mb-3">Acquisition cost of about N5,593 per subscriber
+          is recovered from the GCT Group profit share in roughly four months.</p>
+          <p class="text-xs text-white/70 leading-relaxed">Driving recharge through GCT Group owned digital
+          channels removes the N616 distribution cost and lifts the GCT Group share by about N308 per subscriber
+          per month.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="text-lg font-bold mb-3 mt-9">7.6 Payment terms</h3>
+    <div class="scroller rounded-xl border border-slate-200 overflow-hidden">
+      <table class="doc">
+        <thead><tr><th>Term</th><th>Detail</th></tr></thead>
+        <tbody>
+          <tr><td>Set up fee</td><td>Paid in advance on contract signature</td></tr>
+          <tr><td>Monthly fees</td><td>Invoiced monthly, payable within 30 days of invoice date</td></tr>
+          <tr><td>Late payment</td><td>2% per month on overdue amounts</td></tr>
+          <tr><td>Currency</td><td>All fees in US dollars unless agreed otherwise in writing</td></tr>
+          <tr><td>Exchange rate</td><td>Pricing is subject to USD/ZAR and USD/NGN movement. DSG and MVNE reserve the right to recalibrate</td></tr>
+          <tr><td>Taxes</td><td>All amounts exclude VAT and any applicable Nigerian withholding tax</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== PLAN ============================== -->
+<section id="plan" class="py-14 px-4 bg-surface page-break">
+  <div class="max-w-6xl mx-auto">
+    <span class="text-xs font-bold text-accent uppercase tracking-wider">Section 8</span>
+    <h2 class="text-2xl sm:text-3xl font-extrabold mt-1">Implementation plan</h2>
+    <div class="accent-bar"></div>
+    <p class="text-slate2 text-sm sm:text-[0.95rem] max-w-3xl mb-8 leading-relaxed">
+      The plan below is indicative and subject to joint planning. The clock starts when both conditions
+      precedent in Section 2 are met and the contract is signed.
+    </p>
+    <div class="scroller rounded-xl border border-slate-200 overflow-hidden bg-white mb-9">
+      <table class="doc">
+        <thead><tr><th>Phase</th><th>Timing</th><th>Activities</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Project kick off</strong></td><td>Week 1</td><td>Contract finalisation, project governance, stakeholder alignment</td></tr>
+          <tr><td><strong>Requirements and design</strong></td><td>Weeks 2 to 4</td><td>Business requirements specification, technical specification, customer journey mapping, DARE model</td></tr>
+          <tr><td><strong>Platform configuration</strong></td><td>Weeks 5 to 8</td><td>System configuration, product catalogue set up, API integration, host network configuration</td></tr>
+          <tr><td><strong>Testing and UAT</strong></td><td>Weeks 9 to 12</td><td>System integration testing, user acceptance testing, regulatory compliance checks</td></tr>
+          <tr><td><strong>Training and onboarding</strong></td><td>Weeks 13 to 14</td><td>Training for GCT Group teams, documentation handover, first SIM batch ordered</td></tr>
+          <tr><td><strong>Go live preparation</strong></td><td>Weeks 15 to 16</td><td>Operational readiness, go live rehearsals</td></tr>
+          <tr class="total"><td>Service launch</td><td>Week 16 onward</td><td>Launch to market, post launch support, performance monitoring</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-5">
+      <div>
+        <h3 class="text-base font-bold mb-3">Sign off points</h3>
+        <div class="scroller rounded-xl border border-slate-200 overflow-hidden bg-white">
+          <table class="doc">
+            <thead><tr><th>Deliverable</th><th>Signed off by</th></tr></thead>
+            <tbody>
+              <tr><td>Business requirements specification</td><td>GCT Group and Digital Mobile</td></tr>
+              <tr><td>Technical specification</td><td>Digital Mobile develops it, both parties sign</td></tr>
+              <tr><td>Customer journey map</td><td>GCT Group and Digital Mobile</td></tr>
+              <tr><td>DARE model</td><td>GCT Group and Digital Mobile</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-xs text-muted mt-3">Delivery runs on an agile method with regular sprint reviews and
+        stakeholder updates. A detailed plan and resource allocation follow project award.</p>
+      </div>
+      <div>
+        <h3 class="text-base font-bold mb-3">Key success factors</h3>
+        <div class="space-y-3">
+          <div class="bg-white border border-slate-200 rounded-xl p-4">
+            <div class="font-bold text-sm mb-1">Timeline discipline</div>
+            <p class="text-xs text-muted leading-relaxed">MVNE has met aggressive project deadlines on previous
+            MVNO launches, including DSTV Internet as a full MVNO running 36 months and more, and Digital Mobile
+            as a recent MVNO Light launch.</p>
+          </div>
+          <div class="bg-white border border-slate-200 rounded-xl p-4">
+            <div class="font-bold text-sm mb-1">Stakeholder engagement</div>
+            <p class="text-xs text-muted leading-relaxed">Regular project governance meetings and transparent
+            communication between the parties.</p>
+          </div>
+          <div class="bg-white border border-slate-200 rounded-xl p-4">
+            <div class="font-bold text-sm mb-1">Risk management and quality</div>
+            <p class="text-xs text-muted leading-relaxed">Risks are identified and mitigated through the project
+            lifecycle. Testing, compliance checks and user training happen before launch.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== RESPONSIBILITIES ============================== -->
+<section id="raci" class="py-14 px-4 bg-white">
+  <div class="max-w-6xl mx-auto">
+    <span class="text-xs font-bold text-accent uppercase tracking-wider">Section 9</span>
+    <h2 class="text-2xl sm:text-3xl font-extrabold mt-1">Roles and responsibilities</h2>
+    <div class="accent-bar"></div>
+    <div class="scroller rounded-xl border border-slate-200 overflow-hidden">
+      <table class="doc">
+        <thead><tr><th>Area</th><th>GCT Group</th><th>Digital Mobile and MVNE</th></tr></thead>
+        <tbody>
+          <tr><td>Brand and marketing</td><td>Owns</td><td>Supports with campaign tooling</td></tr>
+          <tr><td>Customer acquisition</td><td>Owns through its channels</td><td>Supports through digital channels</td></tr>
+          <tr><td>Website and app front end</td><td>Owns, or takes the white labelled option</td><td>Provides the white labelled option</td></tr>
+          <tr><td>Mobile licence and regulatory</td><td></td><td>Owns</td></tr>
+          <tr><td>Host network agreement</td><td></td><td>Owns</td></tr>
+          <tr><td>MVNO platform, BSS and OSS</td><td></td><td>Owns and operates</td></tr>
+          <tr><td>SIM supply and logistics</td><td></td><td>Owns</td></tr>
+          <tr><td>SIM registration and NIN verification</td><td>Accurate capture at point of sale</td><td>Platform, process and regulatory reporting</td></tr>
+          <tr><td>Contact centre</td><td></td><td>Owns through CXG</td></tr>
+          <tr><td>Airtime distribution</td><td>Owns for its digital channels</td><td>Owns for third party channels</td></tr>
+          <tr><td>Product and pricing</td><td>Joint approval</td><td>Joint approval</td></tr>
+          <tr><td>Value added services</td><td>Selects and sells</td><td>Delivers and bills</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== TERMS ============================== -->
+<section id="terms" class="py-14 px-4 bg-surface">
+  <div class="max-w-6xl mx-auto">
+    <span class="text-xs font-bold text-accent uppercase tracking-wider">Section 10</span>
+    <h2 class="text-2xl sm:text-3xl font-extrabold mt-1">Terms and conditions</h2>
+    <div class="accent-bar"></div>
+    <div class="scroller rounded-xl border border-slate-200 overflow-hidden bg-white">
+      <table class="doc">
+        <thead><tr><th>Clause</th><th>Detail</th></tr></thead>
+        <tbody>
+          <tr><td>Validity</td><td>This proposal is valid for 30 days from 9 September 2026</td></tr>
+          <tr><td>Conditions precedent</td><td>Subject to the two conditions in Section 2</td></tr>
+          <tr><td>Further agreement</td><td>Subject to signature of a full contract and detailed scope of work between GCT Group and Digital Mobile</td></tr>
+          <tr><td>Payment terms</td><td>Payable within 30 days of invoice date, 2% per month late payment penalty</td></tr>
+          <tr><td>Pricing adjustment</td><td>Subject to USD/ZAR and USD/NGN exchange rate movement</td></tr>
+          <tr><td>Confidentiality</td><td>All contents are confidential and proprietary to MVNE (Pty) Ltd. Recipients keep the contents confidential, use them only to evaluate this proposal, and do not disclose them to third parties without written consent</td></tr>
+          <tr><td>Intellectual property</td><td>Proprietary methodology and pre existing intellectual property remain the property of MVNE (Pty) Ltd and Digital Mobile</td></tr>
+          <tr><td>Compliance</td><td>MVNE (Pty) Ltd complies with applicable Nigerian law, covering telecommunications regulation, data protection and privacy, employment and labour law, and tax and financial reporting</td></tr>
+          <tr><td>Insurance</td><td>MVNE (Pty) Ltd maintains professional indemnity insurance</td></tr>
+          <tr><td>Governing law</td><td>To be agreed in the full contract</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== ACCEPTANCE ============================== -->
+<section id="accept" class="py-14 px-4 bg-white page-break">
+  <div class="max-w-6xl mx-auto">
+    <span class="text-xs font-bold text-accent uppercase tracking-wider">Section 11</span>
+    <h2 class="text-2xl sm:text-3xl font-extrabold mt-1">Acceptance</h2>
+    <div class="accent-bar"></div>
+    <p class="text-slate2 text-sm sm:text-[0.95rem] max-w-3xl mb-8 leading-relaxed">
+      Acceptance covers the MVNO Light platform and the value added services selected by GCT Group. Acceptance
+      is subject to the conditions precedent in Section 2 and to signature of a full contract.
+    </p>
+
+    <!-- Signed record, populated after an online signing -->
+    <div id="signed-record" class="hidden mb-9"></div>
+
+    <!-- Online signing call to action -->
+    <div id="sign-cta" class="no-print grid lg:grid-cols-3 gap-5 mb-10">
+      <div class="lg:col-span-2 bg-navy text-white rounded-2xl p-7">
+        <div class="inline-flex items-center gap-2 bg-white/10 rounded-full px-3 py-1 text-[11px] font-bold text-white/70 mb-4">
+          <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+          Verified online signing
+        </div>
+        <h3 class="text-xl font-extrabold mb-2">Sign this proposal online</h3>
+        <p class="text-white/70 text-sm leading-relaxed mb-6">
+          Signing runs in five steps. You choose what you are accepting, confirm your details, verify your
+          identity, sign, and receive a signing certificate. The certificate records a hash of this document, a
+          timestamp and a reference number, so both parties can prove what was signed and when.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <button onclick="openSign()" class="bg-danger hover:bg-red-700 text-white font-bold text-sm px-6 py-3 rounded-lg transition">Start signing</button>
+          <button onclick="downloadPdf()" class="bg-white/10 hover:bg-white/20 text-white font-semibold text-sm px-6 py-3 rounded-lg transition">Download PDF instead</button>
+        </div>
+      </div>
+      <div class="bg-surface border border-slate-200 rounded-2xl p-6">
+        <div class="text-xs font-bold text-accent uppercase tracking-wider mb-4">The five steps</div>
+        <ol class="space-y-3 text-xs text-slate2">
+          <li class="flex gap-2.5"><span class="step-dot bg-white border border-slate-300 text-navy">1</span><span class="pt-1">Select what you are accepting</span></li>
+          <li class="flex gap-2.5"><span class="step-dot bg-white border border-slate-300 text-navy">2</span><span class="pt-1">Confirm signatory details</span></li>
+          <li class="flex gap-2.5"><span class="step-dot bg-white border border-slate-300 text-navy">3</span><span class="pt-1">Verify your identity</span></li>
+          <li class="flex gap-2.5"><span class="step-dot bg-white border border-slate-300 text-navy">4</span><span class="pt-1">Sign and consent</span></li>
+          <li class="flex gap-2.5"><span class="step-dot bg-white border border-slate-300 text-navy">5</span><span class="pt-1">Receive your certificate</span></li>
+        </ol>
+        <p class="text-[11px] text-muted mt-5 pt-4 border-t border-slate-200 leading-relaxed">
+          Prefer wet ink? Use the PDF. It carries signature blocks for both parties.
+        </p>
+      </div>
+    </div>
+
+    <!-- Wet signature blocks. Always in the PDF, and on screen as a fallback. -->
+    <h3 class="text-lg font-bold mb-1">Signature blocks</h3>
+    <p class="text-xs text-muted mb-5">Use these if the proposal is signed on paper rather than online.</p>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="rounded-xl border border-slate-300 p-6">
+        <div class="text-xs font-bold text-accent uppercase tracking-wider mb-5">For MVNE (Pty) Ltd and Digital Mobile</div>
+        <div class="space-y-5 text-sm">
+          <div><div class="text-xs text-muted mb-1">Name</div><div class="font-semibold border-b border-slate-300 pb-1.5">Yaron Assabi</div></div>
+          <div><div class="text-xs text-muted mb-1">Position</div><div class="border-b border-slate-300 pb-1.5">Chief Executive Officer</div></div>
+          <div><div class="text-xs text-muted mb-1">Signature</div><div class="border-b border-slate-300 h-12"></div></div>
+          <div><div class="text-xs text-muted mb-1">Date</div><div class="border-b border-slate-300 h-7"></div></div>
+        </div>
+      </div>
+      <div class="rounded-xl border border-slate-300 p-6">
+        <div class="text-xs font-bold text-accent uppercase tracking-wider mb-5">For GCT Group</div>
+        <div class="space-y-5 text-sm">
+          <div><div class="text-xs text-muted mb-1">Name</div><div class="border-b border-slate-300 h-7"></div></div>
+          <div><div class="text-xs text-muted mb-1">Position</div><div class="border-b border-slate-300 h-7"></div></div>
+          <div><div class="text-xs text-muted mb-1">Signature</div><div class="border-b border-slate-300 h-12"></div></div>
+          <div><div class="text-xs text-muted mb-1">Date</div><div class="border-b border-slate-300 h-7"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== SOURCE NOTES ============================== -->
+<section id="sources" class="py-14 px-4 bg-surface">
+  <div class="max-w-6xl mx-auto">
+    <span class="text-xs font-bold text-accent uppercase tracking-wider">Appendix</span>
+    <h2 class="text-2xl sm:text-3xl font-extrabold mt-1">Source notes</h2>
+    <div class="accent-bar"></div>
+    <p class="text-slate2 text-sm max-w-3xl mb-7 leading-relaxed">
+      Every commercial figure in this document traces to a source. The table records where each came from and
+      what still needs confirming. Items marked unverified or derived are estimates. Confirm them against a
+      primary source before they are relied on.
+    </p>
+    <div class="scroller rounded-xl border border-slate-200 overflow-hidden bg-white">
+      <table class="doc">
+        <thead><tr><th>Figure</th><th>Source</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>$20,000 set up fee</td><td>Section 8.1.11.4, MVNE MVNO proposal, 28 January 2026</td><td>Stated in source</td></tr>
+          <tr><td>$5,000 monthly or $0.48 per subscriber</td><td>Section 8.1.11.4 worked example, same source</td><td>Stated in source</td></tr>
+          <tr><td>50/50 net profit share</td><td>Section 8.1.11.4, same source</td><td>Stated in source</td></tr>
+          <tr><td>R12 SIM, R8 registration, R40 logistics</td><td>Section 8.1.11.4 monthly cost table, same source</td><td>Stated in source, in rand</td></tr>
+          <tr><td>$0.65, $0.45, $2.15 equivalents</td><td>Converted at roughly R18.50 to the dollar</td><td><strong class="text-danger">Unverified conversion, fix in contract</strong></td></tr>
+          <tr><td>Naira worked example</td><td>Section 8.1.11.4 nett profit framework, same source</td><td>Stated in source, illustrative</td></tr>
+          <tr><td>N1,375 to the dollar implied rate</td><td>Derived from the source example's internal arithmetic</td><td><strong class="text-danger">Unverified, confirm at contracting</strong></td></tr>
+          <tr><td>PWA $12,507 and $4,250 monthly</td><td>Yellow Dot MVNO PWA Support Proposal, 23 February 2026</td><td>Stated in source</td></tr>
+          <tr><td>Travel eSIM $3,200 and per subscriber fees</td><td>Yellow Dot Travel eSIM Proposal, 23 February 2026</td><td>Stated in source</td></tr>
+          <tr><td>Bitdefender rate card and $2,000 set up</td><td>GCT Group proposal site, Bitdefender section</td><td>Stated in source</td></tr>
+          <tr><td>16 week implementation plan</td><td>Section 8.1.12, MVNE MVNO proposal, 28 January 2026</td><td>Stated in source</td></tr>
+          <tr><td>Four month payback on acquisition cost</td><td>Calculated from the illustrative naira example</td><td><strong class="text-danger">Derived, depends on illustrative inputs</strong></td></tr>
+          <tr><td>Bitdefender at 2.5 times wholesale, 60% gross margin on retail</td><td>Calculated from the Bitdefender rate card</td><td><strong class="text-danger">Derived, applies to that rate card only</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== CONTACT ============================== -->
+<section id="contact" class="py-14 px-4 bg-navy text-white">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-2xl sm:text-3xl font-extrabold">Contact</h2>
+    <div class="accent-bar"></div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5 mb-9">
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+        <div class="text-[11px] font-bold text-white/40 uppercase tracking-wider mb-2">Primary contact</div>
+        <div class="font-bold mb-1">Edward Wicks</div>
+        <a href="mailto:edwardw@mvne.co.za" class="text-sky-400 text-xs hover:underline break-all">edwardw@mvne.co.za</a>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+        <div class="text-[11px] font-bold text-white/40 uppercase tracking-wider mb-2">Primary contact</div>
+        <div class="font-bold mb-1">Hugo Mokken</div>
+        <a href="mailto:hugom@mvne.co.za" class="text-sky-400 text-xs hover:underline break-all">hugom@mvne.co.za</a>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+        <div class="text-[11px] font-bold text-white/40 uppercase tracking-wider mb-2">MVNE (Pty) Ltd</div>
+        <p class="text-xs text-white/60 leading-relaxed">15 6th Street, Parkhurst, Johannesburg</p>
+        <a href="https://www.mvne.co.za" target="_blank" rel="noopener noreferrer" class="text-sky-400 text-xs hover:underline">www.mvne.co.za</a>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+        <div class="text-[11px] font-bold text-white/40 uppercase tracking-wider mb-2">DSG (Pty) Ltd</div>
+        <p class="text-xs text-white/60 leading-relaxed">158 Jan Smuts Avenue, Rosebank, 2196</p>
+        <a href="https://www.dsg.co.za" target="_blank" rel="noopener noreferrer" class="text-sky-400 text-xs hover:underline">www.dsg.co.za</a>
+      </div>
+    </div>
+    <div class="no-print flex flex-wrap gap-3 pt-7 border-t border-white/10">
+      <button onclick="openSign()" class="bg-danger hover:bg-red-700 text-white font-bold text-sm px-6 py-3 rounded-lg transition">Sign this proposal</button>
+      <button onclick="downloadPdf()" class="bg-white/10 hover:bg-white/20 text-white font-semibold text-sm px-6 py-3 rounded-lg transition">Download PDF</button>
+      <a href="/" class="bg-white/10 hover:bg-white/20 text-white font-semibold text-sm px-6 py-3 rounded-lg transition">Full product suite</a>
+    </div>
+  </div>
+</section>
+
+<footer class="bg-navy border-t border-white/10 text-white/40 text-xs py-7 px-4 text-center">
+  <p class="mb-1">MVNO Light proposal for GCT Group. Prepared by MVNE (Pty) Ltd with the DSG Group of Companies.</p>
+  <p>Confidential and proprietary. 9 September 2026. Valid for 30 days.</p>
+</footer>
+</main>
+
+<!-- ============================================================= -->
+<!-- ONLINE SIGNING CEREMONY                                        -->
+<!-- Five steps: scope, signatory, verification, signature, record.  -->
+<!-- ============================================================= -->
+<div id="sign-modal" class="no-print fixed inset-0 z-[150] hidden items-center justify-center p-3 sm:p-5"
+     style="background:rgba(6,12,24,.8)" role="dialog" aria-modal="true" aria-labelledby="sm-title">
+  <div class="w-full max-w-2xl bg-white rounded-2xl shadow-2xl flex flex-col" style="max-height:94vh">
+
+    <!-- header -->
+    <div class="bg-navy px-5 sm:px-7 py-4 rounded-t-2xl flex items-start justify-between gap-4 flex-none">
+      <div class="min-w-0">
+        <div class="flex items-center gap-2 mb-1">
+          <img src="dsg-logo.png" alt="DSG" class="h-7 w-auto rounded" />
+          <span class="text-white/25 text-xs">|</span>
+          <span class="text-white/50 text-[11px] font-semibold">Secure signing</span>
+        </div>
+        <h2 id="sm-title" class="text-white font-extrabold text-base sm:text-lg truncate">MVNO Light proposal</h2>
+      </div>
+      <button onclick="closeSign()" aria-label="Close" class="text-white/50 hover:text-white text-2xl leading-none flex-none">&times;</button>
+    </div>
+
+    <!-- step rail -->
+    <div class="px-5 sm:px-7 py-3.5 border-b border-slate-200 bg-surface flex-none">
+      <div class="flex items-center gap-1.5" id="step-rail">
+        <div class="flex items-center gap-1.5 flex-1" data-rail="1"><span class="step-dot bg-navy text-white">1</span><span class="h-1 flex-1 rounded bg-slate-200"></span></div>
+        <div class="flex items-center gap-1.5 flex-1" data-rail="2"><span class="step-dot bg-slate-200 text-muted">2</span><span class="h-1 flex-1 rounded bg-slate-200"></span></div>
+        <div class="flex items-center gap-1.5 flex-1" data-rail="3"><span class="step-dot bg-slate-200 text-muted">3</span><span class="h-1 flex-1 rounded bg-slate-200"></span></div>
+        <div class="flex items-center gap-1.5 flex-1" data-rail="4"><span class="step-dot bg-slate-200 text-muted">4</span><span class="h-1 flex-1 rounded bg-slate-200"></span></div>
+        <div class="flex items-center gap-1.5" data-rail="5"><span class="step-dot bg-slate-200 text-muted">5</span></div>
+      </div>
+      <div id="step-label" class="text-[11px] font-bold text-muted uppercase tracking-wider mt-2.5">Step 1 of 5, what you are accepting</div>
+    </div>
+
+    <!-- body -->
+    <div class="overflow-y-auto px-5 sm:px-7 py-6 flex-1">
+
+      <!-- STEP 1: scope -->
+      <div data-step="1">
+        <h3 class="font-extrabold text-base mb-1">Select what GCT Group is accepting</h3>
+        <p class="text-xs text-muted mb-5">The MVNO Light platform is the base. Add any value added services you want included.</p>
+
+        <label class="flex items-start gap-3 rounded-xl border-2 border-accent bg-accent/5 p-4 mb-4 cursor-not-allowed">
+          <input type="checkbox" checked disabled class="mt-0.5 w-4 h-4 accent-accent flex-none" />
+          <span class="min-w-0 flex-1">
+            <span class="font-bold text-sm block">MVNO Light platform, Digital Mobile model</span>
+            <span class="text-xs text-muted block mt-0.5">$20,000 once off, $5,000 per month minimum, 50/50 net profit share</span>
+            <span class="text-[11px] text-accent font-semibold block mt-1.5">Required, this is the base of the proposal</span>
+          </span>
+        </label>
+
+        <div class="text-[11px] font-bold text-muted uppercase tracking-wider mb-2.5">Value added services</div>
+        <div class="space-y-2 mb-5" id="vas-picker"></div>
+
+        <div class="rounded-xl bg-navy text-white p-5">
+          <div class="text-[11px] font-bold text-white/40 uppercase tracking-wider mb-3">Running total on published pricing</div>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <div class="text-[11px] text-white/50 mb-0.5">Once off</div>
+              <div class="text-2xl font-extrabold text-sky-400" id="tot-once">$20,000</div>
+            </div>
+            <div>
+              <div class="text-[11px] text-white/50 mb-0.5">Monthly minimum</div>
+              <div class="text-2xl font-extrabold text-sky-400" id="tot-month">$5,000</div>
+            </div>
+          </div>
+          <p class="text-[11px] text-white/50 mt-3.5 pt-3.5 border-t border-white/10" id="tot-note">
+            Services priced on request are excluded from the total and are scoped after a requirements session.
+          </p>
+        </div>
+      </div>
+
+      <!-- STEP 2: signatory -->
+      <div data-step="2" class="hidden">
+        <h3 class="font-extrabold text-base mb-1">Signatory details</h3>
+        <p class="text-xs text-muted mb-5">These details appear on the signing certificate.</p>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div class="sm:col-span-2">
+            <label class="block text-xs font-semibold text-muted mb-1.5" for="sg-name">Full name</label>
+            <input id="sg-name" type="text" autocomplete="name" required class="sg-req w-full border border-slate-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-muted mb-1.5" for="sg-position">Position</label>
+            <input id="sg-position" type="text" autocomplete="organization-title" required class="sg-req w-full border border-slate-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-muted mb-1.5" for="sg-company">Signing on behalf of</label>
+            <input id="sg-company" type="text" value="GCT Group" required class="sg-req w-full border border-slate-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-muted mb-1.5" for="sg-email">Email address</label>
+            <input id="sg-email" type="email" autocomplete="email" required class="sg-req w-full border border-slate-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20" />
+            <p class="text-[11px] text-muted mt-1.5">The verification code and the certificate go to this address.</p>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-muted mb-1.5" for="sg-mobile">Mobile number</label>
+            <input id="sg-mobile" type="tel" autocomplete="tel" placeholder="+234" class="w-full border border-slate-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20" />
+            <p class="text-[11px] text-muted mt-1.5">Optional.</p>
+          </div>
+        </div>
+        <div class="rounded-xl bg-surface border border-slate-200 p-4 mt-5">
+          <label class="flex items-start gap-2.5 text-sm cursor-pointer">
+            <input type="checkbox" id="sg-authority" class="mt-0.5 w-4 h-4 accent-accent flex-none" />
+            <span class="text-slate2 text-xs leading-relaxed">I confirm that I am authorised to accept this proposal on behalf of the organisation named above, and that the details I have given are correct.</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- STEP 3: verification -->
+      <div data-step="3" class="hidden">
+        <h3 class="font-extrabold text-base mb-1">Verify your identity</h3>
+        <p class="text-xs text-muted mb-5" id="verify-intro">Checking what verification this deployment supports.</p>
+
+        <!-- 3a: email OTP -->
+        <div id="verify-otp" class="hidden">
+          <div class="rounded-xl border border-slate-200 bg-surface p-5 mb-4">
+            <p class="text-sm text-slate2 mb-4">We will email a six digit code to <strong id="otp-target"></strong>. Enter it below to confirm the address is yours.</p>
+            <button id="otp-send" onclick="requestOtp()" class="bg-navy hover:bg-slate2 text-white font-semibold text-xs px-4 py-2.5 rounded-lg transition">Send verification code</button>
+            <span id="otp-status" class="text-xs text-muted ml-3"></span>
+          </div>
+          <div id="otp-entry" class="hidden">
+            <label class="block text-xs font-semibold text-muted mb-1.5" for="otp-code">Six digit code</label>
+            <input id="otp-code" type="text" inputmode="numeric" maxlength="6" autocomplete="one-time-code"
+                   class="w-full sm:w-48 border border-slate-300 rounded-lg px-3 py-3 text-lg tracking-[0.4em] text-center font-bold focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20" />
+            <button onclick="verifyOtp()" class="ml-0 sm:ml-3 mt-3 sm:mt-0 bg-accent hover:bg-sky-700 text-white font-semibold text-sm px-5 py-3 rounded-lg transition">Verify</button>
+            <p id="otp-error" class="text-xs text-danger font-semibold mt-2.5 hidden"></p>
+          </div>
+          <div id="otp-done" class="hidden rounded-xl border border-green-300 bg-green-50 p-4 mt-4">
+            <p class="text-sm font-semibold text-green-800">Email address verified.</p>
+          </div>
+        </div>
+
+        <!-- 3b: attestation, used when email delivery is not configured -->
+        <div id="verify-attest" class="hidden">
+          <div class="rounded-xl border-l-4 border-accent bg-accent/5 p-5 mb-5">
+            <p class="text-sm text-slate2 leading-relaxed mb-3">
+              You reached this document with the GCT Group access code, which is checked on the server before any
+              page is served. That access is recorded against this signature.
+            </p>
+            <p class="text-xs text-muted leading-relaxed">
+              Email code verification is available on this site but is not switched on for this deployment. See
+              the deployment notes for how to enable it.
+            </p>
+          </div>
+          <div class="rounded-xl bg-surface border border-slate-200 p-4">
+            <label class="flex items-start gap-2.5 text-sm cursor-pointer">
+              <input type="checkbox" id="attest-chk" class="mt-0.5 w-4 h-4 accent-accent flex-none" />
+              <span class="text-slate2 text-xs leading-relaxed">I confirm that I am the person named in the previous step, and that I am signing this proposal myself.</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="mt-5 rounded-xl bg-navy text-white p-4">
+          <div class="text-[11px] font-bold text-white/40 uppercase tracking-wider mb-2">What gets recorded</div>
+          <ul class="text-[11px] text-white/60 space-y-1.5">
+            <li class="tick">A SHA 256 hash of this document as displayed to you</li>
+            <li class="tick">The date and time of signature in UTC</li>
+            <li class="tick">Your name, position, organisation and email address</li>
+            <li class="tick">The services you selected in step 1</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- STEP 4: signature -->
+      <div data-step="4" class="hidden">
+        <h3 class="font-extrabold text-base mb-1">Sign</h3>
+        <p class="text-xs text-muted mb-5">Draw your signature, or type your name to sign.</p>
+
+        <div class="flex gap-2 mb-3">
+          <button id="tab-draw" onclick="sigMode('draw')" class="flex-1 text-xs font-bold py-2 rounded-lg bg-navy text-white transition">Draw</button>
+          <button id="tab-type" onclick="sigMode('type')" class="flex-1 text-xs font-bold py-2 rounded-lg bg-slate-200 text-muted transition">Type</button>
+        </div>
+
+        <div id="sig-draw-wrap" class="border-2 border-dashed border-slate-300 rounded-xl p-1.5 mb-2 bg-white">
+          <canvas id="sig-pad" class="sig-pad"></canvas>
+        </div>
+        <div id="sig-type-wrap" class="hidden mb-2">
+          <input id="sig-typed" type="text" placeholder="Type your full name"
+                 class="w-full border-2 border-dashed border-slate-300 rounded-xl px-4 py-6 text-2xl text-center focus:outline-none focus:border-accent"
+                 style="font-family:'Segoe Script','Brush Script MT',cursive" />
+        </div>
+        <div class="flex items-center justify-between mb-6">
+          <p class="text-[11px] text-muted" id="sig-hint">Sign inside the box using your finger, stylus or mouse.</p>
+          <button onclick="clearSig()" class="text-xs text-accent font-semibold hover:underline">Clear</button>
+        </div>
+
+        <div class="text-[11px] font-bold text-muted uppercase tracking-wider mb-2.5">Consent</div>
+        <div class="space-y-2.5">
+          <label class="flex items-start gap-2.5 text-xs cursor-pointer rounded-xl bg-surface border border-slate-200 p-3.5">
+            <input type="checkbox" class="consent mt-0.5 w-4 h-4 accent-accent flex-none" />
+            <span class="text-slate2 leading-relaxed">I have read the proposal, including the conditions precedent in Section 2 and the terms in Section 10.</span>
+          </label>
+          <label class="flex items-start gap-2.5 text-xs cursor-pointer rounded-xl bg-surface border border-slate-200 p-3.5">
+            <input type="checkbox" class="consent mt-0.5 w-4 h-4 accent-accent flex-none" />
+            <span class="text-slate2 leading-relaxed">I understand that acceptance is subject to signature of a full contract and scope of work, and that the two conditions precedent must be met before the project starts.</span>
+          </label>
+          <label class="flex items-start gap-2.5 text-xs cursor-pointer rounded-xl bg-surface border border-slate-200 p-3.5">
+            <input type="checkbox" class="consent mt-0.5 w-4 h-4 accent-accent flex-none" />
+            <span class="text-slate2 leading-relaxed">I agree that my electronic signature has the same effect as a handwritten signature, and I intend to be bound by it.</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- STEP 5: certificate -->
+      <div data-step="5" class="hidden">
+        <div id="cert-pending" class="py-12 text-center">
+          <div class="inline-block w-9 h-9 border-[3px] border-slate-200 border-t-accent rounded-full animate-spin mb-4"></div>
+          <p class="text-sm text-muted">Recording the signature.</p>
+        </div>
+        <div id="cert-body" class="hidden"></div>
+      </div>
+    </div>
+
+    <!-- footer -->
+    <div class="px-5 sm:px-7 py-4 border-t border-slate-200 bg-surface rounded-b-2xl flex items-center justify-between gap-3 flex-none">
+      <button id="btn-back" onclick="stepBack()" class="text-xs font-semibold text-muted hover:text-navy transition">Back</button>
+      <div class="flex items-center gap-2">
+        <button id="btn-cancel" onclick="closeSign()" class="text-xs font-semibold text-muted hover:text-navy transition px-2">Cancel</button>
+        <button id="btn-next" onclick="stepNext()" disabled
+                class="bg-danger hover:bg-red-700 text-white font-bold text-sm px-6 py-2.5 rounded-lg transition disabled:opacity-40 disabled:cursor-not-allowed">Continue</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =================================================================
+   GCT Group MVNO Light proposal, page runtime.
+   Four concerns: the confidentiality gate, the PDF export,
+   the signing ceremony, and the signing certificate.
+   ================================================================= */
+
+/* ---------- confidentiality gate ---------------------------------
+   The site is already gated server side by middleware.js. This gate
+   records who opened the document and takes the confidentiality
+   acknowledgement before the content becomes readable. */
+const CG_KEY = 'gct_mvnolight_ack';
+
+function cgReady() {
+  const ticked = [...document.querySelectorAll('.cg-chk')].every(c => c.checked);
+  const named  = document.getElementById('cg-name').value.trim().length > 1;
+  document.getElementById('cg-btn').disabled = !(ticked && named);
+}
+
+function acceptConfidentiality() {
+  const name = document.getElementById('cg-name').value.trim();
+  const record = { name, at: new Date().toISOString() };
+  try { sessionStorage.setItem(CG_KEY, JSON.stringify(record)); } catch (e) { /* private mode */ }
+  window.__accessRecord = record;
+  document.getElementById('confidentiality-gate').remove();
+  document.body.classList.remove('gated');
+}
+
+(function initGate() {
+  let prior = null;
+  try { prior = JSON.parse(sessionStorage.getItem(CG_KEY) || 'null'); } catch (e) { prior = null; }
+  if (prior && prior.name) {
+    window.__accessRecord = prior;
+    const g = document.getElementById('confidentiality-gate');
+    if (g) g.remove();
+    document.body.classList.remove('gated');
+    return;
+  }
+  document.querySelectorAll('.cg-chk').forEach(c => c.addEventListener('change', cgReady));
+  document.getElementById('cg-name').addEventListener('input', cgReady);
+})();
+
+/* ---------- reading progress ------------------------------------- */
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const max = h.scrollHeight - h.clientHeight;
+  const pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+  document.getElementById('progress').style.width = pct + '%';
+}, { passive: true });
+
+/* ---------- PDF export -------------------------------------------
+   The print stylesheet renders the whole document with the
+   interactive chrome removed and both signature blocks intact. */
+function downloadPdf() {
+  const gate = document.getElementById('confidentiality-gate');
+  if (gate) { alert('Please acknowledge the confidentiality terms first.'); return; }
+  window.print();
+}
+
+/* ---------- the services on offer -------------------------------- */
+const VAS = [
+  { id:'pwa',         name:'MVNO PWA platform',            detail:'$12,507 once off, $4,250 per month', once:12507, month:4250 },
+  { id:'esim',        name:'Travel eSIM',                  detail:'$3,200 once off, 50/50 margin share', once:3200,  month:0 },
+  { id:'bitdefender', name:'Bitdefender cybersecurity',    detail:'$2,000 set up, 50/50 revenue share',  once:2000,  month:0 },
+  { id:'xanite',      name:'Xanite CVM platform',          detail:'Platform fee, priced on request',     once:null,  month:null },
+  { id:'persaic',     name:'PersAIc personalisation',      detail:'Per active subscriber, priced on request', once:null, month:null },
+  { id:'cxg',         name:'CXG customer experience',      detail:'Scope beyond the standard service, priced on request', once:null, month:null },
+  { id:'mars',        name:'MARS revenue assurance',       detail:'Priced on request',                   once:null,  month:null },
+  { id:'vms',         name:'VMS voucher management',       detail:'Priced on request',                   once:null,  month:null }
+];
+
+(function buildPicker() {
+  document.getElementById('vas-picker').innerHTML = VAS.map(v => `
+    <label class="flex items-start gap-3 rounded-xl border border-slate-200 hover:border-accent/50 bg-white p-3.5 cursor-pointer transition">
+      <input type="checkbox" class="vas-chk mt-0.5 w-4 h-4 accent-accent flex-none" value="${v.id}" />
+      <span class="min-w-0 flex-1">
+        <span class="font-semibold text-sm block">${v.name}</span>
+        <span class="text-xs text-muted block mt-0.5">${v.detail}</span>
+      </span>
+    </label>`).join('');
+  document.querySelectorAll('.vas-chk').forEach(c => c.addEventListener('change', recalc));
+})();
+
+const money = n => '$' + n.toLocaleString('en-GB');
+
+function selectedVas() {
+  return [...document.querySelectorAll('.vas-chk:checked')]
+    .map(c => VAS.find(v => v.id === c.value));
+}
+
+function recalc() {
+  const picked = selectedVas();
+  let once = 20000, month = 5000, onRequest = 0;
+  picked.forEach(v => {
+    if (v.once === null) { onRequest++; return; }
+    once += v.once; month += v.month;
+  });
+  document.getElementById('tot-once').textContent = money(once);
+  document.getElementById('tot-month').textContent = money(month);
+  document.getElementById('tot-note').textContent = onRequest === 0
+    ? 'Excludes the per subscriber and per SIM charges in Section 7.3, and excludes VAT and withholding tax.'
+    : (onRequest === 1
+        ? 'One selected service is priced on request and sits outside this total.'
+        : onRequest + ' selected services are priced on request and sit outside this total.')
+      + ' Scoping follows a requirements session.';
+}
+
+/* ---------- signing ceremony ------------------------------------- */
+let step = 1;
+let otpEnabled = false;
+let otpVerified = false;
+let docHash = null;
+const STEP_LABELS = {
+  1:'Step 1 of 5, what you are accepting',
+  2:'Step 2 of 5, signatory details',
+  3:'Step 3 of 5, verify your identity',
+  4:'Step 4 of 5, sign and consent',
+  5:'Step 5 of 5, your signing certificate'
+};
+
+async function sha256Hex(text) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+  return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+async function openSign() {
+  if (document.getElementById('confidentiality-gate')) {
+    alert('Please acknowledge the confidentiality terms first.');
+    return;
+  }
+  const modal = document.getElementById('sign-modal');
+  modal.classList.remove('hidden');
+  modal.classList.add('flex');
+  document.body.style.overflow = 'hidden';
+
+  // Already signed in this session, so show the certificate again.
+  if (signedRecord) { step = 5; renderStep(); renderCertificate(); return; }
+
+  resetCeremony();
+  step = 1; renderStep(); recalc();
+
+  // Hash the document exactly as the signatory sees it.
+  if (!docHash) {
+    const text = document.getElementById('doc').innerText.replace(/\s+/g, ' ').trim();
+    try { docHash = await sha256Hex(text); }
+    catch (e) { docHash = 'unavailable, crypto.subtle blocked'; }
+  }
+  loadSignConfig();
+}
+
+/* Consent, verification and the signature are given afresh each time the
+   ceremony opens. Signatory details and the service selection are kept. */
+function resetCeremony() {
+  otpVerified = false;
+  document.querySelectorAll('.consent').forEach(c => { c.checked = false; });
+  const attest = document.getElementById('attest-chk');
+  if (attest) attest.checked = false;
+  document.getElementById('otp-entry').classList.add('hidden');
+  document.getElementById('otp-done').classList.add('hidden');
+  document.getElementById('otp-send').disabled = false;
+  document.getElementById('otp-status').textContent = '';
+  document.getElementById('otp-error').classList.add('hidden');
+  document.getElementById('otp-code').value = '';
+  sigMode('draw');
+  clearSig();
+}
+
+function closeSign() {
+  const modal = document.getElementById('sign-modal');
+  modal.classList.add('hidden');
+  modal.classList.remove('flex');
+  document.body.style.overflow = '';
+}
+
+/* Ask the server whether email verification is switched on. */
+async function loadSignConfig() {
+  try {
+    const r = await fetch('/api/config', { headers:{ 'Accept':'application/json' } });
+    const j = await r.json();
+    otpEnabled = j.otpEnabled === true;
+  } catch (e) { otpEnabled = false; }
+
+  document.getElementById('verify-otp').classList.toggle('hidden', !otpEnabled);
+  document.getElementById('verify-attest').classList.toggle('hidden', otpEnabled);
+  document.getElementById('verify-intro').textContent = otpEnabled
+    ? 'We send a six digit code to your email address to confirm it is yours.'
+    : 'This deployment verifies signatories through the site access code and a personal confirmation.';
+}
+
+function renderStep() {
+  document.querySelectorAll('[data-step]').forEach(el => {
+    el.classList.toggle('hidden', Number(el.dataset.step) !== step);
+  });
+  document.querySelectorAll('#step-rail [data-rail]').forEach(el => {
+    const n = Number(el.dataset.rail);
+    const dot = el.querySelector('.step-dot');
+    const done = n < step, now = n === step;
+    dot.className = 'step-dot ' + (done ? 'bg-accent text-white' : now ? 'bg-navy text-white' : 'bg-slate-200 text-muted');
+    dot.textContent = done ? '✓' : n;
+    const bar = el.querySelector('span.h-1');
+    if (bar) bar.className = 'h-1 flex-1 rounded ' + (done ? 'bg-accent' : 'bg-slate-200');
+  });
+  document.getElementById('step-label').textContent = STEP_LABELS[step];
+  document.getElementById('btn-back').style.visibility = (step === 1 || step === 5) ? 'hidden' : 'visible';
+  document.getElementById('btn-cancel').style.display = step === 5 ? 'none' : '';
+  const next = document.getElementById('btn-next');
+  next.textContent = step === 4 ? 'Sign the proposal' : step === 5 ? 'Done' : 'Continue';
+  if (step === 3) syncOtpTarget();
+  if (step === 4) setTimeout(initPad, 60);
+  gateNext();
+}
+
+function syncOtpTarget() {
+  const el = document.getElementById('otp-target');
+  if (el) el.textContent = document.getElementById('sg-email').value.trim() || 'your email address';
+}
+
+/* Validate the current step and enable or disable Continue. */
+function gateNext() {
+  const btn = document.getElementById('btn-next');
+  let ok = false;
+  if (step === 1) ok = true;
+  if (step === 2) {
+    const filled = [...document.querySelectorAll('.sg-req')].every(i => i.value.trim().length > 1);
+    const email  = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(document.getElementById('sg-email').value.trim());
+    ok = filled && email && document.getElementById('sg-authority').checked;
+  }
+  if (step === 3) ok = otpEnabled ? otpVerified : document.getElementById('attest-chk').checked;
+  if (step === 4) {
+    const consented = [...document.querySelectorAll('.consent')].every(c => c.checked);
+    ok = consented && hasSignature();
+  }
+  if (step === 5) ok = true;
+  btn.disabled = !ok;
+}
+
+document.getElementById('sign-modal').addEventListener('input', () => { syncOtpTarget(); gateNext(); });
+document.getElementById('sign-modal').addEventListener('change', gateNext);
+
+function stepBack() { if (step > 1) { step--; renderStep(); } }
+
+function stepNext() {
+  if (step === 5) { closeSign(); return; }
+  if (step === 4) { submitSignature(); step = 5; renderStep(); return; }
+  step++; renderStep();
+}
+
+/* ---------- email verification code ------------------------------ */
+async function requestOtp() {
+  const email = document.getElementById('sg-email').value.trim();
+  const btn = document.getElementById('otp-send');
+  const status = document.getElementById('otp-status');
+  btn.disabled = true; status.textContent = 'Sending.';
+  try {
+    const r = await fetch('/api/otp/request', {
+      method:'POST', headers:{ 'Content-Type':'application/json' },
+      body: JSON.stringify({ email })
+    });
+    const j = await r.json();
+    if (j.delivered) {
+      status.textContent = 'Code sent. It expires in 10 minutes.';
+      document.getElementById('otp-entry').classList.remove('hidden');
+      document.getElementById('otp-code').focus();
+    } else {
+      status.textContent = 'The code could not be sent. ' + (j.reason || '');
+    }
+  } catch (e) {
+    status.textContent = 'The code could not be sent.';
+  }
+  btn.disabled = false;
+}
+
+async function verifyOtp() {
+  const code = document.getElementById('otp-code').value.trim();
+  const err = document.getElementById('otp-error');
+  err.classList.add('hidden');
+  try {
+    const r = await fetch('/api/otp/verify', {
+      method:'POST', headers:{ 'Content-Type':'application/json' },
+      body: JSON.stringify({ code })
+    });
+    const j = await r.json();
+    if (j.ok) {
+      otpVerified = true;
+      document.getElementById('otp-entry').classList.add('hidden');
+      document.getElementById('otp-done').classList.remove('hidden');
+      document.getElementById('otp-send').disabled = true;
+      document.getElementById('otp-status').textContent = '';
+      gateNext();
+    } else {
+      err.textContent = j.error || 'That code was not recognised. Request a new one if it has expired.';
+      err.classList.remove('hidden');
+    }
+  } catch (e) {
+    err.textContent = 'The code could not be checked. Try again.';
+    err.classList.remove('hidden');
+  }
+}
+
+/* ---------- signature pad ---------------------------------------- */
+let padCtx = null, drawing = false, padDirty = false, padInit = false;
+let mode = 'draw';
+
+function initPad() {
+  const c = document.getElementById('sig-pad');
+  if (!c) return;
+  const ratio = window.devicePixelRatio || 1;
+  const rect = c.getBoundingClientRect();
+  if (rect.width === 0) return;
+  c.width = rect.width * ratio;
+  c.height = rect.height * ratio;
+  padCtx = c.getContext('2d');
+  padCtx.scale(ratio, ratio);
+  padCtx.lineWidth = 2.2;
+  padCtx.lineCap = 'round';
+  padCtx.lineJoin = 'round';
+  padCtx.strokeStyle = '#0F172A';
+  if (padInit) return;
+  padInit = true;
+
+  const pos = e => {
+    const r = c.getBoundingClientRect();
+    const p = e.touches ? e.touches[0] : e;
+    return [p.clientX - r.left, p.clientY - r.top];
+  };
+  const start = e => { e.preventDefault(); drawing = true; padCtx.beginPath(); padCtx.moveTo(...pos(e)); };
+  const move  = e => { if (!drawing) return; e.preventDefault(); padCtx.lineTo(...pos(e)); padCtx.stroke(); padDirty = true; gateNext(); };
+  const end   = () => { drawing = false; };
+
+  c.addEventListener('mousedown', start); c.addEventListener('mousemove', move);
+  window.addEventListener('mouseup', end);
+  c.addEventListener('touchstart', start, { passive:false });
+  c.addEventListener('touchmove', move, { passive:false });
+  c.addEventListener('touchend', end);
+}
+
+function sigMode(m) {
+  mode = m;
+  const draw = m === 'draw';
+  document.getElementById('sig-draw-wrap').classList.toggle('hidden', !draw);
+  document.getElementById('sig-type-wrap').classList.toggle('hidden', draw);
+  document.getElementById('tab-draw').className = 'flex-1 text-xs font-bold py-2 rounded-lg transition ' + (draw ? 'bg-navy text-white' : 'bg-slate-200 text-muted');
+  document.getElementById('tab-type').className = 'flex-1 text-xs font-bold py-2 rounded-lg transition ' + (draw ? 'bg-slate-200 text-muted' : 'bg-navy text-white');
+  document.getElementById('sig-hint').textContent = draw
+    ? 'Sign inside the box using your finger, stylus or mouse.'
+    : 'Your typed name is your signature. It carries the same effect.';
+  if (draw) setTimeout(initPad, 40);
+  gateNext();
+}
+
+function clearSig() {
+  if (padCtx) {
+    const c = document.getElementById('sig-pad');
+    padCtx.clearRect(0, 0, c.width, c.height);
+  }
+  padDirty = false;
+  document.getElementById('sig-typed').value = '';
+  gateNext();
+}
+
+function hasSignature() {
+  return mode === 'draw' ? padDirty : document.getElementById('sig-typed').value.trim().length > 1;
+}
+
+function signatureImage() {
+  if (mode === 'draw') {
+    const c = document.getElementById('sig-pad');
+    return c ? c.toDataURL('image/png') : null;
+  }
+  // Render the typed name to a canvas so the certificate carries an image either way.
+  const c = document.createElement('canvas');
+  c.width = 600; c.height = 150;
+  const x = c.getContext('2d');
+  x.fillStyle = '#0F172A';
+  x.font = "italic 52px 'Segoe Script','Brush Script MT',cursive";
+  x.textAlign = 'center'; x.textBaseline = 'middle';
+  x.fillText(document.getElementById('sig-typed').value.trim(), 300, 78);
+  return c.toDataURL('image/png');
+}
+</script>
+
+<script>
+/* ---------- submit the signature and render the certificate ------- */
+let signedRecord = null;
+
+function gatherPayload() {
+  const picked = selectedVas();
+  let once = 20000, month = 5000;
+  picked.forEach(v => { if (v.once !== null) { once += v.once; month += v.month; } });
+  return {
+    document: {
+      title: 'GCT Group MVNO Light Proposal',
+      version: '9 September 2026',
+      url: location.href,
+      hash: docHash
+    },
+    signatory: {
+      name:     document.getElementById('sg-name').value.trim(),
+      position: document.getElementById('sg-position').value.trim(),
+      company:  document.getElementById('sg-company').value.trim(),
+      email:    document.getElementById('sg-email').value.trim(),
+      mobile:   document.getElementById('sg-mobile').value.trim() || null
+    },
+    accepted: {
+      base: 'MVNO Light platform, Digital Mobile model. $20,000 once off, $5,000 per month minimum, 50/50 net profit share.',
+      services: picked.map(v => ({ id:v.id, name:v.name, terms:v.detail })),
+      totals: { onceOffUsd: once, monthlyMinimumUsd: month }
+    },
+    verification: {
+      method: otpEnabled ? 'email one time code' : 'site access code and signatory confirmation',
+      emailVerified: otpVerified
+    },
+    consent: {
+      readProposal: true,
+      understandsConditionsPrecedent: true,
+      electronicSignatureIntent: true
+    },
+    access: window.__accessRecord || null,
+    signature: { mode, image: signatureImage() },
+    client: { userAgent: navigator.userAgent, timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone }
+  };
+}
+
+async function submitSignature() {
+  const payload = gatherPayload();
+  document.getElementById('cert-pending').classList.remove('hidden');
+  document.getElementById('cert-body').classList.add('hidden');
+
+  let server = null;
+  try {
+    const r = await fetch('/api/sign', {
+      method:'POST', headers:{ 'Content-Type':'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if (r.ok) server = await r.json();
+  } catch (e) { server = null; }
+
+  // If the server could not be reached the certificate is still issued,
+  // marked as recorded in the browser only so the gap is visible.
+  if (!server) {
+    server = {
+      reference: 'GCT-ML-' + Date.now().toString(36).toUpperCase(),
+      signedAt: new Date().toISOString(),
+      recordedBy: 'browser',
+      delivered: false,
+      note: 'The signing service could not be reached. Email this certificate to edwardw@mvne.co.za.'
+    };
+  }
+  signedRecord = { ...payload, ...server };
+  renderCertificate();
+  showSignedOnPage();
+}
+
+function fmtWhen(iso) {
+  const d = new Date(iso);
+  const p = n => String(n).padStart(2, '0');
+  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  return `${d.getUTCDate()} ${months[d.getUTCMonth()]} ${d.getUTCFullYear()} at ${p(d.getUTCHours())}:${p(d.getUTCMinutes())} UTC`;
+}
+
+function renderCertificate() {
+  const r = signedRecord;
+  const services = r.accepted.services.length
+    ? r.accepted.services.map(s => `<li class="tick">${s.name}, ${s.terms}</li>`).join('')
+    : '<li class="text-muted text-xs">No value added services selected.</li>';
+
+  const warn = r.delivered === false ? `
+    <div class="rounded-xl border-l-4 border-danger bg-danger/5 p-4 mb-5">
+      <p class="text-xs text-slate2 leading-relaxed"><strong>Send this certificate on.</strong>
+      ${r.note || 'A copy could not be emailed automatically.'} Use the download button below and send the file
+      to <a href="mailto:edwardw@mvne.co.za" class="text-accent font-semibold">edwardw@mvne.co.za</a>.</p>
+    </div>` : `
+    <div class="rounded-xl border border-green-300 bg-green-50 p-4 mb-5">
+      <p class="text-xs text-green-900 leading-relaxed">A copy of this certificate has been emailed to MVNE and to
+      ${r.signatory.email}.</p>
+    </div>`;
+
+  document.getElementById('cert-pending').classList.add('hidden');
+  const body = document.getElementById('cert-body');
+  body.classList.remove('hidden');
+  body.innerHTML = `
+    <div class="text-center mb-6">
+      <div class="inline-grid place-items-center w-14 h-14 rounded-full bg-green-100 mb-3">
+        <svg class="w-7 h-7 text-green-700" fill="none" stroke="currentColor" stroke-width="2.6" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+      </div>
+      <h3 class="font-extrabold text-lg">Proposal signed</h3>
+      <p class="text-xs text-muted mt-1">Reference ${r.reference}</p>
+    </div>
+    ${warn}
+    <div class="rounded-xl border border-slate-200 overflow-hidden mb-5">
+      <table class="doc">
+        <tbody>
+          <tr><td style="width:38%"><strong>Signed by</strong></td><td>${r.signatory.name}, ${r.signatory.position}</td></tr>
+          <tr><td><strong>On behalf of</strong></td><td>${r.signatory.company}</td></tr>
+          <tr><td><strong>Email</strong></td><td>${r.signatory.email}</td></tr>
+          ${r.signatory.mobile ? `<tr><td><strong>Mobile</strong></td><td>${r.signatory.mobile}</td></tr>` : ''}
+          <tr><td><strong>Signed at</strong></td><td>${fmtWhen(r.signedAt)}</td></tr>
+          <tr><td><strong>Verification</strong></td><td>${r.verification.method}</td></tr>
+          <tr><td><strong>Document</strong></td><td>${r.document.title}, version ${r.document.version}</td></tr>
+          <tr><td><strong>Document hash</strong></td><td style="word-break:break-all;font-size:.6875rem;font-family:ui-monospace,monospace">${r.document.hash}</td></tr>
+          ${r.recordSignature ? `<tr><td><strong>Record signature</strong></td><td style="word-break:break-all;font-size:.6875rem;font-family:ui-monospace,monospace">${r.recordSignature}</td></tr>` : ''}
+        </tbody>
+      </table>
+    </div>
+    <div class="rounded-xl bg-surface border border-slate-200 p-5 mb-5">
+      <div class="text-[11px] font-bold text-muted uppercase tracking-wider mb-3">Accepted</div>
+      <p class="text-xs text-slate2 mb-3 leading-relaxed">${r.accepted.base}</p>
+      <ul class="space-y-1.5 text-xs text-slate2">${services}</ul>
+      <div class="grid grid-cols-2 gap-4 mt-4 pt-4 border-t border-slate-200">
+        <div><div class="text-[11px] text-muted">Once off</div><div class="font-extrabold text-lg">${money(r.accepted.totals.onceOffUsd)}</div></div>
+        <div><div class="text-[11px] text-muted">Monthly minimum</div><div class="font-extrabold text-lg">${money(r.accepted.totals.monthlyMinimumUsd)}</div></div>
+      </div>
+      <p class="text-[11px] text-muted mt-3">Excludes services priced on request, the per subscriber and per SIM
+      charges in Section 7.3, VAT and withholding tax.</p>
+    </div>
+    <div class="rounded-xl border border-slate-200 p-5 mb-5 text-center">
+      <div class="text-[11px] font-bold text-muted uppercase tracking-wider mb-3">Signature</div>
+      <img src="${r.signature.image}" alt="Signature of ${r.signatory.name}" class="max-h-24 mx-auto" />
+      <div class="text-xs text-muted mt-2 pt-2 border-t border-slate-200">${r.signatory.name}</div>
+    </div>
+    <div class="rounded-xl border-l-4 border-accent bg-accent/5 p-4 mb-5">
+      <p class="text-xs text-slate2 leading-relaxed">Acceptance remains subject to the two conditions precedent in
+      Section 2 and to signature of a full contract and scope of work.</p>
+    </div>
+    <div class="flex flex-wrap gap-2.5">
+      <button onclick="downloadCertificate()" class="bg-navy hover:bg-slate2 text-white font-semibold text-xs px-4 py-2.5 rounded-lg transition">Download certificate</button>
+      <button onclick="downloadRecordJson()" class="bg-slate-200 hover:bg-slate-300 text-navy font-semibold text-xs px-4 py-2.5 rounded-lg transition">Download data file</button>
+      <button onclick="emailCertificate()" class="bg-slate-200 hover:bg-slate-300 text-navy font-semibold text-xs px-4 py-2.5 rounded-lg transition">Email to MVNE</button>
+    </div>`;
+}
+
+/* Mirror the certificate into Section 11 so it prints with the document. */
+function showSignedOnPage() {
+  const r = signedRecord;
+  document.getElementById('sign-cta').classList.add('hidden');
+  const el = document.getElementById('signed-record');
+  el.classList.remove('hidden');
+  el.innerHTML = `
+    <div class="rounded-2xl border-2 border-green-400 bg-green-50 p-6">
+      <div class="flex flex-wrap items-start justify-between gap-4 mb-5">
+        <div>
+          <div class="inline-flex items-center gap-2 bg-green-600 text-white rounded-full px-3 py-1 text-[11px] font-bold mb-2.5">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            Signed online
+          </div>
+          <h3 class="font-extrabold text-lg">Accepted by ${r.signatory.name}</h3>
+          <p class="text-xs text-muted mt-0.5">${r.signatory.position}, ${r.signatory.company}</p>
+        </div>
+        <img src="${r.signature.image}" alt="Signature of ${r.signatory.name}" class="max-h-16" />
+      </div>
+      <div class="grid sm:grid-cols-3 gap-4 text-xs">
+        <div><div class="font-bold text-muted uppercase tracking-wider text-[10px] mb-1">Reference</div><div class="text-slate2">${r.reference}</div></div>
+        <div><div class="font-bold text-muted uppercase tracking-wider text-[10px] mb-1">Signed at</div><div class="text-slate2">${fmtWhen(r.signedAt)}</div></div>
+        <div><div class="font-bold text-muted uppercase tracking-wider text-[10px] mb-1">Verification</div><div class="text-slate2">${r.verification.method}</div></div>
+      </div>
+      <div class="mt-4 pt-4 border-t border-green-300">
+        <div class="font-bold text-muted uppercase tracking-wider text-[10px] mb-1">Document hash, SHA 256</div>
+        <div class="text-[10px] text-slate2" style="word-break:break-all;font-family:ui-monospace,monospace">${r.document.hash}</div>
+      </div>
+      <p class="text-xs text-slate2 mt-4 pt-4 border-t border-green-300 leading-relaxed">
+        Acceptance remains subject to the two conditions precedent in Section 2 and to signature of a full
+        contract and scope of work.
+      </p>
+    </div>`;
+}
+
+/* ---------- certificate files ------------------------------------ */
+function saveBlob(name, type, content) {
+  const url = URL.createObjectURL(new Blob([content], { type }));
+  const a = document.createElement('a');
+  a.href = url; a.download = name;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 4000);
+}
+
+function certificateHtml() {
+  const r = signedRecord;
+  const services = r.accepted.services.length
+    ? r.accepted.services.map(s => `<li>${s.name}, ${s.terms}</li>`).join('')
+    : '<li>No value added services selected.</li>';
+  return `<!doctype html><html lang="en-GB"><head><meta charset="utf-8">
+<title>Signing certificate ${r.reference}</title><style>
+body{font-family:Inter,Helvetica,Arial,sans-serif;color:#0F172A;max-width:760px;margin:32px auto;padding:0 24px;line-height:1.55}
+h1{font-size:20px;margin:0 0 4px} .sub{color:#64748B;font-size:12px;margin-bottom:24px}
+.bar{width:56px;height:4px;background:#0369A1;border-radius:2px;margin:10px 0 22px}
+table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:22px}
+th{background:#0F172A;color:#fff;text-align:left;padding:8px 10px;font-size:10px;text-transform:uppercase;letter-spacing:.06em}
+td{padding:8px 10px;border-bottom:1px solid #E2E8F0;vertical-align:top}
+td.k{width:36%;font-weight:600} .mono{font-family:ui-monospace,monospace;font-size:10px;word-break:break-all}
+.box{border:1px solid #E2E8F0;border-radius:10px;padding:18px;margin-bottom:22px}
+.lab{font-size:10px;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+ul{margin:0;padding-left:18px;font-size:12px} .note{font-size:11px;color:#64748B;border-top:1px solid #E2E8F0;padding-top:14px}
+img.sig{max-height:90px;display:block;margin:0 auto}
+</style></head><body>
+<h1>Signing certificate</h1>
+<div class="sub">Reference ${r.reference}</div>
+<div class="bar"></div>
+<table><tbody>
+<tr><td class="k">Document</td><td>${r.document.title}, version ${r.document.version}</td></tr>
+<tr><td class="k">Signed by</td><td>${r.signatory.name}, ${r.signatory.position}</td></tr>
+<tr><td class="k">On behalf of</td><td>${r.signatory.company}</td></tr>
+<tr><td class="k">Email</td><td>${r.signatory.email}</td></tr>
+${r.signatory.mobile ? `<tr><td class="k">Mobile</td><td>${r.signatory.mobile}</td></tr>` : ''}
+<tr><td class="k">Signed at</td><td>${fmtWhen(r.signedAt)}</td></tr>
+<tr><td class="k">Verification method</td><td>${r.verification.method}</td></tr>
+<tr><td class="k">Document hash, SHA 256</td><td class="mono">${r.document.hash}</td></tr>
+${r.recordSignature ? `<tr><td class="k">Record signature, HMAC SHA 256</td><td class="mono">${r.recordSignature}</td></tr>` : ''}
+<tr><td class="k">Recorded by</td><td>${r.recordedBy || 'MVNE signing service'}</td></tr>
+</tbody></table>
+<div class="box"><div class="lab">Accepted</div>
+<p style="font-size:12px;margin:0 0 10px">${r.accepted.base}</p>
+<ul>${services}</ul>
+<p style="font-size:12px;margin:14px 0 0"><strong>Once off ${money(r.accepted.totals.onceOffUsd)}.
+Monthly minimum ${money(r.accepted.totals.monthlyMinimumUsd)}.</strong></p>
+<p class="note" style="margin-top:12px">Excludes services priced on request, the per subscriber and per SIM charges
+in Section 7.3, VAT and withholding tax.</p></div>
+<div class="box"><div class="lab">Signature</div>
+<img class="sig" src="${r.signature.image}" alt="Signature of ${r.signatory.name}">
+<p style="text-align:center;font-size:11px;color:#64748B;margin:8px 0 0">${r.signatory.name}</p></div>
+<p class="note">Acceptance remains subject to the two conditions precedent in Section 2 of the proposal and to
+signature of a full contract and scope of work. Prepared by MVNE (Pty) Ltd, 15 6th Street, Parkhurst,
+Johannesburg. Questions go to edwardw@mvne.co.za.</p>
+</body></html>`;
+}
+
+function downloadCertificate() {
+  saveBlob(`GCT signing certificate ${signedRecord.reference}.html`, 'text/html', certificateHtml());
+}
+
+function downloadRecordJson() {
+  saveBlob(`GCT signing record ${signedRecord.reference}.json`, 'application/json',
+           JSON.stringify(signedRecord, null, 2));
+}
+
+function emailCertificate() {
+  const r = signedRecord;
+  const body = [
+    'MVNO Light proposal, signed online.', '',
+    'Reference: ' + r.reference,
+    'Signed by: ' + r.signatory.name + ', ' + r.signatory.position,
+    'On behalf of: ' + r.signatory.company,
+    'Email: ' + r.signatory.email,
+    'Signed at: ' + fmtWhen(r.signedAt),
+    'Verification: ' + r.verification.method,
+    'Document hash: ' + r.document.hash,
+    r.recordSignature ? 'Record signature: ' + r.recordSignature : '',
+    '', 'Accepted:', r.accepted.base,
+    ...r.accepted.services.map(s => '  ' + s.name + ', ' + s.terms),
+    '', 'Once off: ' + money(r.accepted.totals.onceOffUsd),
+    'Monthly minimum: ' + money(r.accepted.totals.monthlyMinimumUsd),
+    '', 'The signature image is in the downloaded certificate file.'
+  ].filter(Boolean).join('\n');
+  window.location.href = 'mailto:edwardw@mvne.co.za'
+    + '?subject=' + encodeURIComponent('GCT Group MVNO Light proposal signed, ' + r.reference)
+    + '&body=' + encodeURIComponent(body);
+}
+
+/* Keyboard: Escape closes the ceremony unless it has completed. */
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && step !== 5) {
+    const m = document.getElementById('sign-modal');
+    if (!m.classList.contains('hidden')) closeSign();
+  }
+});
+
+window.addEventListener('resize', () => { if (step === 4 && mode === 'draw') initPad(); });
+recalc();
+</script>
+</body>
+</html>

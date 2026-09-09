@@ -1,0 +1,39 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>GCT Proposal · Access</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0B4F8A;--teal:#00D9C0;--ink:#0B1220;--mut:#56616F;--line:#E2E7ED}
+*{box-sizing:border-box;margin:0;padding:0} html,body{height:100%}
+body{font-family:Inter,system-ui,sans-serif;color:var(--ink);display:flex;align-items:center;
+ justify-content:center;padding:24px;background:
+ radial-gradient(90% 130% at 88% -12%,#0E2C50 0%,rgba(14,44,80,0) 55%),
+ linear-gradient(118deg,#04101F 0%,#081527 52%,#0B2440 100%)}
+.box{width:100%;max-width:392px;background:#fff;border:1px solid var(--line);border-radius:18px;
+ padding:36px 32px 28px;box-shadow:0 30px 80px -20px rgba(0,0,0,.6)}
+.bar{width:52px;height:4px;border-radius:2px;background:var(--teal);margin-bottom:22px}
+h1{font-family:'Plus Jakarta Sans',sans-serif;font-size:19px;font-weight:700;margin-bottom:7px;letter-spacing:-.02em}
+.sub{color:var(--mut);font-size:13px;line-height:1.5;margin-bottom:20px}
+label{display:block;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#8893A1;margin-bottom:7px}
+input{width:100%;padding:13px 15px;border-radius:11px;border:1px solid var(--line);background:#F6F8FA;
+ font-size:15px;outline:none;letter-spacing:1px;font-family:inherit}
+input:focus{border-color:var(--navy);background:#fff;box-shadow:0 0 0 3px rgba(11,79,138,.14)}
+button{width:100%;margin-top:12px;padding:13px;border:0;border-radius:11px;cursor:pointer;
+ background:linear-gradient(135deg,var(--navy),#0A3C6B);color:#fff;font-weight:700;font-size:15px;font-family:inherit}
+button:hover{opacity:.92}
+.err{color:#B3223A;font-size:12.5px;margin-top:10px;font-weight:600}
+.foot{margin-top:18px;padding-top:14px;border-top:1px solid var(--line);font-size:11px;color:#7A867D;line-height:1.5}
+</style></head><body>
+<form class="box" action="/unlock" method="get">
+ <div class="bar"></div>
+ <h1>GCT Proposal</h1>
+ <p class="sub">This document is confidential. Enter the access code to continue.</p>
+ <label for="pin">Access code</label>
+ <input id="pin" name="pin" type="password" autocomplete="off" autofocus required>
+ <button type="submit">View document</button>
+ <p class="err" id="e" style="display:none">That code was not recognised.</p>
+ <p class="foot">Prepared by MVNE. If you need the code, contact your MVNE contact.</p>
+</form>
+<script>if(location.search.indexOf('e=1')>-1)document.getElementById('e').style.display='block';</script>
+</body></html>

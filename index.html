@@ -4,6 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GCT Group | DSG & MVNE Product Suite 2026</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="description" content="Curated suite of DSG and MVNE digital products and transformation services for GCT Group, Nigeria. Confidential." />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="GCT Group | DSG and MVNE Product Suite" />
+  <meta property="og:description" content="Curated suite of digital products and transformation services for GCT Group. Confidential." />
+  <meta property="og:image" content="og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="og-image.png" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <script>
@@ -75,6 +86,7 @@
           </div>
         </div>
 
+        <a href="/mvno-light" class="nav-link text-sky-400 hover:text-sky-300">MVNO Light</a>
         <button onclick="showView('contact')" class="nav-link" data-nav="contact">Contact Us</button>
 
         <button onclick="openAcceptModal()" class="bg-danger hover:bg-red-700 text-white font-bold text-xs px-4 py-2 rounded-lg transition">Accept Proposals</button>
@@ -226,6 +238,19 @@
             <span class="text-accent text-xs font-semibold">View &rarr;</span>
           </div>
         </div>
+
+        <a href="/mvno-light" class="product-card bg-accent/15 border border-accent/40 rounded-2xl p-6 group no-underline">
+          <div class="inline-block bg-danger text-white text-xs font-bold rounded-full px-2.5 py-0.5 mb-4">Standalone proposal</div>
+          <h2 class="text-lg font-extrabold text-white mb-1">MVNO Light</h2>
+          <p class="text-white/60 text-xs mb-5 leading-relaxed">Digital Mobile model with all value added services, priced and signable on its own. Includes online signing and a PDF for signature.</p>
+          <div class="border-t border-white/20 pt-4 flex items-end justify-between mt-auto">
+            <div>
+              <div class="text-2xl font-extrabold text-sky-400">$20,000</div>
+              <div class="text-xs text-white/50 mt-0.5">once off + $5,000/month + 50/50 share</div>
+            </div>
+            <span class="text-sky-400 text-xs font-semibold">Open &rarr;</span>
+          </div>
+        </a>
 
       </div>
     </div>
@@ -1215,7 +1240,7 @@
             <div>
               <label class="block text-xs text-muted mb-1">Signature</label>
               <div class="border border-dashed border-slate-300 rounded-lg p-3 text-center cursor-pointer hover:border-accent transition" onclick="document.getElementById('sig-dsg').click()">
-                <img id="sig-dsg-preview" src="" alt="" class="max-h-16 mx-auto mb-1" style="display:none" />
+                <img id="sig-dsg-preview" alt="" class="max-h-16 mx-auto mb-1" style="display:none" />
                 <p id="sig-dsg-label" class="text-xs text-slate-400">Click to upload signature image</p>
                 <input type="file" id="sig-dsg" accept="image/*" class="hidden" onchange="previewSig('sig-dsg')" />
               </div>
@@ -1241,7 +1266,7 @@
             <div>
               <label class="block text-xs text-muted mb-1">Signature</label>
               <div class="border border-dashed border-slate-300 rounded-lg p-3 text-center cursor-pointer hover:border-accent transition" onclick="document.getElementById('sig-gct').click()">
-                <img id="sig-gct-preview" src="" alt="" class="max-h-16 mx-auto mb-1" style="display:none" />
+                <img id="sig-gct-preview" alt="" class="max-h-16 mx-auto mb-1" style="display:none" />
                 <p id="sig-gct-label" class="text-xs text-slate-400">Click to upload signature image</p>
                 <input type="file" id="sig-gct" accept="image/*" class="hidden" onchange="previewSig('sig-gct')" />
               </div>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="MVNE">
+  <rect width="64" height="64" rx="14" fill="#0F172A"/>
+  <text x="32" y="38" text-anchor="middle" font-family="Inter, Helvetica, Arial, sans-serif"
+        font-size="24" font-weight="800" fill="#FFFFFF" letter-spacing="-1">DSG</text>
+  <rect x="22" y="46" width="20" height="4" rx="2" fill="#0369A1"/>
+</svg>

@@ -1,0 +1,7 @@
+{
+  "name": "gct-proposal",
+  "private": true,
+  "dependencies": {
+    "@vercel/edge": "^1.2.2"
+  }
+}
