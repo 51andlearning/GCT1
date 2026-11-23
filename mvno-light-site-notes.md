@@ -23,9 +23,28 @@ navigation and as a card in the overview grid.
 
 **Layer one, the server side gate.** `middleware.js` runs on every request. A
 visitor without the access cookie is redirected to `/gate` and no page HTML is
-served to them. The access code is `gct2026`, checked case insensitively. The
+served to them. The access code is **GCT2026**, checked case insensitively. The
 cookie lasts 30 days. Only `/gate`, the favicons and `og-image.png` are served
 before authentication, so link previews still render.
+
+The gate page carries GCT Group branding, using the navy and gold taken from
+the GCT logo, and names MVNE as the preparer.
+
+How the gate is hardened:
+
+| Measure | What it prevents |
+|---------|------------------|
+| The code is posted in a form body, never a query string | A code in a URL lands in server logs, browser history and the Referer header sent to the next site |
+| The code is compared in constant time | A byte by byte timing difference lets a patient caller recover the code one character at a time |
+| Six attempts per address per minute, then a one minute refusal | Turns an automated guessing run into a slow one. The window opens on the first failure and is never extended, and a locked window refuses the correct code too |
+| The limiter never fails the route | If anything in it throws, the request is allowed rather than erroring. A gate that 500s is a gate nobody can pass |
+| Cookie named `__Host-gct_access`, with HttpOnly, Secure, Path=/ and SameSite=Lax | The `__Host-` prefix binds the cookie to this exact host over HTTPS, so no sibling or parent host can plant one |
+| The client address is read from `x-vercel-forwarded-for` | Vercel's edge sets that header itself. `x-forwarded-for` can be appended to by the caller, which would let an attacker choose its own rate limit bucket |
+| Gate, unlock and API responses are sent with `Cache-Control: no-store` | Stops a shared cache holding a response meant for one visitor |
+
+Changing the access code means setting `GATE_CODE` in the Vercel project, with
+no deploy needed. Rotating `TOKEN` in `middleware.js` signs out every session
+already issued.
 
 **Layer two, the confidentiality popup.** The MVNO Light page holds the document
 behind a popup until the reader confirms they are authorised by GCT Group, agrees
@@ -83,7 +102,8 @@ Set these in the Vercel project under Settings, then Environment Variables.
 
 | Variable | Effect if unset | Effect if set |
 |----------|-----------------|---------------|
-| `SIGNING_SECRET` | A built in fallback is used, so records signed before the variable is set cannot be verified afterwards | Records stay verifiable across deployments. Set this before the proposal goes to GCT Group |
+| `GATE_CODE` | The access code is GCT2026 | The access code becomes this value, with no deploy needed |
+| `SIGNING_SECRET` | **Signing is refused with a 503.** There is no fallback secret, because a fallback is a secret that sits in the repository | Signing works and records stay verifiable across deployments. Set this before the proposal goes to GCT Group |
 | `RESEND_API_KEY` | Email verification is off and the ceremony falls back to a personal confirmation. Certificates are not emailed | Email verification is required before signing, and certificates are emailed |
 | `SIGN_FROM_EMAIL` | Same as above, both this and the API key are needed | The from address on outbound email, on a domain verified with the mail provider |
 | `SIGN_NOTIFY_EMAIL` | Certificates go to edwardw@mvne.co.za | Certificates go to this address instead |
@@ -96,6 +116,26 @@ step 3 accordingly, so no page change is needed when the variables are added.
 `to`, `subject`, `html` and `attachments`. Check that against the current Resend
 documentation before switching it on, since the request shape has not been tested
 against the live service. Everything else is covered by the tests.
+
+## Security headers
+
+`vercel.json` serves these on every response:
+
+| Header | Value |
+|--------|-------|
+| Content-Security-Policy | `default-src 'self'`, with scripts limited to the page itself and the Tailwind CDN, styles to the page and Google Fonts, connections to this origin only, and `frame-ancestors 'none'` |
+| Strict-Transport-Security | Two years, including subdomains |
+| X-Content-Type-Options | nosniff |
+| X-Frame-Options | DENY |
+| Referrer-Policy | no-referrer |
+| Permissions-Policy | Camera, microphone, location, payment and USB all refused |
+| X-Robots-Tag | noindex, nofollow, noarchive, nosnippet |
+| Cross-Origin-Opener-Policy | same-origin |
+
+The policy still allows inline scripts, because both pages use inline handlers
+and inline script blocks. `connect-src 'self'` is the line doing the most work:
+it means a script injected into a page cannot post what it reads to another
+host.
 
 ## The PDF for signature
 
@@ -117,10 +157,12 @@ its certificate details print inside Section 11.
 ./tests/run.sh
 ```
 
-26 tests cover the gate, the signing API, and the one time code flow, including
-tamper detection on the verification token, address matching, code expiry and
-reproducibility of the record signature. The tests stub the Vercel import and
-the mail provider, so they need no network and no Vercel runtime.
+35 tests cover the gate, the signing API, and the one time code flow. They
+include the rate limiter, refusal of a code sent in a query string, tamper
+detection on the verification token, address matching, code expiry,
+reproducibility of the record signature, and the refusal to sign at all when
+`SIGNING_SECRET` is unset. The tests stub the Vercel import and the mail
+provider, so they need no network and no Vercel runtime.
 
 ## Known limits
 
@@ -130,5 +172,9 @@ the mail provider, so they need no network and no Vercel runtime.
 - The access code is shared rather than per person, so the gate identifies GCT
   Group rather than an individual. The confidentiality popup and the signing
   steps carry the individual detail.
+- Attempts are counted in memory, per edge instance, because an edge middleware
+  has no shared store. A caller spread across many Vercel regions gets more than
+  six attempts a minute in total. It still turns a fast guessing run into a slow
+  one, and the code is not short.
 - `crypto.subtle` is needed for the document hash and is only available over
   HTTPS or on localhost. On the Vercel deployment this is always the case.

@@ -1,12 +1,23 @@
-import mw from './mw.mjs';
+process.env.SIGNING_SECRET = 'test-signing-secret-for-the-suite';
+const mw = (await import('./mw.mjs')).default;
 
-const AUTH = 'gctproposal_auth=gct-propos-dfbaf017650ea233';
-const mk = (path, { method = 'GET', cookie = '', body } = {}) =>
-  new Request('https://example.test' + path, {
-    method,
-    headers: { ...(cookie ? { cookie } : {}), ...(body ? { 'Content-Type': 'application/json' } : {}) },
-    ...(body ? { body: JSON.stringify(body) } : {})
-  });
+const AUTH = '__Host-gct_access=gct-2026-a41f7c08b9d2e653';
+const mk = (path, { method = 'GET', cookie = '', body, form, ip } = {}) => {
+  const headers = { ...(cookie ? { cookie } : {}) };
+  if (ip) headers['x-vercel-forwarded-for'] = ip;
+  if (body) headers['Content-Type'] = 'application/json';
+  const init = { method, headers };
+  if (body) init.body = JSON.stringify(body);
+  if (form) {
+    const fd = new FormData();
+    for (const [k, v] of Object.entries(form)) fd.append(k, v);
+    init.body = fd;
+  }
+  return new Request('https://example.test' + path, init);
+};
+// Post the access code the way the gate form does.
+const unlock = (code, ip = '203.0.113.9') =>
+  mk('/unlock', { method: 'POST', form: { code }, ip });
 
 const HASH = 'a'.repeat(64);
 const goodBody = {
@@ -35,12 +46,43 @@ await t('og image is public for link previews', async () => {
   eq((await mw(mk('/og-image.png'))).headers.get('x-mw'), 'next', 'passthrough');
 });
 await t('correct code sets the cookie', async () => {
-  const r = await mw(mk('/unlock?pin=GCT2026'));
-  eq(r.status, 302, 'status');
-  if (!/gctproposal_auth=gct-propos/.test(r.headers.get('set-cookie'))) throw new Error('no auth cookie');
+  const r = await mw(unlock('GCT2026'));
+  eq(r.status, 303, 'status');
+  const c = r.headers.get('set-cookie') || '';
+  if (!/__Host-gct_access=/.test(c)) throw new Error('no auth cookie');
+  for (const flag of ['HttpOnly', 'Secure', 'Path=/', 'SameSite=Lax']) {
+    if (!c.includes(flag)) throw new Error('cookie missing ' + flag);
+  }
+});
+await t('the code is accepted in any case', async () => {
+  eq((await mw(unlock('gct2026', '203.0.113.10'))).status, 303, 'lower case');
+  eq((await mw(unlock('  GcT2026 ', '203.0.113.11'))).status, 303, 'padded and mixed');
 });
 await t('wrong code bounces back to the gate', async () => {
-  eq((await mw(mk('/unlock?pin=nope'))).headers.get('location'), '/gate?e=1', 'location');
+  eq((await mw(unlock('nope', '203.0.113.12'))).headers.get('location'), '/gate?e=1', 'location');
+});
+await t('the code is never accepted from the query string', async () => {
+  const r = await mw(mk('/unlock?pin=GCT2026'));
+  eq(r.headers.get('location'), '/gate', 'GET is sent back to the gate');
+  if (r.headers.get('set-cookie')) throw new Error('a GET must never set the cookie');
+});
+await t('an empty code is refused', async () => {
+  eq((await mw(unlock('', '203.0.113.13'))).headers.get('location'), '/gate?e=1', 'location');
+});
+await t('repeated wrong codes from one address are rate limited', async () => {
+  const ip = '198.51.100.7';
+  let limited = false;
+  for (let i = 0; i < 9; i++) {
+    const r = await mw(unlock('wrong' + i, ip));
+    if (r.headers.get('location') === '/gate?e=2') { limited = true; break; }
+  }
+  if (!limited) throw new Error('never rate limited after nine attempts');
+  // A locked window refuses the correct code too, otherwise it is theatre.
+  const r = await mw(unlock('GCT2026', ip));
+  eq(r.headers.get('location'), '/gate?e=2', 'correct code during lockout');
+});
+await t('the limit is per address, so one attacker cannot lock everyone out', async () => {
+  eq((await mw(unlock('GCT2026', '198.51.100.200'))).status, 303, 'a different address still works');
 });
 await t('authenticated page passes through', async () => {
   eq((await mw(mk('/mvno-light', { cookie: AUTH }))).headers.get('x-mw'), 'next', 'passthrough');
@@ -53,6 +95,7 @@ await t('api requires authentication', async () => {
 await t('config reports otp off when mail is unconfigured', async () => {
   const j = await (await mw(mk('/api/config', { cookie: AUTH }))).json();
   eq(j.otpEnabled, false, 'otpEnabled');
+  eq(j.signingEnabled, true, 'signingEnabled with a secret');
 });
 await t('sign rejects GET', async () => {
   eq((await mw(mk('/api/sign', { cookie: AUTH }))).status, 405, 'status');
@@ -83,7 +126,7 @@ await t('the record signature is reproducible and tamper evident', async () => {
   const again = await (await mw(mk('/api/sign', { method: 'POST', cookie: AUTH, body: goodBody }))).json();
   // A different signedAt means a different signature, so recompute over the returned fields.
   const { createHmac } = await import('node:crypto');
-  const SECRET = 'gct-mvnolight-fallback-secret-change-me';
+  const SECRET = process.env.SIGNING_SECRET;
   const canonical = ['gct-mvno-light-v1', HASH, 'Adaeze Okonkwo', 'CCO', 'GCT Group',
     'a.okonkwo@example.ng', signed.signedAt, 'site access code and signatory confirmation',
     'pwa', '32507', '9250'].join('|');

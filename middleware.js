@@ -8,17 +8,26 @@
    Added 2026-08-31, signing API added 2026-09-09. */
 import { next } from "@vercel/edge";
 
-const PIN = "gct2026";
-const TOKEN = "gct-propos-dfbaf017650ea233"; // opaque session token, set only on a correct code
-const COOKIE = "gctproposal_auth";
+/* The access code is deliberately shareable: Edward gives it to GCT Group.
+   GATE_CODE overrides it without a deploy. Compared case insensitively and in
+   constant time, so the code cannot be recovered a character at a time. */
+const PIN = (process.env.GATE_CODE || "GCT2026").trim().toLowerCase();
 
-/* Signs the OTP challenge and the signing record. Set SIGNING_SECRET in
-   the Vercel project so records stay verifiable across deployments. */
-const SECRET = process.env.SIGNING_SECRET || "gct-mvnolight-fallback-secret-change-me";
+/* The session cookie. The __Host- prefix binds it to this exact host over
+   HTTPS with Path=/, so no sibling or parent host can plant one. Rotating
+   TOKEN signs every existing session out. */
+const COOKIE = "__Host-gct_access";
+const TOKEN = "gct-2026-a41f7c08b9d2e653";
+
+/* Signs the one time codes and the signing records. Unlike the access code
+   this is a real secret, so an unset value refuses to sign rather than
+   falling back to a value that sits in the repository. */
+const SECRET = process.env.SIGNING_SECRET || "";
+const SIGNING_READY = SECRET.length >= 16;
 const RESEND_KEY = process.env.RESEND_API_KEY || "";
 const FROM_EMAIL = process.env.SIGN_FROM_EMAIL || "";
 const NOTIFY_EMAIL = process.env.SIGN_NOTIFY_EMAIL || "edwardw@mvne.co.za";
-const MAIL_READY = Boolean(RESEND_KEY && FROM_EMAIL);
+const MAIL_READY = Boolean(RESEND_KEY && FROM_EMAIL && SIGNING_READY);
 
 const OTP_TTL = 600;      // seconds a verification code stays valid
 const VERIFIED_TTL = 1800; // seconds a verified email stays valid for signing
@@ -103,11 +112,60 @@ async function sendMail({ to, subject, html, attachments }) {
   }
 }
 
+/* ---------- who is calling, and how often ----------
+
+   On Vercel the edge sets x-vercel-forwarded-for itself, so a caller cannot
+   choose it. x-forwarded-for can be appended to by the caller, so it is only
+   a last resort and only its first hop is taken. */
+function clientAddress(req) {
+  const vercel = req.headers.get("x-vercel-forwarded-for");
+  if (vercel) return vercel.split(",")[0].trim();
+  const real = req.headers.get("x-real-ip");
+  if (real) return real.trim();
+  const fwd = req.headers.get("x-forwarded-for");
+  return fwd ? fwd.split(",")[0].trim() : "unknown";
+}
+
+/* Attempts are counted in memory, per edge instance. A shared store would
+   count globally, but an edge middleware has none, and a per instance count
+   still turns a fast guessing run into a slow one. The limiter degrades to
+   allowing the request rather than failing the route. */
+const WINDOW_MS = 60000;   // attempts are counted over one minute
+const MAX_TRIES = 6;       // per address, per window
+const attempts = new Map();
+
+function tooManyAttempts(addr) {
+  try {
+    const now = Date.now();
+    if (attempts.size > 4000) attempts.clear();   // bound the memory
+    const row = attempts.get(addr);
+    if (!row || now > row.until) {
+      // The window opens on the first failure and is never extended.
+      attempts.set(addr, { count: 1, until: now + WINDOW_MS });
+      return false;
+    }
+    row.count += 1;
+    return row.count > MAX_TRIES;
+  } catch (e) {
+    return false;
+  }
+}
+
+function clearAttempts(addr) {
+  try { attempts.delete(addr); } catch (e) { /* nothing to clear */ }
+}
+
 /* ---------- signing API ---------- */
 
 async function handleApi(req, path) {
+  // An unconfigured secret refuses the call rather than signing with a value
+  // that anyone reading the repository already has.
+  if (!SIGNING_READY && path !== "/api/config") {
+    return json({ error: "Signing is not configured on this deployment. Contact MVNE." }, 503);
+  }
+
   if (path === "/api/config") {
-    return json({ otpEnabled: MAIL_READY, signingSecretConfigured: Boolean(process.env.SIGNING_SECRET) });
+    return json({ otpEnabled: MAIL_READY, signingEnabled: SIGNING_READY });
   }
 
   if (req.method !== "POST") return json({ error: "POST required" }, 405);
@@ -232,7 +290,7 @@ async function handleApi(req, path) {
     ].join("|");
     const recordSignature = await hmacHex(canonical);
 
-    const ip = req.headers.get("x-forwarded-for") || req.headers.get("x-real-ip") || "";
+    const ip = clientAddress(req);
     const rows = [
       ["Reference", reference],
       ["Signed by", `${name}, ${position}`],
@@ -286,6 +344,10 @@ async function handleApi(req, path) {
 
 /* ---------- request handling ---------- */
 
+function redirect(to, status = 303) {
+  return new Response(null, { status, headers: { Location: to, "Cache-Control": "no-store" } });
+}
+
 export default async function middleware(req) {
   const url = new URL(req.url);
   // tolerate a trailing slash so a trailingSlash:true project cannot loop on /gate
@@ -300,13 +362,30 @@ export default async function middleware(req) {
     .split(/;\s*/).some(c => c === `${COOKIE}=${TOKEN}`);
 
   if (path === "/unlock") {
-    if ((url.searchParams.get("pin") || "").trim().toLowerCase() === PIN) {
-      return new Response(null, { status: 302, headers: {
+    // The code travels in a POST body. In a query string it would land in
+    // server logs, browser history and the Referer header of the next page.
+    if (req.method !== "POST") return redirect("/gate");
+
+    const addr = clientAddress(req);
+    if (tooManyAttempts(addr)) return redirect("/gate?e=2");
+
+    let submitted = "";
+    try {
+      const form = await req.formData();
+      submitted = String(form.get("code") || "").trim().toLowerCase();
+    } catch (e) {
+      submitted = "";
+    }
+
+    if (submitted && safeEqual(submitted, PIN)) {
+      clearAttempts(addr);
+      return new Response(null, { status: 303, headers: {
         Location: "/",
+        "Cache-Control": "no-store",
         "Set-Cookie": `${COOKIE}=${TOKEN}; Path=/; Max-Age=2592000; HttpOnly; Secure; SameSite=Lax`
       } });
     }
-    return new Response(null, { status: 302, headers: { Location: "/gate?e=1" } });
+    return redirect("/gate?e=1");
   }
 
   // The signing API sits behind the same access code as the pages.
@@ -316,5 +395,5 @@ export default async function middleware(req) {
   }
 
   if (authed) return next();
-  return new Response(null, { status: 302, headers: { Location: "/gate" } });
+  return redirect("/gate", 302);
 }

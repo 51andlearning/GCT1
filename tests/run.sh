@@ -7,8 +7,12 @@ mkdir -p .tmp
 sed 's|import { next } from "@vercel/edge";|const next = () => new Response("PASS_THROUGH", { status: 200, headers: { "x-mw": "next" } });|' ../middleware.js > .tmp/mw.mjs
 cp gate-and-signing.test.mjs .tmp/gate.mjs
 cp otp-flow.test.mjs .tmp/otp.mjs
+cp no-secret.test.mjs .tmp/nosecret.mjs
 echo "== gate and signing =="
 node .tmp/gate.mjs
 echo
 echo "== one time code flow =="
 node .tmp/otp.mjs
+echo
+echo "== unconfigured signing secret =="
+node .tmp/nosecret.mjs

@@ -11,7 +11,7 @@ globalThis.fetch = async (url, opts) => {
 
 const mw = (await import('./mw.mjs')).default;
 
-const AUTH = 'gctproposal_auth=gct-propos-dfbaf017650ea233';
+const AUTH = '__Host-gct_access=gct-2026-a41f7c08b9d2e653';
 const mk = (path, { method = 'GET', cookie = '', body } = {}) =>
   new Request('https://example.test' + path, {
     method, headers: { ...(cookie ? { cookie } : {}), ...(body ? { 'Content-Type': 'application/json' } : {}) },
@@ -43,7 +43,7 @@ const body = {
 await t('config reports otp on when mail is configured', async () => {
   const j = await (await mw(mk('/api/config', { cookie: AUTH }))).json();
   eq(j.otpEnabled, true, 'otpEnabled');
-  eq(j.signingSecretConfigured, true, 'signingSecretConfigured');
+  eq(j.signingEnabled, true, 'signingEnabled');
 });
 
 await t('signing is refused before the email is verified', async () => {

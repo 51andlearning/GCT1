@@ -1,39 +1,174 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8">
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title>GCT Proposal · Access</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<title>GCT Group | Secure access</title>
+<meta name="description" content="Secure access to confidential GCT Group documents prepared by MVNE (Pty) Ltd.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="GCT Group | Secure access">
+<meta property="og:description" content="Confidential documents prepared for GCT Group by MVNE (Pty) Ltd. An access code is required.">
+<meta property="og:image" content="og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="og-image.png">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--navy:#0B4F8A;--teal:#00D9C0;--ink:#0B1220;--mut:#56616F;--line:#E2E7ED}
-*{box-sizing:border-box;margin:0;padding:0} html,body{height:100%}
-body{font-family:Inter,system-ui,sans-serif;color:var(--ink);display:flex;align-items:center;
- justify-content:center;padding:24px;background:
- radial-gradient(90% 130% at 88% -12%,#0E2C50 0%,rgba(14,44,80,0) 55%),
- linear-gradient(118deg,#04101F 0%,#081527 52%,#0B2440 100%)}
-.box{width:100%;max-width:392px;background:#fff;border:1px solid var(--line);border-radius:18px;
- padding:36px 32px 28px;box-shadow:0 30px 80px -20px rgba(0,0,0,.6)}
-.bar{width:52px;height:4px;border-radius:2px;background:var(--teal);margin-bottom:22px}
-h1{font-family:'Plus Jakarta Sans',sans-serif;font-size:19px;font-weight:700;margin-bottom:7px;letter-spacing:-.02em}
-.sub{color:var(--mut);font-size:13px;line-height:1.5;margin-bottom:20px}
-label{display:block;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#8893A1;margin-bottom:7px}
-input{width:100%;padding:13px 15px;border-radius:11px;border:1px solid var(--line);background:#F6F8FA;
- font-size:15px;outline:none;letter-spacing:1px;font-family:inherit}
-input:focus{border-color:var(--navy);background:#fff;box-shadow:0 0 0 3px rgba(11,79,138,.14)}
-button{width:100%;margin-top:12px;padding:13px;border:0;border-radius:11px;cursor:pointer;
- background:linear-gradient(135deg,var(--navy),#0A3C6B);color:#fff;font-weight:700;font-size:15px;font-family:inherit}
-button:hover{opacity:.92}
-.err{color:#B3223A;font-size:12.5px;margin-top:10px;font-weight:600}
-.foot{margin-top:18px;padding-top:14px;border-top:1px solid var(--line);font-size:11px;color:#7A867D;line-height:1.5}
-</style></head><body>
-<form class="box" action="/unlock" method="get">
- <div class="bar"></div>
- <h1>GCT Proposal</h1>
- <p class="sub">This document is confidential. Enter the access code to continue.</p>
- <label for="pin">Access code</label>
- <input id="pin" name="pin" type="password" autocomplete="off" autofocus required>
- <button type="submit">View document</button>
- <p class="err" id="e" style="display:none">That code was not recognised.</p>
- <p class="foot">Prepared by MVNE. If you need the code, contact your MVNE contact.</p>
-</form>
-<script>if(location.search.indexOf('e=1')>-1)document.getElementById('e').style.display='block';</script>
-</body></html>
+:root{
+  /* Taken from the GCT Group logo: steel navy ground, gold monogram. */
+  --gct-navy:#304A6B;
+  --gct-navy-deep:#16263C;
+  --gct-navy-ink:#0C1726;
+  --gct-gold:#B39558;
+  --gct-gold-lift:#CBAE6E;
+  --ink:#10192A;
+  --mut:#5B6882;
+  --line:#DFE4EC;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%}
+body{
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+  color:var(--ink);
+  display:flex;align-items:center;justify-content:center;
+  padding:24px 20px;
+  background:
+    radial-gradient(70% 90% at 82% -10%, rgba(179,149,88,.22) 0%, rgba(179,149,88,0) 58%),
+    radial-gradient(85% 110% at 10% 110%, rgba(47,72,106,.85) 0%, rgba(47,72,106,0) 60%),
+    linear-gradient(145deg, var(--gct-navy-ink) 0%, var(--gct-navy-deep) 48%, var(--gct-navy) 100%);
+}
+.wrap{width:100%;max-width:428px}
+.card{
+  background:#fff;border-radius:20px;overflow:hidden;
+  box-shadow:0 36px 90px -24px rgba(5,12,24,.72), 0 2px 6px rgba(5,12,24,.25);
+}
+.crest{
+  background:var(--gct-navy);
+  padding:26px 30px 24px;text-align:center;position:relative;
+}
+.crest::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:3px;
+  background:linear-gradient(90deg, var(--gct-gold) 0%, var(--gct-gold-lift) 50%, var(--gct-gold) 100%);
+}
+.crest img{height:58px;width:auto;display:block;margin:0 auto}
+.body{padding:30px}
+.lock{
+  width:40px;height:40px;border-radius:11px;display:grid;place-items:center;
+  background:rgba(179,149,88,.14);margin-bottom:16px;
+}
+.lock svg{width:19px;height:19px;stroke:var(--gct-gold)}
+h1{font-family:'Plus Jakarta Sans',Inter,sans-serif;font-size:21px;font-weight:800;letter-spacing:-.022em;margin-bottom:8px}
+.sub{color:var(--mut);font-size:13.5px;line-height:1.6;margin-bottom:24px}
+label{display:block;font-size:10.5px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#7A8698;margin-bottom:8px}
+input{
+  width:100%;padding:14px 16px;border-radius:12px;border:1.5px solid var(--line);
+  background:#F7F9FC;font-size:16px;font-family:inherit;outline:none;
+  letter-spacing:.16em;font-weight:600;text-align:center;color:var(--ink);
+  transition:border-color .15s, background .15s, box-shadow .15s;
+}
+input::placeholder{letter-spacing:.08em;font-weight:400;color:#AEB7C5}
+input:focus{border-color:var(--gct-navy);background:#fff;box-shadow:0 0 0 4px rgba(47,72,106,.13)}
+button{
+  width:100%;margin-top:14px;padding:14px;border:0;border-radius:12px;cursor:pointer;
+  background:linear-gradient(135deg, var(--gct-navy) 0%, var(--gct-navy-deep) 100%);
+  color:#fff;font-weight:700;font-size:15px;font-family:inherit;letter-spacing:.01em;
+  transition:filter .15s, transform .06s;
+}
+button:hover{filter:brightness(1.12)}
+button:active{transform:translateY(1px)}
+.msg{
+  display:flex;gap:9px;align-items:flex-start;margin-top:15px;padding:12px 14px;
+  border-radius:10px;font-size:12.5px;font-weight:500;line-height:1.5;
+}
+.msg[hidden]{display:none}
+.msg svg{width:15px;height:15px;flex:none;margin-top:1px}
+.msg.err{background:#FDF2F3;color:#9E1B30;border:1px solid #F3D4D9}
+.msg.err svg{stroke:#C8102E}
+.msg.wait{background:#FFF8EC;color:#7A5B18;border:1px solid #F0E0BF}
+.msg.wait svg{stroke:#B3741A}
+.foot{
+  margin-top:24px;padding-top:18px;border-top:1px solid var(--line);
+  font-size:11.5px;color:#7A8698;line-height:1.65;
+}
+.foot strong{color:var(--mut);font-weight:600}
+.foot a{color:var(--gct-navy);font-weight:600;text-decoration:none}
+.foot a:hover{text-decoration:underline}
+.by{
+  margin-top:18px;display:flex;align-items:center;justify-content:center;gap:9px;
+  opacity:.82;
+}
+.by span{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);font-weight:600}
+.by img{height:26px;width:auto;border-radius:5px}
+@media (max-width:380px){ .body{padding:24px 22px} h1{font-size:19px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <form class="card" action="/unlock" method="post" autocomplete="off">
+    <div class="crest">
+      <img src="gct-logo.png" alt="GCT Group">
+    </div>
+    <div class="body">
+      <div class="lock" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="4" y="11" width="16" height="10" rx="2"></rect>
+          <path d="M8 11V7a4 4 0 0 1 8 0v4"></path>
+        </svg>
+      </div>
+      <h1>Secure document access</h1>
+      <p class="sub">
+        These documents are confidential to GCT Group and MVNE (Pty) Ltd.
+        Enter the access code you were given to continue.
+      </p>
+
+      <label for="code">Access code</label>
+      <input id="code" name="code" type="password" required autofocus
+             autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"
+             placeholder="Enter code" aria-describedby="note">
+
+      <button type="submit">Open documents</button>
+
+      <p class="msg err" id="err" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v5M12 16.5v.01"></path></svg>
+        <span>That code was not recognised. Check it and try again.</span>
+      </p>
+      <p class="msg wait" id="wait" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+        <span>Too many attempts from this connection. Wait a minute, then try again.</span>
+      </p>
+
+      <p class="foot" id="note">
+        <strong>Prepared by MVNE (Pty) Ltd</strong> with the DSG Group of Companies,
+        15 6th Street, Parkhurst, Johannesburg.<br>
+        Need the code? Contact <a href="mailto:edwardw@mvne.co.za">edwardw@mvne.co.za</a>.
+      </p>
+    </div>
+  </form>
+
+  <div class="by">
+    <span>Prepared by</span>
+    <img src="dsg-logo.png" alt="DSG">
+  </div>
+</div>
+
+<script>
+// The server redirects back with a reason when a code is refused.
+(function () {
+  var q = new URLSearchParams(location.search);
+  var e = q.get('e');
+  if (e === '1') document.getElementById('err').hidden = false;
+  if (e === '2') document.getElementById('wait').hidden = false;
+  if (e) history.replaceState(null, '', location.pathname);
+  var f = document.querySelector('form');
+  f.addEventListener('submit', function () {
+    var b = f.querySelector('button');
+    b.disabled = true;
+    b.textContent = 'Checking…';
+  });
+})();
+</script>
+</body>
+</html>
