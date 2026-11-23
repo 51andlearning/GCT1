@@ -2,6 +2,7 @@
 process.env.RESEND_API_KEY = 'test-key';
 process.env.SIGN_FROM_EMAIL = 'proposals@mvne.co.za';
 process.env.SIGNING_SECRET = 'a-real-secret-for-the-test';
+process.env.GATE_CODE = 'TEST-GATE-CODE-9931';
 
 const sent = [];
 globalThis.fetch = async (url, opts) => {

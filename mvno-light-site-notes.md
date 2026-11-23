@@ -23,7 +23,8 @@ navigation and as a card in the overview grid.
 
 **Layer one, the server side gate.** `middleware.js` runs on every request. A
 visitor without the access cookie is redirected to `/gate` and no page HTML is
-served to them. The access code is **GCT2026**, checked case insensitively. The
+served to them. The access code is held in the `GATE_CODE` environment variable
+in Vercel and is checked case insensitively. The
 cookie lasts 30 days. Only `/gate`, the favicons and `og-image.png` are served
 before authentication, so link previews still render.
 
@@ -42,9 +43,11 @@ How the gate is hardened:
 | The client address is read from `x-vercel-forwarded-for` | Vercel's edge sets that header itself. `x-forwarded-for` can be appended to by the caller, which would let an attacker choose its own rate limit bucket |
 | Gate, unlock and API responses are sent with `Cache-Control: no-store` | Stops a shared cache holding a response meant for one visitor |
 
-Changing the access code means setting `GATE_CODE` in the Vercel project, with
-no deploy needed. Rotating `TOKEN` in `middleware.js` signs out every session
-already issued.
+The code itself is never in this repository. It is set as a sensitive
+environment variable in the Vercel project, which means it can be written but
+not read back from the dashboard or the API. Changing it is a one field edit in
+Vercel with no deploy. Rotating `TOKEN` in `middleware.js` signs out every
+session already issued.
 
 **Layer two, the confidentiality popup.** The MVNO Light page holds the document
 behind a popup until the reader confirms they are authorised by GCT Group, agrees
@@ -102,7 +105,7 @@ Set these in the Vercel project under Settings, then Environment Variables.
 
 | Variable | Effect if unset | Effect if set |
 |----------|-----------------|---------------|
-| `GATE_CODE` | The access code is GCT2026 | The access code becomes this value, with no deploy needed |
+| `GATE_CODE` | **The gate refuses everyone.** There is no built in code, so a missing variable fails closed rather than open | That value becomes the access code, with no deploy needed |
 | `SIGNING_SECRET` | **Signing is refused with a 503.** There is no fallback secret, because a fallback is a secret that sits in the repository | Signing works and records stay verifiable across deployments. Set this before the proposal goes to GCT Group |
 | `RESEND_API_KEY` | Email verification is off and the ceremony falls back to a personal confirmation. Certificates are not emailed | Email verification is required before signing, and certificates are emailed |
 | `SIGN_FROM_EMAIL` | Same as above, both this and the API key are needed | The from address on outbound email, on a domain verified with the mail provider |

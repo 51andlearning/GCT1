@@ -135,6 +135,10 @@ button:active{transform:translateY(1px)}
         <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v5M12 16.5v.01"></path></svg>
         <span>That code was not recognised. Check it and try again.</span>
       </p>
+      <p class="msg err" id="unset" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v5M12 16.5v.01"></path></svg>
+        <span>This site has no access code configured yet. Contact MVNE.</span>
+      </p>
       <p class="msg wait" id="wait" hidden>
         <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
         <span>Too many attempts from this connection. Wait a minute, then try again.</span>
@@ -161,6 +165,7 @@ button:active{transform:translateY(1px)}
   var e = q.get('e');
   if (e === '1') document.getElementById('err').hidden = false;
   if (e === '2') document.getElementById('wait').hidden = false;
+  if (e === '3') document.getElementById('unset').hidden = false;
   if (e) history.replaceState(null, '', location.pathname);
   var f = document.querySelector('form');
   f.addEventListener('submit', function () {

@@ -1,4 +1,6 @@
 process.env.SIGNING_SECRET = 'test-signing-secret-for-the-suite';
+// The live access code lives only in Vercel, so the suite sets its own.
+process.env.GATE_CODE = 'TEST-GATE-CODE-9931';
 const mw = (await import('./mw.mjs')).default;
 
 const AUTH = '__Host-gct_access=gct-2026-a41f7c08b9d2e653';
@@ -16,6 +18,7 @@ const mk = (path, { method = 'GET', cookie = '', body, form, ip } = {}) => {
   return new Request('https://example.test' + path, init);
 };
 // Post the access code the way the gate form does.
+const CODE = process.env.GATE_CODE;
 const unlock = (code, ip = '203.0.113.9') =>
   mk('/unlock', { method: 'POST', form: { code }, ip });
 
@@ -46,7 +49,7 @@ await t('og image is public for link previews', async () => {
   eq((await mw(mk('/og-image.png'))).headers.get('x-mw'), 'next', 'passthrough');
 });
 await t('correct code sets the cookie', async () => {
-  const r = await mw(unlock('GCT2026'));
+  const r = await mw(unlock(CODE));
   eq(r.status, 303, 'status');
   const c = r.headers.get('set-cookie') || '';
   if (!/__Host-gct_access=/.test(c)) throw new Error('no auth cookie');
@@ -55,14 +58,14 @@ await t('correct code sets the cookie', async () => {
   }
 });
 await t('the code is accepted in any case', async () => {
-  eq((await mw(unlock('gct2026', '203.0.113.10'))).status, 303, 'lower case');
-  eq((await mw(unlock('  GcT2026 ', '203.0.113.11'))).status, 303, 'padded and mixed');
+  eq((await mw(unlock(CODE.toLowerCase(), '203.0.113.10'))).status, 303, 'lower case');
+  eq((await mw(unlock('  ' + CODE.toLowerCase().replace('t','T') + ' ', '203.0.113.11'))).status, 303, 'padded and mixed');
 });
 await t('wrong code bounces back to the gate', async () => {
   eq((await mw(unlock('nope', '203.0.113.12'))).headers.get('location'), '/gate?e=1', 'location');
 });
 await t('the code is never accepted from the query string', async () => {
-  const r = await mw(mk('/unlock?pin=GCT2026'));
+  const r = await mw(mk('/unlock?pin=' + CODE));
   eq(r.headers.get('location'), '/gate', 'GET is sent back to the gate');
   if (r.headers.get('set-cookie')) throw new Error('a GET must never set the cookie');
 });
@@ -78,11 +81,11 @@ await t('repeated wrong codes from one address are rate limited', async () => {
   }
   if (!limited) throw new Error('never rate limited after nine attempts');
   // A locked window refuses the correct code too, otherwise it is theatre.
-  const r = await mw(unlock('GCT2026', ip));
+  const r = await mw(unlock(CODE, ip));
   eq(r.headers.get('location'), '/gate?e=2', 'correct code during lockout');
 });
 await t('the limit is per address, so one attacker cannot lock everyone out', async () => {
-  eq((await mw(unlock('GCT2026', '198.51.100.200'))).status, 303, 'a different address still works');
+  eq((await mw(unlock(CODE, '198.51.100.200'))).status, 303, 'a different address still works');
 });
 await t('authenticated page passes through', async () => {
   eq((await mw(mk('/mvno-light', { cookie: AUTH }))).headers.get('x-mw'), 'next', 'passthrough');

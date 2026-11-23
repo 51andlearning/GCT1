@@ -8,6 +8,7 @@ sed 's|import { next } from "@vercel/edge";|const next = () => new Response("PAS
 cp gate-and-signing.test.mjs .tmp/gate.mjs
 cp otp-flow.test.mjs .tmp/otp.mjs
 cp no-secret.test.mjs .tmp/nosecret.mjs
+cp no-gate-code.test.mjs .tmp/nogate.mjs
 echo "== gate and signing =="
 node .tmp/gate.mjs
 echo
@@ -16,3 +17,6 @@ node .tmp/otp.mjs
 echo
 echo "== unconfigured signing secret =="
 node .tmp/nosecret.mjs
+echo
+echo "== unconfigured access code =="
+node .tmp/nogate.mjs

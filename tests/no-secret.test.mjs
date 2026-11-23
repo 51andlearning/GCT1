@@ -1,6 +1,7 @@
 // A deployment with no SIGNING_SECRET must refuse to sign rather than fall
 // back to a value that anyone reading the repository already has.
 delete process.env.SIGNING_SECRET;
+process.env.GATE_CODE = 'TEST-GATE-CODE-9931';
 delete process.env.RESEND_API_KEY;
 delete process.env.SIGN_FROM_EMAIL;
 
@@ -38,7 +39,7 @@ await t('requesting a one time code is refused too', async () => {
   eq((await mw(mk('/api/otp/request', { method: 'POST', body: { email: 'a@b.co' } }))).status, 503, 'status');
 });
 await t('the gate still works without a signing secret', async () => {
-  const fd = new FormData(); fd.append('code', 'GCT2026');
+  const fd = new FormData(); fd.append('code', process.env.GATE_CODE);
   const r = await mw(new Request('https://example.test/unlock', {
     method: 'POST', headers: { 'x-vercel-forwarded-for': '203.0.113.44' }, body: fd
   }));

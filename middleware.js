@@ -1,17 +1,20 @@
 /* Vercel Edge Middleware for the GCT Group proposal site.
    Two jobs:
      1. Server side access code gate, so no page HTML reaches an
-        unauthenticated visitor. Code: gct2026. Cookie lasts 30 days.
+        unauthenticated visitor. The code lives in GATE_CODE, never here.
      2. The signing API used by mvno-light.html, handled here rather
         than as a separate function so the static build config is
         left alone.
    Added 2026-08-31, signing API added 2026-09-09. */
 import { next } from "@vercel/edge";
 
-/* The access code is deliberately shareable: Edward gives it to GCT Group.
-   GATE_CODE overrides it without a deploy. Compared case insensitively and in
-   constant time, so the code cannot be recovered a character at a time. */
-const PIN = (process.env.GATE_CODE || "GCT2026").trim().toLowerCase();
+/* The access code is shareable, because MVNE gives it to GCT Group, but it is
+   still a credential, so it lives in GATE_CODE and never in this file. When it
+   is unset the gate refuses everyone rather than falling open. Compared case
+   insensitively and in constant time, so it cannot be recovered a character at
+   a time. */
+const PIN = (process.env.GATE_CODE || "").trim().toLowerCase();
+const GATE_READY = PIN.length >= 4;
 
 /* The session cookie. The __Host- prefix binds it to this exact host over
    HTTPS with Path=/, so no sibling or parent host can plant one. Rotating
@@ -365,6 +368,9 @@ export default async function middleware(req) {
     // The code travels in a POST body. In a query string it would land in
     // server logs, browser history and the Referer header of the next page.
     if (req.method !== "POST") return redirect("/gate");
+
+    // No code configured means nobody gets in, rather than everybody.
+    if (!GATE_READY) return redirect("/gate?e=3");
 
     const addr = clientAddress(req);
     if (tooManyAttempts(addr)) return redirect("/gate?e=2");
